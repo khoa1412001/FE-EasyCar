@@ -9,15 +9,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { useState } from 'react';
 import CarRentalIcon from '@mui/icons-material/CarRental';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { fontFamily } from '@mui/system';
 import '../../assets/style.scss';
 
 function Header () {
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [auth, setAuth] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
   
     const handleChange = (event) => {
       setAuth(event.target.checked);
@@ -44,7 +44,7 @@ function Header () {
             >
               <MenuIcon />
             </IconButton>
-            <img src={{logo}}/>
+            <img width='50px' height = '50px' src={logo}/>
             <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: 'Orbitron' }}>
               EasyCar
             </Typography>
