@@ -1,0 +1,11 @@
+$main-color: #003366;
+$main-light-color: #71B1C5;
+$main-lighter-color:#CBE6EF;
+$main-white-color:#F0F2F3;
+
+:export {
+    maincolor: $main-color;
+    mainlightcolor:$main-light-color;
+    mainlightercolor:$main-lighter-color;
+    mainwhitecolor:$main-white-color;
+}
