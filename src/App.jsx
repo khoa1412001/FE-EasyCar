@@ -1,8 +1,9 @@
-import Header from './components/Header';
+import FillterPage from 'pages/FilterPage';
+import HomePage from 'pages/HomePage'
 
 function App() {
   return (
-      <Header/>
+    <FillterPage/>
   );
 }
 

@@ -9,9 +9,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { bgcolor, Stack } from "@mui/system";
 import * as React from "react";
-import logo from "../../assets/img/logo_ec.png";
-import "../../assets/style.scss";
-import variables from "../../assets/_variable.scss";
+import logo from "assets/img/logo_ec.png";
+import "assets/style.scss";
+import variables from "assets/_variable.scss";
 import "./style.scss";
 import Button from '@mui/material/Button';
 function Header() {
@@ -43,7 +43,7 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} className="navbar__logo" />
+          <img src={logo} className="header__logo" />
           <Typography
             variant="h4"
             component="div"
@@ -55,7 +55,7 @@ function Header() {
           {true && (
             <Stack direction="row">
               <Box alignSelf="center" paddingRight={5}>
-                <Button variant="outlined" color="primary" sx={{bgcolor: variables.mainlightercolor, color:variables.mainlightcolor, fontWeight:"bold", fontSize:15}}>Trở thành chủ xe</Button>
+                <Button variant="outlined" className="header__button" sx={{bgcolor: variables.mainyellowcolor, color:variables.mainlightercolor, fontWeight:"bold", fontSize:15}}>Trở thành chủ xe</Button>
               </Box>
               <IconButton
                 size="large"
