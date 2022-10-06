@@ -1,0 +1,21 @@
+@import '../../../../assets/variable';
+.fillter-container {
+    background-color: #FFF;
+    height: 660px;
+    width: 390px;
+    border-radius: 5px;
+    border-style: groove;
+    border-color: $main-lighter-color;
+    border-width: 2px;
+
+    &__text {
+        color: $main-lighter-color;
+        padding-bottom: 5px;
+    }
+
+    &__button {
+        width: 100%;
+    }
+
+    
+}

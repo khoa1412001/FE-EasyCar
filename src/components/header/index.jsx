@@ -9,9 +9,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { bgcolor, Stack } from "@mui/system";
 import * as React from "react";
-import logo from "../../assets/img/logo_ec.png";
-import "../../assets/style.scss";
-import variables from "../../assets/_variable.scss";
+import logo from "assets/img/logo_ec.png";
+import "assets/style.scss";
+import variables from "assets/_variable.scss";
 import "./style.scss";
 import Button from '@mui/material/Button';
 function Header() {
