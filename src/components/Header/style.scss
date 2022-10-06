@@ -1,0 +1,14 @@
+@import '../../assets/variable';
+
+.header {
+
+    &__button:hover {
+        color: $main-yellow-color;
+        opacity: 0.8;
+    }
+
+    &__logo {
+        max-width:auto;
+        max-height:64px;
+    }
+}

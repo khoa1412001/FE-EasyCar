@@ -1,0 +1,15 @@
+// main color
+$main-color: #11296B;
+$main-yellow-color: #FFCB05;
+$main-yellow-lighter-color: #FFDB57;
+$main-lighter-color:#00509D;
+$main-white-color:#EDEDED;
+//header color
+
+:export {
+    maincolor: $main-color;
+    mainlightercolor: $main-lighter-color;
+    mainyellowcolor:$main-yellow-color;
+    mainyellowlightercolor:$main-yellow-lighter-color;
+    mainwhitecolor:$main-white-color;
+}
