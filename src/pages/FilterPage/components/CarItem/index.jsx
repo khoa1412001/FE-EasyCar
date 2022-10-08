@@ -12,11 +12,8 @@ import Divider from "@mui/material/Divider";
 function CarItem() {
   return (
     <Stack className='carlist-container' padding={1} spacing={1} flexWrap='nowrap'>
-        <Box className='caritem-container'>
-
-        </Box>
-        <Box className='caritem-container'>
-
+        <Box className='caritem-container' padding={1}>
+          <img className='caritem-container__img' src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774" alt=""/>
         </Box>
 
     </Stack>

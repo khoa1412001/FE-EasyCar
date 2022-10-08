@@ -11,8 +11,12 @@
 }
 
 .caritem-container {
-    width: 774px;
-    min-height: 160px;
+    width: 758px;
+    min-height: 144px;
     border-radius: 5px;
     background-color: white;
+
+    &__img {
+        height: 50px;
+    }
 }
