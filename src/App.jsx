@@ -1,9 +1,12 @@
-import FillterPage from 'pages/FilterPage';
-import HomePage from 'pages/HomePage'
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SigninPage from "pages/SigninPage";
 function App() {
   return (
-    <FillterPage/>
+    <BrowserRouter>
+      <div className="App">
+        <SigninPage/>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -55,7 +55,7 @@ function Footer() {
     return ( 
         <Container  
         maxWidth={false}
-        sx={{ bgcolor: variables.maincolor, position: 'fixed',bottom: 0 }}>
+        sx={{ bgcolor: variables.maincolor,bottom: 0 }}>
             <Box py={5}>
             <Container sx={{maxWidth: 'xl'}}>
                 <Grid container rowSpacing={2} >
