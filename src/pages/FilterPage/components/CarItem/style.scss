@@ -1,0 +1,18 @@
+@import '../../../../assets/variable';
+
+.carlist-container {
+    width: 789px;
+    height: 750px;
+    border-radius: 5px;
+    overflow-y: auto;
+    border-style: groove;
+    border-color: $main-lighter-color;
+    border-width: 2px; 
+}
+
+.caritem-container {
+    width: 774px;
+    min-height: 160px;
+    border-radius: 5px;
+    background-color: white;
+}

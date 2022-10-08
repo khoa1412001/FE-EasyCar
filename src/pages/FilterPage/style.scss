@@ -1,0 +1,19 @@
+@import '../../assets/variable';
+
+.fillter-page-bg {
+    background-color: $main-grey-color;
+    height: 1000px;
+}
+
+.fillter-page-container {
+    height: 900px;
+    min-height: 500px;
+    width: 1204px;
+    background-color: $main-grey-color;
+    margin: auto;
+
+    &__datetimecontainer {
+        width: fit-content;
+        height: fit-content;
+    }
+}
