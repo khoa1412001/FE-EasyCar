@@ -5,6 +5,8 @@ $main-yellow-lighter-color: #FFDB57;
 $main-lighter-color:#00509D;
 $main-white-color:#EDEDED;
 $main-grey-color: #e8eaef;
+$text-grey-color: #a8a8a8;
+$text-green-color: #10a310;
 //header color
 
 :export {
@@ -14,4 +16,6 @@ $main-grey-color: #e8eaef;
     mainyellowlightercolor:$main-yellow-lighter-color;
     mainwhitecolor:$main-white-color;
     maingreycolor: $main-grey-color;
+    textgreycolor: $text-grey-color;
+    textgreencolor: $text-green-color;
 }
