@@ -17,6 +17,21 @@
     background-color: white;
 
     &__img {
-        height: 50px;
+        height: 140px;
     }
+
+    &__name {
+        padding-bottom: 5px;
+    }
+
+    &__option {
+        padding-bottom: 10px;
+    }
+
+    &__button:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+   
 }
