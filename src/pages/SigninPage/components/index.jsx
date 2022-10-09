@@ -72,7 +72,7 @@ function SigninBody() {
                 control={<Checkbox style={{padding:0}} checked={checked}
                 onChange = {handleChange}/>} 
                 label = {<Typography pl={1}>Tôi đã đọc và đồng ý với chính sách của EasyCar</Typography>}/>
-                <Button align='center' className="signin__button" disabled={!checked} variant="standard" sx={{color: variables.mainyellowcolor, bgcolor:variables.mainlightercolor}}>Đăng ký</Button>
+                <Button align='center' className="signin__button" disabled={!checked} variant="standard" sx={{color: variables.mainlightercolor, bgcolor:variables.mainyellowcolor}}>Đăng ký</Button>
                 <Divider/>
                 <Typography align='center'>Hoặc đăng nhập bằng tài khoản</Typography>
                 <Box
