@@ -4,11 +4,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import variables from "../../../assets/_variable.scss";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
-import './signin.scss'
+import './signup.scss'
 import { useState } from "react";
 
 function SigninBody() {
-    const [checked, setChecked] = useState(true)
+    const [checked, setChecked] = useState(false)
     const handleChange = (event) => {
         setChecked(event.target.checked);
     }
@@ -72,7 +72,7 @@ function SigninBody() {
                 control={<Checkbox style={{padding:0}} checked={checked}
                 onChange = {handleChange}/>} 
                 label = {<Typography pl={1}>Tôi đã đọc và đồng ý với chính sách của EasyCar</Typography>}/>
-                <Button align='center' className="signin__button" disabled={!checked} variant="standard" sx={{color: variables.mainlightercolor, bgcolor:variables.mainyellowcolor}}>Đăng ký</Button>
+                <Button align='center' className="signup__button" disabled={!checked} variant="standard" sx={{color: variables.mainlightercolor, bgcolor:variables.mainyellowcolor}}>Đăng ký</Button>
                 <Divider/>
                 <Typography align='center'>Hoặc đăng nhập bằng tài khoản</Typography>
                 <Box

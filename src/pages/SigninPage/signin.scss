@@ -1,0 +1,9 @@
+@import '../../assets/variable';
+
+.signin {
+
+    &__button:hover {
+        color: $main-yellow-color;
+        background-color: $main-lighter-color !important;
+    }
+}
