@@ -1,12 +1,12 @@
 @import '../../../../assets/variable';
 
 .datelocationfillter-container {
-    width: 1200px;
+    width: 1203px;
     height: 50px;
     border-radius: 5px;
-    border-style: groove;
+    border-style: solid;
     border-color: $main-lighter-color;
-    border-width: 2px;
+    border-width: 1px;
     background-color: white;
     &__text {
         color:$main-lighter-color;

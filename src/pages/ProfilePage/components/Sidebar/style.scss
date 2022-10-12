@@ -1,0 +1,35 @@
+@import '../../../../assets/variable';
+
+.sidebar-container {
+    background-color: #FFF;
+    width: 360px;
+    height: 608px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+
+    &__avatar {
+        align-self: center;
+    }
+
+    &__name {
+        align-self: center;
+        padding-top: 5px;
+    }
+
+    &__phone {
+        align-self: center;
+        letter-spacing: 0.4px !important;
+        padding-top: 5px;
+    }
+
+    &__email {
+        align-self: center;
+        padding-top: 5px;
+    }
+    
+    &__button {
+        
+    }
+}

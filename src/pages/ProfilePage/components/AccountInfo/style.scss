@@ -1,0 +1,25 @@
+@import '../../../../assets/variable';
+
+.accountinfo-container {
+    height: 608px;
+    width: 1065px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+
+    &__title {
+        padding-top: 8px;
+        padding-bottom: 16px;
+        color: $main-color;
+    }
+
+    &__detail {
+        color: $main-lighter-color;
+    }
+
+    &__update:hover {
+        color: $main-yellow-color;
+        background-color: $main-lighter-color !important;
+    }
+}
