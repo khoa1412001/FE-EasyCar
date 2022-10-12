@@ -1,15 +1,10 @@
-import React from "react";
+import StarIcon from "@mui/icons-material/Star";
+import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import { Stack } from "@mui/system";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
 import "./style.scss";
-import { Stack } from "@mui/system";
-import { Box, Grid, TextField, Typography } from "@mui/material";
-import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import moment from "moment";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
-import StarIcon from "@mui/icons-material/Star";
 
 function CarItem() {
   return (

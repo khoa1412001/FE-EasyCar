@@ -1,17 +1,18 @@
 @import '../../../../assets/variable';
 
-.carlist-container {
-    width: 789px;
-    height: 750px;
+.rentalhistory-container {
+    height: 608px;
+    width: 1065px;
     border-radius: 5px;
-    overflow-y: auto;
     border-style: solid;
     border-color: $main-lighter-color;
-    border-width: 1px; 
+    border-width: 1px;
+    overflow-y: auto;
+    background-color: $main-grey-color;
 }
 
-.caritem-container {
-    width: 758px;
+.rentalhistory-container-item {
+    width: 1032px;
     min-height: 144px;
     border-radius: 5px;
     background-color: white;
@@ -27,11 +28,17 @@
     &__option {
         padding-bottom: 10px;
     }
-
-    &__button:hover {
+    
+    &__rebook:hover {
         color:white;
         background-color: $text-green-color !important;
         border-color: $text-green-color !important;
     }
-   
+
+    &__favorite:hover {
+        color: white;
+        background-color: $orange-color !important;
+        border-color: $orange-color !important;
+    }
+
 }
