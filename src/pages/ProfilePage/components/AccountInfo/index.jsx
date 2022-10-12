@@ -1,17 +1,16 @@
-import * as React from "react";
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
-import Avatar from "@mui/material/Avatar";
-import "./style.scss";
+import CheckIcon from '@mui/icons-material/Check';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { Stack } from "@mui/system";
 import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import CheckIcon from '@mui/icons-material/Check';
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Stack } from "@mui/system";
+import "assets/style.scss";
+import variables from "assets/_variable.scss";
+import * as React from "react";
+import "./style.scss";
 
 function AccountInfo() {
   const [gender, setGender] = React.useState("MALE");
