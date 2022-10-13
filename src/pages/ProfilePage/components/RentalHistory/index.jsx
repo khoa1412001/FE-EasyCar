@@ -120,21 +120,6 @@ function RentalHistory() {
           >
             ĐẶT LẠI
           </Button>
-          <Button
-            variant="outlined"
-            size="medium"
-            className="rentalhistory-container-item__favorite"
-            startIcon={<FavoriteIcon/>}
-            sx={{
-              borderColor: variables.orangecolor,
-              color: variables.orangecolor,
-              fontWeight: "bold",
-              width: "215px ",
-              alignSelf:"center"
-            }}
-          >
-            ƯU THÍCH
-          </Button>
         </Stack>
       </Stack>
     </Stack>

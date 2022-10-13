@@ -1,7 +1,7 @@
 @import '../../../../assets/variable';
 
 .rentalhistory-container {
-    height: 608px;
+    height: 860px;
     width: 1065px;
     border-radius: 5px;
     border-style: solid;
@@ -33,12 +33,6 @@
         color:white;
         background-color: $text-green-color !important;
         border-color: $text-green-color !important;
-    }
-
-    &__favorite:hover {
-        color: white;
-        background-color: $orange-color !important;
-        border-color: $orange-color !important;
     }
 
 }

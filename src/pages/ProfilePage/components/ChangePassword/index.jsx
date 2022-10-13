@@ -18,7 +18,7 @@ function ChangePassword() {
         <Typography
           className="changepassword-container__title"
           alignSelf={"center"}
-          sx={{ fontWeight: "400", fontSize: "24px" }}
+          sx={{ fontWeight: "400", fontSize: "24px",paddingTop:"8px" }}
         >
           ĐỔI MẬT KHẨU
         </Typography>
