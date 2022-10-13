@@ -8,6 +8,7 @@ $main-grey-color: #e8eaef;
 $text-grey-color: #a8a8a8;
 $text-green-color: #10a310;
 $orange-color: #FF731D;
+$red-color: #DD5353;
 //header color
 
 :export {
@@ -20,4 +21,5 @@ $orange-color: #FF731D;
     textgreycolor: $text-grey-color;
     textgreencolor: $text-green-color;
     orangecolor: $orange-color;
+    redcolor: $red-color;
 }

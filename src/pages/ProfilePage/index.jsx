@@ -6,6 +6,7 @@ import AccountInfo from './components/AccountInfo';
 import RentalHistory from './components/RentalHistory';
 import ChangePassword from './components/ChangePassword';
 import AccountVerify from './components/AccountVerify';
+import CarManagement from './components/CarManagement';
 import { Stack } from "@mui/system";
 function ProfilePage() {
   return (
@@ -13,7 +14,7 @@ function ProfilePage() {
       <Header/>
       <Stack direction={'row'}>
         <Sidebar/>
-        <RentalHistory/>
+        <CarManagement/>
       </Stack>
       <Footer/>
     </>
