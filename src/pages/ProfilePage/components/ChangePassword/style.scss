@@ -1,0 +1,19 @@
+@import '../../../../assets/variable';
+
+.changepassword-container {
+    height: 608px;
+    width: 1065px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+
+    &__title {
+        color: $main-color;
+    }
+
+    &__button:hover {
+        color: $main-yellow-color;
+        background-color: $main-lighter-color !important;
+    }
+}

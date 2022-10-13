@@ -1,20 +1,13 @@
 import * as React from "react";
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
-import Avatar from "@mui/material/Avatar";
-import "./style.scss";
-import Box from "@mui/material/Box";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
-import Divider from "@mui/material/Divider";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import CheckIcon from "@mui/icons-material/Check";
-import StarIcon from "@mui/icons-material/Star";
-import Rating from "@mui/material/Rating";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import "assets/style.scss";
+import variables from "assets/_variable.scss";
+import "./style.scss";
 
 function RentalHistory() {
   return (
