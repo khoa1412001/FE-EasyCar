@@ -14,7 +14,7 @@ function ProfilePage() {
       <Header/>
       <Stack direction={'row'}>
         <Sidebar/>
-        <CarManagement/>
+        <RentalHistory/>
       </Stack>
       <Footer/>
     </>

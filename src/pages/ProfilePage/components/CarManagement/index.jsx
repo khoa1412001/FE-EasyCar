@@ -106,7 +106,7 @@ function CarManagement() {
           <Button
             variant="outlined"
             size="medium"
-            className="carmanagement-container-item__edit"
+            className="carmanagement-container-item__status"
             sx={{
               borderColor: variables.textgreencolor,
               color: variables.textgreencolor,
@@ -115,7 +115,7 @@ function CarManagement() {
               alignSelf:"center"
             }}
           >
-            CHỈNH SỬA
+            TRẠNG THÁI XE
           </Button>
           <Button
             variant="outlined"
