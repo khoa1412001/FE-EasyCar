@@ -1,36 +1,35 @@
-import * as React from "react";
-import StarIcon from "@mui/icons-material/Star";
-import Button from "@mui/material/Button";
-import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
-import { Stack } from "@mui/system";
+import * as React from 'react';
+import "./style.scss";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
-import "./style.scss";
+import CheckIcon from '@mui/icons-material/Check';
+import StarIcon from "@mui/icons-material/Star";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Stack } from "@mui/system";
 
-function RentalHistory() {
+function CarManagement() {
   return (
-    <Stack
-      className="rentalhistory-container"
-      padding={1}
-      marginLeft="5px"
-      spacing={1}
-      flexWrap="nowrap"
-    >
-      <Stack
+    <Stack className='carmanagement-container' padding={1} marginLeft="5px">
+        <Stack
         direction={"row"}
-        className="rentalhistory-container-item"
+        className="carmanagement-container-item"
         padding={1}
         spacing={2}
       >
         <img
-          className="rentalhistory-container-item__img"
+          className="carmanagement-container-item__img"
           src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
           alt=""
         />
         <Stack paddingLeft={"5px"}>
           <Typography
-            className="rentalhistory-container-item__name"
+            className="carmanagement-container-item__name"
             sx={{
               fontWeight: "bold",
               fontSize: "18px",
@@ -40,7 +39,7 @@ function RentalHistory() {
             Mazda CX-3
           </Typography>
           <Typography
-            className="rentalhistory-container-item__option"
+            className="carmanagement-container-item__option"
             sx={{
               fontWeight: "600",
               fontSize: "12px",
@@ -51,7 +50,7 @@ function RentalHistory() {
             Tự động - Xăng - 5 Ghế
           </Typography>
           <Typography
-            className="rentalhistory-container-item__rating"
+            className="carmanagement-container-item__rating"
             sx={{
               fontWeight: "400",
               fontSize: "12px",
@@ -62,11 +61,10 @@ function RentalHistory() {
             <StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} />{" "}
             5.00 - 8k kms
           </Typography>
-          <Rating name="no-value" value={null} sx={{ paddingTop: "20px" }} />
         </Stack>
         <Stack>
         <Typography
-          className="rentalhistory-container-item__location"
+          className="carmanagement-container-item__location"
           paddingTop={"5px"}
           paddingLeft={"20px"}
           sx={{ fontWeight: "600", fontSize: "12px", letterSpacing: "0.6px" }}
@@ -74,7 +72,7 @@ function RentalHistory() {
           Phường 12, Quận Gò Vấp
         </Typography>
         <Typography
-          className="rentalhistory-container-item__startdate"
+          className="carmanagement-container-item__startdate"
           paddingTop={"5px"}
           paddingLeft={"20px"}
           sx={{ fontSize: "14px", letterSpacing: "0.8px" }}
@@ -82,7 +80,7 @@ function RentalHistory() {
           Từ: 09/10/2022
         </Typography>
         <Typography
-          className="rentalhistory-container-item__enddate"
+          className="carmanagement-container-item__enddate"
           paddingTop={"5px"}
           paddingLeft={"20px"}
           sx={{ fontSize: "14px", letterSpacing: "0.8px" }}
@@ -92,7 +90,7 @@ function RentalHistory() {
         </Stack>
         <Stack justifyContent={"center"}>
           <Typography
-            className="rentalhistory-container-item__price"
+            className="carmanagement-container-item__price"
             paddingLeft={"20px"}
             sx={{
               fontWeight: "600",
@@ -104,11 +102,11 @@ function RentalHistory() {
             2,738,225₫
           </Typography>
         </Stack>
-        <Stack flex={1} justifyContent={"center"} spacing={2}>
+        <Stack flex={1} justifyContent={"center"} spacing={1}>
           <Button
             variant="outlined"
             size="medium"
-            className="rentalhistory-container-item__rebook"
+            className="carmanagement-container-item__status"
             sx={{
               borderColor: variables.textgreencolor,
               color: variables.textgreencolor,
@@ -117,12 +115,40 @@ function RentalHistory() {
               alignSelf:"center"
             }}
           >
-            ĐẶT LẠI
+            TRẠNG THÁI XE
+          </Button>
+          <Button
+            variant="outlined"
+            size="medium"
+            className="carmanagement-container-item__stop"
+            sx={{
+              borderColor: variables.orangecolor,
+              color: variables.orangecolor,
+              fontWeight: "bold",
+              width: "215px ",
+              alignSelf:"center"
+            }}
+          >
+            TẠM DỪNG
+          </Button>
+          <Button
+            variant="outlined"
+            size="medium"
+            className="carmanagement-container-item__delete"
+            sx={{
+              borderColor: variables.redcolor,
+              color: variables.redcolor,
+              fontWeight: "bold",
+              width: "215px ",
+              alignSelf:"center"
+            }}
+          >
+            XOÁ
           </Button>
         </Stack>
       </Stack>
     </Stack>
-  );
+  )
 }
 
-export default RentalHistory;
+export default CarManagement
