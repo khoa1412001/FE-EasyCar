@@ -1,132 +1,44 @@
 import React from 'react'
 import { useState } from 'react'
-import { TextField, Typography, Grid, Select, MenuItem, Stack} from '@mui/material'
-
+import { TextField, Typography, Grid, Stack, Switch, Divider, Slider} from '@mui/material'
 
 function RentForm() {
-  const [age,setAge] = useState('')
-  const handleChange = event => (setAge(event.target.value))
+  const [checked,setChecked] = useState(true)
   return (
-    <Stack bgcolor='white' p={5}>
-    <Typography>Biển số xe</Typography>
-    <Typography>Lưu ý: Biển số sẽ không thể thay đổi sau khi đăng ký</Typography>
-    <Grid container>
-      <Grid item xs={6}>
-        <TextField fullWidth></TextField>
+    <Stack bgcolor='white' p={5} spacing={1}>
+      <Typography fontWeight='bold' fontSize='1.25rem'>Đơn giá thuê mặc định</Typography>
+      <Typography color='#424242' fontSize='0.95rem'>Đơn giá áp dụng cho tất cả các ngày. Bạn có thuể tuỳ chỉnh giá khác cho các ngày đặc biệt (cuối tuần, lễ, tết...) trong mục quản lý xe sau khi đăng kí.</Typography>
+      <Typography py={2} color='#424242' fontSize='0.95rem'>Giá đề xuất: 720K</Typography>
+      <Grid container>
+        <Grid item xs={3}>
+        <TextField fullWidth value='720'></TextField>
+        </Grid>
+        <Grid item xs={1}>
+        <Typography p={2}>K</Typography></Grid>
       </Grid>
-    </Grid>
-    <Typography>Thông tin cơ bản</Typography>
-    <Typography>Lưu ý: Các thông tin cơ bản sẽ không thể thay đổi sau khi đăng ký</Typography>
-    <Grid container columns={13} rowSpacing={2}>
+      <Typography py={2} fontWeight='bold' fontSize='1.25rem'>Địa chỉ xe</Typography>
+      <Typography variant='outlined'>Địa chỉ mặc định để giao nhận xe</Typography>
+      <Stack direction='row' justifyContent="space-between">
+      <Typography pt={1} fontWeight='bold' fontSize='1.25rem'>Giới hạn số km</Typography>
+      <Switch onChange={() => setChecked(!checked)} checked = {checked}/>
+      </Stack>
+      {checked && 
+      <Grid container justifyContent="space-between">
         <Grid item xs={6}>
-            <Typography>Hãng xe</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-        </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={6}>
-            <Typography>Mẫu xe</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
+          <Typography color='#424242' fontSize='0.95rem'>Số km tối đa trong 1 ngày</Typography>
+          <Slider/>
+          <Typography color='gray' fontSize='0.95rem'>Số km đề xuất: 400km</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography>Số ghế</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
+          <Typography color='#424242' fontSize='0.95rem'>Số km tối đa trong 1 ngày</Typography>
+          <Slider mx = {2} />
+          <Typography color='gray' fontSize='0.95rem'>Số km đề xuất: 400km</Typography>
         </Grid>
-        <Grid item xs={1}/>
-        <Grid item xs={6}>
-            <Typography>Năm sản xuất</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-        </Grid>
-        <Grid item xs={6}>
-            <Typography>Truyền động</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-        </Grid>
-        <Grid item xs={1}/>
-        <Grid item xs={6}>
-            <Typography>Loại nhiên liệu</Typography>
-              <Select
-                fullWidth
-                displayEmpty
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  Chọn hãng xe
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-        </Grid>
-    </Grid>
-    <Typography>Mức tiêu thụ nhiên liệu</Typography>
-    <Typography>Số lít nhiên liệu cho quãng đường 100km.</Typography>
-    <Grid container>
-      <Grid item xs={6}>
-        <TextField fullWidth></TextField>
-      </Grid>
-    </Grid>
-    <Typography>Mô tả</Typography>
-    <TextField
+      </Grid>}
+      <Divider/>
+      <Typography>Điều khoản thuê xe</Typography>
+      <Typography>Ghi rõ các yêu cầu để khách có thể thuê xe.</Typography>
+      <TextField
           fullWidth
           multiline
           rows={4}
