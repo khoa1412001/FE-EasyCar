@@ -8,15 +8,14 @@ import ChangePassword from './components/ChangePassword';
 import AccountVerify from './components/AccountVerify';
 import CarManagement from './components/CarManagement';
 import { Stack } from "@mui/system";
+import { Outlet } from 'react-router-dom';
 function ProfilePage() {
   return (
     <>
-      <Header/>
-      <Stack direction={'row'}>
+      <Stack direction={'row'} justifyContent="center" paddingTop={2} paddingBottom={2} bgcolor="#e8eaef">
         <Sidebar/>
-        <RentalHistory/>
+        <Outlet/>
       </Stack>
-      <Footer/>
     </>
   )
 };

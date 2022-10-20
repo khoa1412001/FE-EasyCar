@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -26,6 +27,8 @@ function Sidebar() {
             </Typography>
             <Divider sx={{paddingTop:'8px'}}/>
             <Button
+                component = {Link}
+                to = '/profile/info'
                 size="medium"
                 className="sidebar-container__button"
                 sx={{
@@ -37,6 +40,8 @@ function Sidebar() {
             </Button>
             <Divider/>
             <Button
+                component = {Link}
+                to = '/profile/history'
                 size="medium"
                 className="sidebar-container__button"
                 sx={{
@@ -48,6 +53,8 @@ function Sidebar() {
             </Button>
             <Divider/>
             <Button
+                component = {Link}
+                to = '/profile/verify'
                 size="medium"
                 className="sidebar-container__button"
                 sx={{
@@ -59,6 +66,21 @@ function Sidebar() {
             </Button>
             <Divider/>
             <Button
+                component = {Link}
+                to = '/profile/carmanage'
+                size="medium"
+                className="sidebar-container__button"
+                sx={{
+                  fontWeight: "bold",
+                  height:'45px'
+                }}
+              >
+                QUẢN LÝ XE
+            </Button>
+            <Divider/>
+            <Button
+                component = {Link}
+                to = '/profile/changepassword'
                 size="medium"
                 className="sidebar-container__button"
                 sx={{

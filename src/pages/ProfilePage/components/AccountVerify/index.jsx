@@ -14,7 +14,7 @@ import { Stack } from "@mui/system";
 
 function AccountVerify() {
   return (
-    <Box className="accountverify-container" padding={1} marginLeft="5px">
+    <Box className="accountverify-container" padding={1} marginLeft="5px" bgcolor="#FFFFFF">
       <Stack spacing={2}>
         <Typography
           className="accountverify-container__title"
