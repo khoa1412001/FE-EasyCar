@@ -1,0 +1,31 @@
+@import '../../assets/variable';
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+.carinfo-container {
+    height: 1200px;
+    width: 800px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+    background-color: #FFF;
+
+    &__img {
+    
+    }
+
+    &__imgcontainer {
+        height: 400px;
+        width: 800px;
+    }
+}
+
+.payment-container {
+    height: 860px;
+    width: 410px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+    background-color: #FFF;
+}

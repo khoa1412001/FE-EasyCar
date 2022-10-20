@@ -11,6 +11,7 @@ import RentalHistory from 'pages/ProfilePage/components/RentalHistory'
 import ChangePassword from 'pages/ProfilePage/components/ChangePassword'
 import AccountVerify from 'pages/ProfilePage/components/AccountVerify'
 import CarManagement from 'pages/ProfilePage/components/CarManagement'
+import CarDetails from 'pages/CarDetails'
 
 function ConfigRoute() {
   return (
@@ -29,9 +30,10 @@ function ConfigRoute() {
           <Route path='carmanage' element ={<CarManagement/>}/>
         </Route>
         <Route path = 'fillter' element ={<FilterPage/>}/>
-
+        <Route path = "details" element ={<CarDetails/>}/>
     </Routes>
   )
 }
+
 
 export default ConfigRoute

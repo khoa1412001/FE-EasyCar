@@ -100,7 +100,6 @@ function AccountInfo() {
             id="accountinfo-container__email"
             variant="outlined"
             size="small"
-            disabled
             sx={{ marginLeft: "50px" }}
             value="Nguyễn Phúc An"
           />
