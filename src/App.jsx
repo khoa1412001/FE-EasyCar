@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import VehicleSignupPage from "pages/VehicleSignupPage";
 import ConfigRoute from "ConfigRoute";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 function App() {
-  const [openSignin, setOpenSignin] = useState(false)
   return (
     <BrowserRouter>
+      <Header/>
       <ConfigRoute/>
+      <Footer/>
     </BrowserRouter>
   );
 }

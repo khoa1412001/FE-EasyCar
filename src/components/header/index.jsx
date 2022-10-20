@@ -13,7 +13,8 @@ import logo from "assets/img/logo_ec.png";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
 import "./style.scss";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 function Header() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,16 +56,30 @@ function Header() {
           {true && (
             <Stack direction="row">
               <Box alignSelf="center" paddingRight={5}>
-                <Button variant="outlined" className="header__button" sx={{bgcolor: variables.mainyellowcolor, color:variables.mainlightercolor, fontWeight:"bold", fontSize:15}}>Trở thành chủ xe</Button>
-              </Box>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
+                  <Button
+                    component = {Link}
+                    to = '/signin/signup'
+                    variant="outlined"
+                    className="header__button"
+                    sx={{
+                      bgcolor: variables.mainyellowcolor,
+                      color: variables.mainlightercolor,
+                      fontWeight: "bold",
+                      fontSize: 15,
+                    }}
+                  >
+                    Trở thành chủ xe
+                  </Button>
+                </Box>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                
                 <Avatar
                   alt="Remy Sharp"
                   src="https://n1-astg.mioto.vn/g/2022/08/02/21/f4VeE-IlZhkA073LQ7xv_A.jpg"
