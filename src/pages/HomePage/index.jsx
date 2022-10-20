@@ -4,10 +4,7 @@ import Header from 'components/Header'
 import LandingBody from 'pages/HomePage/components/LandingBody'
 function HomePage() {
   return (
-    <Box>
-        <Header/>
         <LandingBody/>
-    </Box>
   )
 }
 

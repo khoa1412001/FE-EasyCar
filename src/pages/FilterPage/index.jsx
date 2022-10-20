@@ -10,7 +10,6 @@ import 'pages/FilterPage/style.scss'
 function FilterPage() {
   return (
     <Box>
-      <Header/>
       <Box className='fillter-page-bg'>
         <Box className='fillter-page-container' paddingTop={'5px'}>
           <Box className='fillter-page-container__datetimecontainer' paddingBottom={'5px'}>

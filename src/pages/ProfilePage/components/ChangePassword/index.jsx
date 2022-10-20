@@ -13,7 +13,7 @@ import { Stack } from "@mui/system";
 
 function ChangePassword() {
   return (
-    <Box className="changepassword-container" padding={1} marginLeft="5px">
+    <Box className="changepassword-container" padding={1} marginLeft="5px" bgcolor="#FFFFFF">
       <Stack spacing={2}>
         <Typography
           className="changepassword-container__title"

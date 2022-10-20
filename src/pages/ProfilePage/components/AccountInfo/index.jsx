@@ -20,7 +20,7 @@ function AccountInfo() {
   };
 
   return (
-    <Box className="accountinfo-container" padding={1} marginLeft="5px">
+    <Box className="accountinfo-container" padding={1} marginLeft="5px" bgcolor="#FFFFFF">
       <Stack>
         <Typography
           className="accountinfo-container__title"
