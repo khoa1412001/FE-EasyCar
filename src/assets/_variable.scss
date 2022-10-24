@@ -6,6 +6,8 @@ $main-lighter-color:#00509D;
 $main-white-color:#EDEDED;
 $main-grey-color: #e8eaef;
 $text-grey-color: #a8a8a8;
+$text-black-color: #141414;
+$text-greyer-color: #3C4048;
 $text-green-color: #10a310;
 $orange-color: #FF731D;
 $red-color: #DD5353;
@@ -22,4 +24,6 @@ $red-color: #DD5353;
     textgreencolor: $text-green-color;
     orangecolor: $orange-color;
     redcolor: $red-color;
+    textgreyercolor: $text-greyer-color;
+    textblackcolor: $text-black-color
 }

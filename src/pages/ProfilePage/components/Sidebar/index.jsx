@@ -1,15 +1,12 @@
-import React from 'react'
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
 import Avatar from '@mui/material/Avatar';
-import "./style.scss";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
-import Divider from "@mui/material/Divider";
+import "assets/style.scss";
 import { Link } from "react-router-dom";
+import "./style.scss";
 
 function Sidebar() {
   return (
