@@ -1,4 +1,4 @@
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
@@ -18,13 +18,24 @@ function LandingBody() {
   const [startdatetime, setStartDatetime] = React.useState(moment());
   const [enddatetime, setEndDatetime] = React.useState(moment());
   return (
-    <Box className="landing-container" sx={{ backgroundImage: `url(${bgimg})` }}>
-        <Typography variant="h3" className="landing-container__maintext" sx={{ fontFamily: "Orbitron",paddingTop:"75px" }}>
-            EasyCar 
-        </Typography>
-        <Typography variant="h3" className="landing-container__maintext" sx={{ fontFamily: "Orbitron" }}>
-            Thuê xe nhanh chóng
-        </Typography>
+    <Box
+      className="landing-container"
+      sx={{ backgroundImage: `url(${bgimg})` }}
+    >
+      <Typography
+        variant="h3"
+        className="landing-container__maintext"
+        sx={{ fontFamily: "Orbitron", paddingTop: "75px" }}
+      >
+        EasyCar
+      </Typography>
+      <Typography
+        variant="h3"
+        className="landing-container__maintext"
+        sx={{ fontFamily: "Orbitron" }}
+      >
+        Thuê xe nhanh chóng
+      </Typography>
       <Box className="landing-container__inputcomponent">
         <Stack
           spacing={2}
@@ -42,10 +53,11 @@ function LandingBody() {
             size="normal"
           />
           <Typography className="landing-container__inputcomponent__text">
-            <CalendarMonthIcon fontSize="small"/> Ngày bắt đầu
+            <CalendarMonthIcon fontSize="small" /> Ngày bắt đầu
           </Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DateTimePicker
+              inputFormat="DD/MM/YYYY hh:mm A"
               renderInput={(props) => <TextField {...props} />}
               value={startdatetime}
               onChange={(newValue) => {
@@ -55,10 +67,11 @@ function LandingBody() {
             />
           </LocalizationProvider>
           <Typography className="landing-container__inputcomponent__text">
-            <CalendarMonthIcon fontSize="small"/> Ngày kết thúc
+            <CalendarMonthIcon fontSize="small" /> Ngày kết thúc
           </Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DateTimePicker
+              inputFormat="DD/MM/YYYY hh:mm A"
               renderInput={(props) => <TextField {...props} />}
               value={enddatetime}
               onChange={(newValue) => {

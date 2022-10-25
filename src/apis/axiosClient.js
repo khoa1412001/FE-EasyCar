@@ -1,7 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
 import jwt_decode from 'jwt-decode';
-const baseURL='http://localhost:5000/api'
+import { parse, stringify } from 'qs';
+const baseURL='http://localhost:5000/api';
 
 export const axiosClient = axios.create({
     baseURL: baseURL,
@@ -9,8 +10,16 @@ export const axiosClient = axios.create({
         "Content-Type": "application/json"
     },
     withCredentials: true,
-    paramsSerializer: (params) => queryString.stringify(params)
+    paramsSerializer: {
+        encode: parse,
+        serialize: stringify,
+      },
 });
+
+const getRefreshToken = async (refreshToken) => {
+    const res = await axiosClient.post('/auth/refreshtoken', { refreshToken  })
+    return res.data
+}
 
 export const axiosClientWithToken = axios.create({
     baseURL: baseURL,

@@ -19,9 +19,40 @@ import GoogleIcon from "@mui/icons-material/Google";
 import CloseIcon from "@mui/icons-material/Close";
 import "./signin.scss";
 import React from "react";
-
+import apiAuth from 'apis/apiAuth'
+import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
 function SigninPage(props) {
   const { title, children, openSignin, setOpenSignin } = props;
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const navigate = useNavigate()
+  const handleLogin = () => {
+    const params = {
+      email: email,
+      password: password
+    }
+
+    apiAuth.login(params)
+            .then(res => {
+                if (res) {
+                    // dispatch(loginSuccess(res))
+                    // dispatch(setUserInfo(res))
+                    console.log("Dang nhap thanh cong")
+                    toast.success("Đăng nhập thành công")
+                    navigate('/')
+                }
+                else {
+                    toast.error("Sai tên đăng nhập hoặc mật khẩu")
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                console.log("Loi")
+                // toast.warning(getMessageError(err))
+            })
+            .finally(() => console.log("Hoan thanh"))
+  }
   return (
     <Dialog open={openSignin} maxWidth="sm" fullWidth>
       <DialogTitle>
@@ -41,6 +72,8 @@ function SigninPage(props) {
               fullWidth
               placeholder="Điện thoại hoặc email"
               variant="outlined"
+              value  = {email}
+              onChange = {(event) => setEmail(event.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -52,7 +85,10 @@ function SigninPage(props) {
             <TextField
               fullWidth
               placeholder="Mật khẩu"
+              type='password'
               variant="outlined"
+              value = {password}
+              onChange = {(event) => setPassword(event.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -68,6 +104,7 @@ function SigninPage(props) {
               align="center"
               className="signup__button"
               variant="standard"
+              onClick= {handleLogin}
               sx={{
                 color: variables.mainlightercolor,
                 bgcolor: variables.mainyellowcolor,

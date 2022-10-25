@@ -36,7 +36,10 @@ function DateLocationFillter() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateTimePicker
-            renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+            inputFormat="DD/MM/YYYY hh:mm A"
+            renderInput={(props) => (
+              <TextField {...props} variant="standard" size="small" />
+            )}
             value={startdatetime}
             onChange={(newValue) => {
               setStartDatetime(newValue);
@@ -55,7 +58,10 @@ function DateLocationFillter() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateTimePicker
-            renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+            inputFormat="DD/MM/YYYY hh:mm A"
+            renderInput={(props) => (
+              <TextField {...props} variant="standard" size="small" />
+            )}
             value={enddatetime}
             onChange={(newValue) => {
               setEndDatetime(newValue);
