@@ -15,9 +15,11 @@ import variables from "assets/_variable.scss";
 import "./style.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import SigninPage from "pages/SigninPage";
 function Header() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openSignin, setOpenSignin] = React.useState(false);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -53,33 +55,32 @@ function Header() {
           >
             EasyCar
           </Typography>
-          {true && (
+          {false ? (
             <Stack direction="row">
               <Box alignSelf="center" paddingRight={5}>
-                  <Button
-                    component = {Link}
-                    to = '/signin/signup'
-                    variant="outlined"
-                    className="header__button"
-                    sx={{
-                      bgcolor: variables.mainyellowcolor,
-                      color: variables.mainlightercolor,
-                      fontWeight: "bold",
-                      fontSize: 15,
-                    }}
-                  >
-                    Trở thành chủ xe
-                  </Button>
-                </Box>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
+                <Button
+                  component={Link}
+                  to="/signin/signup"
+                  variant="outlined"
+                  className="header__button"
+                  sx={{
+                    bgcolor: variables.mainyellowcolor,
+                    color: variables.mainlightercolor,
+                    fontWeight: "bold",
+                    fontSize: 15,
+                  }}
                 >
-                
+                  Trở thành chủ xe
+                </Button>
+              </Box>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
                 <Avatar
                   alt="Remy Sharp"
                   src="https://n1-astg.mioto.vn/g/2022/08/02/21/f4VeE-IlZhkA073LQ7xv_A.jpg"
@@ -107,9 +108,47 @@ function Header() {
                 Nguyen Phuc An
               </Typography>
             </Stack>
+          ) : (
+            <Stack direction="row">
+              <Box alignSelf="center" paddingRight={5}>
+                <Button
+                  onClick={() => setOpenSignin(true)}
+                  variant="outlined"
+                  className="header__button"
+                  sx={{
+                    bgcolor: variables.mainyellowcolor,
+                    color: variables.mainlightercolor,
+                    fontWeight: "bold",
+                    fontSize: 15,
+                  }}
+                >
+                  ĐĂNG NHẬP
+                </Button>
+              </Box>
+              <Box alignSelf="center" paddingRight={5}>
+                <Button
+                  component={Link}
+                  to="/signup"
+                  variant="outlined"
+                  className="header__button"
+                  sx={{
+                    bgcolor: variables.mainyellowcolor,
+                    color: variables.mainlightercolor,
+                    fontWeight: "bold",
+                    fontSize: 15,
+                  }}
+                >
+                  ĐĂNG KÝ
+                </Button>
+              </Box>
+            </Stack>
           )}
         </Toolbar>
       </AppBar>
+      <SigninPage
+        openSignin={openSignin}
+        setOpenSignin={setOpenSignin}
+      ></SigninPage>
     </Box>
   );
 }
