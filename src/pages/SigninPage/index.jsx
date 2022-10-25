@@ -54,7 +54,7 @@ function SigninPage(props) {
             .finally(() => console.log("Hoan thanh"))
   }
   return (
-    <Dialog open={openSignin} maxWidth="sm" fullWidth>
+    <Dialog open={openSignin} maxWidth="sm" fullWidth onClose={() => setOpenSignin(false)}>
       <DialogTitle>
         <Box display="flex" sx={{ justifyContent: "flex-end" }}>
           <IconButton onClick={() => setOpenSignin(false)}>
