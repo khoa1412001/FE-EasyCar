@@ -17,6 +17,7 @@ function ConfigRoute() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route index element={<HomePage />} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="car-signup" element={<VehicleSignupPage />} />
       <Route path="profile" element={<ProfilePage />}>
