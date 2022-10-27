@@ -1,15 +1,12 @@
-import * as React from "react";
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
-import "./style.scss";
+import { Box, TextField, Typography } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/system";
-import { Box, Grid, TextField, Typography } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import "assets/style.scss";
 import moment from "moment";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Divider from "@mui/material/Divider";
+import * as React from "react";
+import "./style.scss";
 function DateLocationFillter() {
   const [startdatetime, setStartDatetime] = React.useState(moment());
   const [enddatetime, setEndDatetime] = React.useState(moment());
@@ -39,7 +36,10 @@ function DateLocationFillter() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateTimePicker
-            renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+            inputFormat="DD/MM/YYYY hh:mm A"
+            renderInput={(props) => (
+              <TextField {...props} variant="standard" size="small" />
+            )}
             value={startdatetime}
             onChange={(newValue) => {
               setStartDatetime(newValue);
@@ -58,7 +58,10 @@ function DateLocationFillter() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateTimePicker
-            renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+            inputFormat="DD/MM/YYYY hh:mm A"
+            renderInput={(props) => (
+              <TextField {...props} variant="standard" size="small" />
+            )}
             value={enddatetime}
             onChange={(newValue) => {
               setEndDatetime(newValue);

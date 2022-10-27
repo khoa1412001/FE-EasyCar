@@ -1,17 +1,10 @@
-import * as React from 'react';
-import "./style.scss";
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
-import CheckIcon from '@mui/icons-material/Check';
 import StarIcon from "@mui/icons-material/Star";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
+import "assets/style.scss";
+import variables from "assets/_variable.scss";
+import "./style.scss";
 
 function CarManagement() {
   return (

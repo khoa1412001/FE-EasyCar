@@ -1,9 +1,16 @@
 @import '../../../assets/variable';
 
-.signup {
 
-    &__button:hover {
-        color: $main-yellow-color;
-        background-color: $main-lighter-color !important;
-    }
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.signup {
+	&__button:hover {
+		color: $main-yellow-color;
+		background-color: $main-lighter-color !important;
+	}
 }
