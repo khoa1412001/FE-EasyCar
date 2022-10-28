@@ -21,17 +21,42 @@ function LandingBody() {
 	const [location, setLocation] = React.useState('');
 	const [error, setError] = React.useState({startdate: false, enddate: false})
 	const handleFind = () => {
+		if((startdatetime.date() <= moment().date()&&(enddatetime.date() <= moment().date()))){
+			const newError = {...error, startdate:true,enddate:true}
+			setError(newError)
+		} else {
+			if(startdatetime.date() <= moment().date()){
+				const newError = {...error, startdate:true}
+				setError(newError)
+			} else {
+				const newError = {...error, startdate:false}
+				setError(newError)
+
+				if(enddatetime.date() <= moment().date()){
+					const newError = {...error, enddate:true,startdate:false}
+					setError(newError)
+				} else {
+					const newError = {...error, enddate:false}
+					setError(newError)
+				}
+			}
+
+		}
+
+
 		const uri = encodeURI(location);
 		const params = {
-			uri: uri
+			uri: uri,
+			startdate : startdatetime,
+			enddate : enddatetime,
 		}
 		console.log(uri);
-		apiMio
-			.getlocation(params)
-			.then((res) => console.log(res))
-			.catch((err) => {
-				console.log('loi');
-			});
+		// apiMio
+		// 	.getlocation(params)
+		// 	.then((res) => console.log(res))
+		// 	.catch((err) => {
+		// 		console.log('loi');
+		// 	});
 	};
 
 	return (
@@ -63,7 +88,7 @@ function LandingBody() {
 					<LocalizationProvider dateAdapter={AdapterMoment}>
 						<DateTimePicker
 							inputFormat="DD/MM/YYYY hh:mm A"
-							renderInput={(props) => <TextField {...props} />}
+							renderInput={(props) => <TextField {...props} error={error.startdate} helperText={error.startdate ? "Vui lòng chọn ngày khác": ""}/>}
 							value={startdatetime}
 							onChange={(newValue) => setStartDatetime(newValue)}
 							size="small"
@@ -75,7 +100,7 @@ function LandingBody() {
 					<LocalizationProvider dateAdapter={AdapterMoment}>
 						<DateTimePicker
 							inputFormat="DD/MM/YYYY hh:mm A"
-							renderInput={(props) => <TextField {...props} />}
+							renderInput={(props) => <TextField {...props} error={error.enddate} helperText={error.enddate ? "Vui lòng chọn ngày khác": ""}/>}
 							value={enddatetime}
 							onChange={(newValue) => {
 								setEndDatetime(newValue);
