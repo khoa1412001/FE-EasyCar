@@ -22,13 +22,6 @@ const getRefreshToken = async (refreshToken) => {
     return res.data
 }
 
-const getAccessToken = () => {
-    const jsonobject = JSON.parse(localStorage.getItem('persist:root'))
-    const auth = JSON.parse(jsonobject.auth)
-    const accessToken = auth.accessToken.toString()
-    return accessToken
-};
-
 export const axiosClientWithToken = axios.create({
     baseURL: baseURL,
     headers: {

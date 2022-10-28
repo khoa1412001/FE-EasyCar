@@ -14,16 +14,29 @@ import bgimg from 'assets/img/landingpage_bg.jpg';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
+import apiMio from 'apis/apiMio';
 function LandingBody() {
 	const [startdatetime, setStartDatetime] = React.useState(moment());
 	const [enddatetime, setEndDatetime] = React.useState(moment());
+	const [location, setLocation] = React.useState('');
+	const [error, setError] = React.useState({startdate: false, enddate: false})
+	const handleFind = () => {
+		const uri = encodeURI(location);
+		const params = {
+			uri: uri
+		}
+		console.log(uri);
+		apiMio
+			.getlocation(params)
+			.then((res) => console.log(res))
+			.catch((err) => {
+				console.log('loi');
+			});
+	};
+
 	return (
 		<Box className="landing-container" sx={{ backgroundImage: `url(${bgimg})` }}>
-			<Typography
-				variant="h3"
-				className="landing-container__maintext"
-				sx={{ fontFamily: 'Orbitron', paddingTop: '75px' }}
-			>
+			<Typography variant="h3" className="landing-container__maintext" sx={{ fontFamily: 'Orbitron', paddingTop: '75px' }}>
 				EasyCar
 			</Typography>
 			<Typography variant="h3" className="landing-container__maintext" sx={{ fontFamily: 'Orbitron' }}>
@@ -39,6 +52,10 @@ function LandingBody() {
 						placeholder="Nhập vị trí thành phố, quận, đường..."
 						variant="outlined"
 						size="normal"
+						value={location}
+						onChange={(event) => {
+							setLocation(event.target.value);
+						}}
 					/>
 					<Typography className="landing-container__inputcomponent__text">
 						<CalendarMonthIcon fontSize="small" /> Ngày bắt đầu
@@ -48,9 +65,7 @@ function LandingBody() {
 							inputFormat="DD/MM/YYYY hh:mm A"
 							renderInput={(props) => <TextField {...props} />}
 							value={startdatetime}
-							onChange={(newValue) => {
-								setStartDatetime(newValue);
-							}}
+							onChange={(newValue) => setStartDatetime(newValue)}
 							size="small"
 						/>
 					</LocalizationProvider>
@@ -71,6 +86,7 @@ function LandingBody() {
 					<Button
 						variant="contained"
 						className="landing-container__inputcomponent__inputbutton"
+						onClick={handleFind}
 						sx={{
 							bgcolor: variables.mainyellowcolor,
 							color: variables.mainlightercolor,

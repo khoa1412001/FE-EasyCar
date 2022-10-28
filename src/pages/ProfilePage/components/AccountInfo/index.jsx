@@ -18,15 +18,14 @@ import { useSelector } from 'react-redux';
 
 function AccountInfo() {
 	const [gender, setGender] = React.useState('MALE');
-	const [userdata, setUserdata] = React.useState(null);
 	const user = useSelector((state) => state.user.info) || {};
-	React.useEffect(() => {}, []);
+	React.useEffect(() => {reset(user)}, [user]);
 
 	const handleGenderChange = (event) => {
 		setGender(event.target.value);
 	};
 
-	const { handleSubmit, control } = useForm({
+	const { handleSubmit, control,reset } = useForm({
 		mode: 'onChange',
 		resolver: yupResolver(schema),
 		reValidateMode: 'onChange',
