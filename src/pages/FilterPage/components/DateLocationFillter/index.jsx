@@ -7,7 +7,10 @@ import "assets/style.scss";
 import moment from "moment";
 import * as React from "react";
 import "./style.scss";
-function DateLocationFillter() {
+import { useSearchParams } from 'react-router-dom';
+function DateLocationFillter(props) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { address, setAddress, startdate, setStartdate, enddate, setEnddate } = props;
   const [startdatetime, setStartDatetime] = React.useState(moment());
   const [enddatetime, setEndDatetime] = React.useState(moment());
   return (
@@ -24,6 +27,8 @@ function DateLocationFillter() {
           placeholder="Nhập vị trí thành phố, quận, đường..."
           variant="standard"
           size="small"
+          value={address}
+          onChange={(event) => setAddress(event.target.value)}
         />
         <Divider orientation="vertical" sx={{ paddingLeft: "10px" }} />
         <Typography
@@ -40,9 +45,9 @@ function DateLocationFillter() {
             renderInput={(props) => (
               <TextField {...props} variant="standard" size="small" />
             )}
-            value={startdatetime}
+            value={startdate}
             onChange={(newValue) => {
-              setStartDatetime(newValue);
+              setStartdate(newValue);
             }}
             size="small"
           />
@@ -62,9 +67,9 @@ function DateLocationFillter() {
             renderInput={(props) => (
               <TextField {...props} variant="standard" size="small" />
             )}
-            value={enddatetime}
+            value={enddate}
             onChange={(newValue) => {
-              setEndDatetime(newValue);
+              setEnddate(newValue);
             }}
             size="small"
           />
