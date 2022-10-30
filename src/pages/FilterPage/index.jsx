@@ -8,8 +8,10 @@ import { Stack } from '@mui/system';
 import 'pages/FilterPage/style.scss';
 import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
+import apiUtils from 'apis/apiUtils';
 
 function FilterPage() {
+	const [suggestion, setSuggestion] = React.useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [startdate, setStartdate] = React.useState(moment.unix(searchParams.get('startdate')));
 	const [enddate, setEnddate] = React.useState(moment.unix(searchParams.get('enddate')));
@@ -23,42 +25,42 @@ function FilterPage() {
 			id: 1,
 			text: 'MINI',
 			subtext: '4 GHẾ',
-      value:'MINI-4',
+			value: 'MINI-4',
 			selected: false,
 		},
 		{
 			id: 2,
 			text: 'SEDAN',
 			subtext: '4 GHẾ',
-      value:'SEDAN-4',
+			value: 'SEDAN-4',
 			selected: false,
 		},
 		{
 			id: 3,
 			text: 'SUV',
 			subtext: '5 GHẾ',
-      value:'SUV-5',
+			value: 'SUV-5',
 			selected: false,
 		},
 		{
 			id: 4,
 			text: 'SUV',
 			subtext: '7 GHẾ',
-      value:'SUV-7',
+			value: 'SUV-7',
 			selected: false,
 		},
 		{
 			id: 5,
 			text: 'MPV',
 			subtext: '7 GHẾ',
-      value:'MPV-7',
+			value: 'MPV-7',
 			selected: false,
 		},
 		{
 			id: 6,
 			text: 'PICK-UP',
 			subtext: '4 GHẾ',
-      value:'PU-4',
+			value: 'PU-4',
 			selected: false,
 		},
 	]);
@@ -91,6 +93,28 @@ function FilterPage() {
 	});
 
 	React.useEffect(() => {
+		const GetLocations = (address) => {
+			handleFind(address);
+		};
+		GetLocations(address);
+	}, [address]);
+
+	const handleFind = React.useCallback(
+		_debounce((address) => {
+			const params = {
+				address: address,
+			};
+			apiUtils
+				.findLocation(params)
+				.then((res) => {
+					setSuggestion(res);
+				})
+				.catch((err) => {});
+		}, 1000),
+		[]
+	);
+
+	React.useEffect(() => {
 		const changeFillter = () => {
 			let cartypefillter = ['ALL'];
 			cartype.forEach((item) => {
@@ -101,7 +125,7 @@ function FilterPage() {
 				if (item.select === false) {
 					const index = cartypefillter.indexOf(item.value);
 					if (index > -1) {
-						cartypefillter.splice(index, 1); 
+						cartypefillter.splice(index, 1);
 					}
 				}
 			});
@@ -117,15 +141,19 @@ function FilterPage() {
 				enddate: enddate.unix(),
 			});
 		};
-    changeFillter();
+		changeFillter();
 	}, [price, carbrand, cartype, fueltype, transmission, rating, startdate, enddate, address]);
 
-  React.useEffect(() => {
-    handleApi(fillter)
-  },[fillter])
-  const handleApi = React.useCallback(_debounce((fillter) => {console.log(fillter)},1000),[]);
+	React.useEffect(() => {
+		handleApi(fillter);
+	}, [fillter]);
+	const handleApi = React.useCallback(
+		_debounce((fillter) => {
+			console.log(fillter);
+		}, 1000),
+		[]
+	);
 
-  
 	return (
 		<Box>
 			<Box className="fillter-page-bg">
@@ -138,6 +166,7 @@ function FilterPage() {
 							setStartdate={setStartdate}
 							enddate={enddate}
 							setEnddate={setEnddate}
+							suggestion={suggestion}
 						/>
 					</Box>
 					<Stack direction={'row'}>

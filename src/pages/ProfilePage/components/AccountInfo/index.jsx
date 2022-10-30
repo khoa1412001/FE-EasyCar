@@ -14,18 +14,25 @@ import './style.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useForm, Controller } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import apiUser from 'apis/apiUser';
+import { toast } from 'react-toastify';
+import apiAuth from 'apis/apiAuth';
+import { setUserInfo } from 'slices/userSlice';
 
 function AccountInfo() {
-	const [gender, setGender] = React.useState('MALE');
 	const user = useSelector((state) => state.user.info) || {};
-	React.useEffect(() => {reset(user)}, [user]);
+	const [gender, setGender] = React.useState(user.gender || 'MALE');
+	const dispatch = useDispatch();
+	React.useEffect(() => {
+		reset(user);
+	}, [user]);
 
 	const handleGenderChange = (event) => {
 		setGender(event.target.value);
 	};
 
-	const { handleSubmit, control,reset } = useForm({
+	const { handleSubmit, control, reset } = useForm({
 		mode: 'onChange',
 		resolver: yupResolver(schema),
 		reValidateMode: 'onChange',
@@ -42,8 +49,25 @@ function AccountInfo() {
 			location,
 			username,
 			phoneNumber,
+			gender,
 		};
-		console.log(params);
+		apiUser
+			.updateUser(params)
+			.then((res) => {
+				toast.success('Cập nhật thông tin thành công');
+				apiAuth
+					.getuserinfo()
+					.then((res) => {
+						if (res) {
+							dispatch(setUserInfo(res));
+						}
+					})
+					.catch()
+					.finally();
+			})
+			.catch((err) => {
+				toast.error(err.response.data.message);
+			});
 	};
 	return (
 		<Box className="accountinfo-container" padding={1} marginLeft="5px" bgcolor="#FFFFFF">
