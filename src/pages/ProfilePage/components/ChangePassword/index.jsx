@@ -25,9 +25,9 @@ function ChangePassword() {
 	});
 	const navigate = useNavigate();
 	const onSubmit = (data) => {
-		const { password, oldPassword } = data;
+		const {  newPassword, oldPassword } = data;
 		const params = {
-			password,
+			newPassword,
 			oldPassword,
 		};
 		apiAuth
@@ -80,7 +80,7 @@ function ChangePassword() {
 							Mật khẩu mới:
 						</Typography>
 						<Controller
-							name={'password'}
+							name={'newPassword'}
 							control={control}
 							render={({ field, fieldState: { error } }) => (
 								<TextField

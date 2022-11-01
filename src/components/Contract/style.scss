@@ -1,0 +1,18 @@
+@import '../../assets/variable';
+
+.contract-container {
+
+    &__title {
+        font-weight: bolder !important;
+        font-size: 26px !important;
+    }
+
+    &__text {
+        font-size: 18px !important;
+    }
+
+    &__heading {
+        font-weight: bold !important;
+        font-size: 18px !important;
+    }
+}

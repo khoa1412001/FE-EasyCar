@@ -1,8 +1,5 @@
 import axios from 'axios';
-import queryString from 'query-string';
-import jwt_decode from 'jwt-decode';
 import { parse, stringify } from 'qs';
-import storage from 'redux-persist/lib/storage';
 const baseURL='http://localhost:5000/api';
 
 export const axiosClient = axios.create({
@@ -22,12 +19,17 @@ const getRefreshToken = async (refreshToken) => {
     return res.data
 }
 
-const getAccessToken = () => {
-    const jsonobject = JSON.parse(localStorage.getItem('persist:root'))
-    const auth = JSON.parse(jsonobject.auth)
-    const accessToken = auth.accessToken.toString()
-    return accessToken
-};
+export const axiosClientWithTokenMultiPart = axios.create({
+    baseURL: baseURL,
+    headers: {
+        "Content-type": "multipart/form-data",
+    },
+    withCredentials: true,
+    paramsSerializer: {
+        encode: parse,
+        serialize: stringify,
+      },
+});
 
 export const axiosClientWithToken = axios.create({
     baseURL: baseURL,
@@ -47,6 +49,20 @@ var myInterceptor = null;
 export const axiosInstance = (accessToken, dispatch) => {
     axiosClientWithToken.interceptors.request.eject(myInterceptor)
     myInterceptor = axiosClientWithToken.interceptors.request.use(
+        async (config) => {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+            return config;
+        },
+        err => {
+            return Promise.reject(err)
+        }
+    );
+}
+
+var myInterceptorMultiPart = null;
+export const axiosInstanceMultiPart = (accessToken) => {
+    axiosClientWithTokenMultiPart.interceptors.request.eject(myInterceptorMultiPart)
+    myInterceptorMultiPart = axiosClientWithTokenMultiPart.interceptors.request.use(
         async (config) => {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
             return config;
