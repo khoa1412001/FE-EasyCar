@@ -6,13 +6,14 @@ import Footer from 'components/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { axiosInstance } from 'apis/axiosClient';
+import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
 
 function App() {
 	const accessToken = useSelector((state) => state.auth.accessToken);
 	const dispatch = useDispatch();
 	if (accessToken) {
 		axiosInstance(accessToken, dispatch);
+		axiosInstanceMultiPart(accessToken);
 	}
 	return (
 		<BrowserRouter>

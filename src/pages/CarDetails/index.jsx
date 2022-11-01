@@ -20,7 +20,9 @@ import moment from "moment";
 import TextField from "@mui/material/TextField";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CheckIcon from "@mui/icons-material/Check";
+import Contract from "components/Contract";
 function CarDetails() {
+  const [openSignin, setOpenSignin] = React.useState(true);
   const [startdatetime, setStartDatetime] = React.useState(moment());
   const images = [
     {
@@ -374,10 +376,12 @@ function CarDetails() {
           variant="outlined"
           className="payment-container__button"
           startIcon={<CheckIcon />}
+          onClick={() => setOpenSignin(true)}
         >
           ĐẶT XE
         </Button>
       </Stack>
+      <Contract openSignin={openSignin} setOpenSignin={setOpenSignin}></Contract>
     </Stack>
   );
 }

@@ -67,7 +67,7 @@ function InformationForm() {
         </Grid>
         <Grid item xs={1}/>
         <Grid item xs={6}>
-            <Typography pb={1} color='#424242' fontSize='0.95rem'>Năm sản xuất</Typography>
+            <Typography pb={1} color='#424242' fontSize='0.95rem'>Kiểu xe</Typography>
               <Select
                 fullWidth
                 displayEmpty

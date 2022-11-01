@@ -12,6 +12,8 @@ import * as React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useForm, Controller } from 'react-hook-form';
+import apiUser from 'apis/apiUser';
+import { toast } from 'react-toastify';
 
 function AccountVerify() {
 	const [selectedImage, setSelectedImage] = React.useState();
@@ -26,11 +28,13 @@ function AccountVerify() {
     const params = {
       username: username,
       driverlincense: driverlincense,
-      birthday: birthday,
-      image: selectedImage,
+      bod: birthday,
+      driverlincenseimg: selectedImage,
     }
 
-    console.log(params)
+    apiUser.verifyUser(params)
+	.then((res) => {toast.success('Tạo yêu cầu xác thực tài khoản thành công')})
+	.catch((err) => {toast.error(err.response.data.message)})
 	};
 	return (
 		<Box className="accountverify-container" padding={1} marginLeft="5px" bgcolor="#FFFFFF">
@@ -109,7 +113,7 @@ function AccountVerify() {
 									id="accountverify-container__licensenumber"
 									variant="outlined"
 									size="small"
-									placeholder="DD/MM/YYYY"
+									placeholder="MM/DD/YYYY"
 									sx={{ width: '418px', alignSelf: 'center' }}
 								/>
 							)}
@@ -159,7 +163,7 @@ function AccountVerify() {
 							size="medium"
 							className="accountverify-container__update"
 							startIcon={<CheckIcon />}
-              type="submit"
+              				type="submit"
 							sx={{
 								color: '#FFF',
 								bgcolor: variables.textgreencolor,
