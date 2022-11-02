@@ -1,0 +1,27 @@
+@import '../../../../../assets/variable';
+
+.blue {
+    color: $main-color
+}
+
+.carstatus-container {
+    &__upimg:hover {
+        color: white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+
+    &__img {
+        width: 731px;
+        height: 400px;
+    }
+
+    &__carname {
+        letter-spacing: 0.8px !important;
+        font-weight: bold !important;
+    }
+
+    &__text {
+        font-size: 18px !important;
+    }
+}

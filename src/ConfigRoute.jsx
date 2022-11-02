@@ -12,7 +12,7 @@ import ChangePassword from "pages/ProfilePage/components/ChangePassword";
 import AccountVerify from "pages/ProfilePage/components/AccountVerify";
 import CarManagement from "pages/ProfilePage/components/CarManagement";
 import CarDetails from "pages/CarDetails";
-
+import CarStatusUpdate from "pages/CarStatusUpdate";
 function ConfigRoute() {
   return (
     <Routes>
@@ -29,7 +29,8 @@ function ConfigRoute() {
         <Route path="carmanage" element={<CarManagement />} />
       </Route>
       <Route path="fillter" element={<FilterPage />} />
-      <Route path="details" element={<CarDetails />} />
+      <Route path="fillter/details" element={<CarDetails />} />
+      <Route path="carmanage/carstatus" element={<CarStatusUpdate/>}/>
     </Routes>
   );
 }

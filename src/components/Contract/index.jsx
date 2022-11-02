@@ -1,21 +1,11 @@
-import * as React from 'react';
-import './style.scss';
-import 'assets/style.scss';
-import variables from 'assets/_variable.scss';
 import {
-	Box,
 	Button,
 	Dialog,
-	DialogContent,
-	DialogContentText,
-	DialogTitle,
-	Divider,
-	IconButton,
-	InputAdornment,
-	Stack,
-	TextField,
-	Typography,
+	DialogContent, DialogTitle, Stack, Typography
 } from '@mui/material';
+import 'assets/style.scss';
+import variables from 'assets/_variable.scss';
+import './style.scss';
 function Contract(props) {
 	const { title, children, openSignin, setOpenSignin } = props;
 	return (

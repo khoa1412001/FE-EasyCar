@@ -8,7 +8,7 @@ import RentForm from './RentForm';
 import ImageForm from './ImageForm';
 
 function VehicleSignupBody() {
-	const [step, setStep] = useState(2);
+	const [step, setStep] = useState(1);
 	const bodyProcess = () => {
 		switch (step) {
 			case 1:

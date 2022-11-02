@@ -4,9 +4,11 @@ import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
+import CarStatusDialog from "./CarStatusDialog";
 import "./style.scss";
-
+import * as React from 'react';
 function CarManagement() {
+  const [openCarStatus, setOpenCarStatus] = React.useState(true)
   return (
     <Stack className='carmanagement-container' padding={1} marginLeft="5px">
         <Stack
@@ -140,6 +142,9 @@ function CarManagement() {
           </Button>
         </Stack>
       </Stack>
+      <CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus}>
+
+      </CarStatusDialog>
     </Stack>
   )
 }
