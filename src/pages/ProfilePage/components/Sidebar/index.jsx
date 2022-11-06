@@ -13,7 +13,12 @@ import variables from 'assets/_variable.scss';
 import { useDispatch } from 'react-redux';
 import { clearUserInfo } from 'slices/userSlice';
 import { logoutSuccess } from 'slices/authSlice';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HistoryIcon from '@mui/icons-material/History';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import CarCrashIcon from '@mui/icons-material/CarCrash';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import LogoutIcon from '@mui/icons-material/Logout';
 function Sidebar() {
 	const user = useSelector((state) => state.user.info) || {}
   const dispatch = useDispatch();
@@ -56,6 +61,7 @@ function Sidebar() {
 						fontWeight: 'bold',
 						height: '45px',
 					}}
+					startIcon={<AccountCircleIcon/>}
 				>
 					THÔNG TIN TÀI KHOẢN
 				</Button>
@@ -69,6 +75,7 @@ function Sidebar() {
 						fontWeight: 'bold',
 						height: '45px',
 					}}
+					startIcon={<HistoryIcon/>}
 				>
 					Lịch sử
 				</Button>
@@ -82,6 +89,7 @@ function Sidebar() {
 						fontWeight: 'bold',
 						height: '45px',
 					}}
+					startIcon={<HowToRegIcon/>}
 				>
 					XÁC THỰC TÀI KHOẢN
 				</Button>
@@ -95,6 +103,7 @@ function Sidebar() {
 						fontWeight: 'bold',
 						height: '45px',
 					}}
+					startIcon={<CarCrashIcon/>}
 				>
 					QUẢN LÝ XE
 				</Button>
@@ -108,6 +117,7 @@ function Sidebar() {
 						fontWeight: 'bold',
 						height: '45px',
 					}}
+					startIcon={<LockResetIcon/>}
 				>
 					ĐỔI MẬT KHẨU
 				</Button>
@@ -119,8 +129,9 @@ function Sidebar() {
 					sx={{
 						fontWeight: 'bold',
 						height: '45px',
-            color:variables.redcolor,
+            			color:variables.redcolor,
 					}}
+					startIcon={<LogoutIcon/>}
 				>
 					ĐĂNG XUẤT
 				</Button>
