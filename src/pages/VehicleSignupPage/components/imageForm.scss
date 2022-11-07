@@ -6,4 +6,19 @@
         height: 250px;
         width: 388px;
     }
+
+    &__upimg {
+        margin-left: 69px !important;
+    }
+
+    &__upimg:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+
+    &__sent:hover {
+        background-color: $darker-green !important;
+        border-color: $darker-green !important;
+    }
 }

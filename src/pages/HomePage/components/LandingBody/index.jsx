@@ -71,6 +71,9 @@ function LandingBody() {
 		[]
 	);
 
+	const onKeyDown = (e) => {
+		e.preventDefault();
+	 };
 	return (
 		<Box className="landing-container" sx={{ backgroundImage: `url(${bgimg})` }}>
 			<Typography variant="h3" className="landing-container__maintext" sx={{ fontFamily: 'Orbitron', paddingTop: '75px' }}>
@@ -80,8 +83,8 @@ function LandingBody() {
 				Thuê xe nhanh chóng
 			</Typography>
 			<Box className="landing-container__inputcomponent">
-				<Stack spacing={2} justifyContent="center" padding={2} sx={{ height: '365px' }}>
-					<Typography className="landing-container__inputcomponent__text">
+				<Stack spacing={2} justifyContent="center" padding={2} sx={{ height: '375px' }}>
+					<Typography className="landing-container__inputcomponent__text bold">
 						<LocationOnIcon fontSize="small" /> Địa điểm
 					</Typography>
 					<Autocomplete
@@ -109,7 +112,7 @@ function LandingBody() {
 						<DateTimePicker
 							inputFormat="DD/MM/YYYY hh:mm A"
 							renderInput={(props) => (
-								<TextField {...props} error={error.startdate} helperText={error.startdate ? 'Vui lòng chọn ngày khác' : ''} />
+								<TextField {...props} error={error.startdate}  onKeyDown={onKeyDown}/>
 							)}
 							value={startdatetime}
 							onChange={(newValue) => {setStartDatetime(newValue)}}
@@ -123,7 +126,7 @@ function LandingBody() {
 						<DateTimePicker
 							inputFormat="DD/MM/YYYY hh:mm A"
 							renderInput={(props) => (
-								<TextField {...props} error={error.enddate} helperText={error.enddate ? 'Vui lòng chọn ngày khác' : ''} />
+								<TextField {...props} error={error.enddate} onKeyDown={onKeyDown}/>
 							)}
 							value={enddatetime}
 							onChange={(newValue) => {
