@@ -19,7 +19,7 @@ function CarManagement() {
       >
         <img
           className="carmanagement-container-item__img"
-          src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
+          src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
           alt=""
         />
         <Stack paddingLeft={"5px"}>

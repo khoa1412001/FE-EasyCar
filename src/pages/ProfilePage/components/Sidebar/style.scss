@@ -1,5 +1,13 @@
 @import '../../../../assets/variable';
 
+.red {
+    color: red
+}
+
+.green {
+    color:$text-green-color
+}
+
 .sidebar-container {
     background-color: #FFF;
     width: 360px;
@@ -16,6 +24,12 @@
     &__name {
         align-self: center;
         padding-top: 5px;
+        color: $main-color;
+    }
+
+    &__icon {
+        position: relative;
+        top: 5px;
     }
 
     &__phone {
@@ -28,6 +42,11 @@
     &__email {
         align-self: center;
         padding-top: 5px;
+    }
+
+    &__verifystatus {
+        align-self: center;
+        color: $main-lighter-color;
     }
     
     &__button {
