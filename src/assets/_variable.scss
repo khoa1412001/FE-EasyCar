@@ -9,6 +9,7 @@ $text-grey-color: #a8a8a8;
 $text-black-color: #141414;
 $text-greyer-color: #3C4048;
 $text-green-color: #10a310;
+$darker-green: #0e940e;
 $orange-color: #FF731D;
 $red-color: #DD5353;
 //header color
@@ -25,5 +26,6 @@ $red-color: #DD5353;
     orangecolor: $orange-color;
     redcolor: $red-color;
     textgreyercolor: $text-greyer-color;
-    textblackcolor: $text-black-color
+    textblackcolor: $text-black-color;
+    darkergreen: $darker-green;
 }

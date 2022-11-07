@@ -6,7 +6,7 @@ const apiUser = {
         return res.data;
     },
     verifyUser: async (params) => {
-        const res = await axiosClientWithTokenMultiPart.post('/user/verify',params)
+        const res = await axiosClientWithTokenMultiPart.post('/user/verify', params)
         return res.data;
     }
 }

@@ -22,13 +22,9 @@ const getRefreshToken = async (refreshToken) => {
 export const axiosClientWithTokenMultiPart = axios.create({
     baseURL: baseURL,
     headers: {
-        "Content-type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
     },
     withCredentials: true,
-    paramsSerializer: {
-        encode: parse,
-        serialize: stringify,
-      },
 });
 
 export const axiosClientWithToken = axios.create({

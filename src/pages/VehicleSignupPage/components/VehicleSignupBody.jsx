@@ -1,6 +1,6 @@
 import { Avatar, Button, Stack, Typography } from '@mui/material';
 import variables from '../../../assets/_variable.scss';
-import React from 'react';
+import * as React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from 'react';
 import InformationForm from './InformationForm';
@@ -8,11 +8,41 @@ import RentForm from './RentForm';
 import ImageForm from './ImageForm';
 
 function VehicleSignupBody() {
-	const [step, setStep] = useState(2);
+	const [step, setStep] = useState(1);
+	const [licenseplate, setLicenseplate] = React.useState('');
+	const [brand, setBrand] = React.useState('');
+	const [model, setModel] = React.useState('');
+	const [type, setType] = React.useState('MINI-4');
+	const [transmission, setTransmission] = React.useState('AUTO');
+	const [fueltype, setFueltype] = React.useState('GASOLINE');
+	const [year, setYear] = React.useState('');
+	const [fuelconsumption, setFuelconsumption] = React.useState('');
+	const [description, setDescription] = React.useState('');
 	const bodyProcess = () => {
 		switch (step) {
 			case 1:
-				return <InformationForm />;
+				return (
+					<InformationForm
+						licenseplate={licenseplate}
+						setLicenseplate={setLicenseplate}
+						brand={brand}
+						setBrand={setBrand}
+						model={model}
+						setModel={setModel}
+						type={type}
+						setType={setType}
+						transmission={transmission}
+						setTransmission={setTransmission}
+						fueltype={fueltype}
+						setFueltype = {setFueltype}
+						year = {year}
+						setYear = {setYear}
+						fuelconsumption = {fuelconsumption}
+						setFuelconsumption = {setFuelconsumption}
+						description = {description}
+						setDescription = {setDescription}
+					/>
+				);
 			case 2:
 				return <RentForm />;
 			case 3:
@@ -82,8 +112,12 @@ function VehicleSignupBody() {
 
 				{bodyProcess()}
 				<Stack direction="row" justifyContent="space-between">
-					<Button variant="contained" onClick={handlePrev}>Quay lại</Button>
-					<Button variant="contained" onClick={handleNext}>Tiếp theo</Button>
+					<Button variant="contained" onClick={handlePrev} sx={{ width: '120px' }}>
+						Quay lại
+					</Button>
+					<Button variant="contained" onClick={handleNext} sx={{ width: '120px' }}>
+						Tiếp theo
+					</Button>
 				</Stack>
 			</Stack>
 		</Stack>

@@ -46,11 +46,11 @@ function Header() {
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static" sx={{ bgcolor: variables.maincolor }}>
 				<Toolbar>
-					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0 }}>
+					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0,cursor:'pointer' }}>
 						<MenuIcon />
 					</IconButton>
 					<img src={logo} className="header__logo" onClick={() => {navigate('/')}}/>
-					<Typography variant="h4" component="div" flex="1" onClick={() => {navigate('/')}} sx={{ fontFamily: 'Orbitron' }}>
+					<Typography variant="h4" component="div" flex="1" onClick={() => {navigate('/')}} sx={{ fontFamily: 'Orbitron', cursor:'pointer' }}>
 						EasyCar
 					</Typography>
 					{user ? (
@@ -85,7 +85,7 @@ function Header() {
 									<Avatar {...stringAvatar('Nguyen Phuc An')} />
 								)}
 							</IconButton>
-							<Typography alignSelf="center" paddingRight={5} fontSize={20}>
+							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}}>
 								{user.username}
 							</Typography>
 						</Stack>

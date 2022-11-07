@@ -42,7 +42,7 @@
 
     &__delete:hover {
         color: white;
-        background-color: $red-color;
-        border-color: $red-color;
+        background-color: $red-color !important;
+        border-color: $red-color !important;
     }
 }

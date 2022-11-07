@@ -25,13 +25,12 @@ function AccountVerify() {
 
 	const onSubmit = (data) => {
 		const { username, driverlincense, birthday } = data;
-    const params = {
-      username: username,
-      driverlincense: driverlincense,
-      bod: birthday,
-      driverlincenseimg: selectedImage,
-    }
-
+    let params = new FormData();
+	params.append('username',username)
+	params.append('driverlicense', driverlincense)
+	params.append('bod',birthday)
+	params.append('driverlincenseimg',selectedImage)
+	
     apiUser.verifyUser(params)
 	.then((res) => {toast.success('Tạo yêu cầu xác thực tài khoản thành công')})
 	.catch((err) => {toast.error(err.response.data.message)})

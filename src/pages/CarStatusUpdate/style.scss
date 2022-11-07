@@ -1,0 +1,29 @@
+@import '../../assets/variable';
+
+.carstatusupdate-container {
+    &__img {
+        width: 930px;
+        height: 465px;
+        justify-self: center;;
+    }
+
+    &__upimg {
+        margin-left: 341px !important;
+        margin-top: 5px !important;
+    }
+
+    &__upimg:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+    &__upvideo:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+
+    &__update:hover {
+        background-color: #119211 !important;
+    }
+}

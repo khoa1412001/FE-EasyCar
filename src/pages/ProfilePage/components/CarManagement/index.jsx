@@ -4,9 +4,11 @@ import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
+import CarStatusDialog from "./CarStatusDialog";
 import "./style.scss";
-
+import * as React from 'react';
 function CarManagement() {
+  const [openCarStatus, setOpenCarStatus] = React.useState(true)
   return (
     <Stack className='carmanagement-container' padding={1} marginLeft="5px">
         <Stack
@@ -17,7 +19,7 @@ function CarManagement() {
       >
         <img
           className="carmanagement-container-item__img"
-          src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
+          src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
           alt=""
         />
         <Stack paddingLeft={"5px"}>
@@ -140,6 +142,9 @@ function CarManagement() {
           </Button>
         </Stack>
       </Stack>
+      <CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus}>
+
+      </CarStatusDialog>
     </Stack>
   )
 }
