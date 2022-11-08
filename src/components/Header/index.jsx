@@ -19,13 +19,14 @@ import stringAvatar from 'utils/stringavatar';
 import {useDispatch} from 'react-redux'
 import {setUserInfo} from 'slices/userSlice'
 import apiAuth from 'apis/apiAuth';
+import LeftNavigation from 'components/LeftNavigation';
 function Header() {
 	const [openSignin, setOpenSignin] = React.useState(false);
 	const user = useSelector((state) => state.user.info);
 	const accesstoken = useSelector((state) => state.auth.accessToken);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
+	const [open, setOpen] = React.useState(false);
 	React.useEffect(() => {
 		const getInfo = () => {
 			if(accesstoken){
@@ -44,9 +45,10 @@ function Header() {
 	},[accesstoken])
 	return (
 		<Box sx={{ flexGrow: 1 }}>
+			<LeftNavigation open={open} setOpen={setOpen}/>
 			<AppBar position="static" sx={{ bgcolor: variables.maincolor }}>
 				<Toolbar>
-					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0,cursor:'pointer' }}>
+					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0,cursor:'pointer' }} onClick={()=> setOpen(true)}>
 						<MenuIcon />
 					</IconButton>
 					<img src={logo} className="header__logo" onClick={() => {navigate('/')}}/>
