@@ -6,12 +6,14 @@ import { useState } from 'react';
 import InformationForm from './InformationForm';
 import RentForm from './RentForm';
 import ImageForm from './ImageForm';
+import apiCar from 'apis/apiCar';
+import { toast } from 'react-toastify';
 
 function VehicleSignupBody() {
 	const [step, setStep] = useState(1);
 	const [licenseplate, setLicenseplate] = React.useState('');
-	const [brand, setBrand] = React.useState('');
-	const [model, setModel] = React.useState('');
+	const [brand, setBrand] = React.useState('NONE');
+	const [model, setModel] = React.useState('NONE');
 	const [type, setType] = React.useState('MINI-4');
 	const [transmission, setTransmission] = React.useState('AUTO');
 	const [fueltype, setFueltype] = React.useState('GASOLINE');
@@ -27,32 +29,64 @@ function VehicleSignupBody() {
 	const [imgrear, setImgrear] = React.useState();
 	const [imgleft, setImgleft] = React.useState();
 	const [imgright, setImgright] = React.useState();
+	const [brandlist, setBrandlist] = React.useState([]);
+	const [modellist, setModellist] = React.useState([]);
+	React.useEffect(() => {
+		const getBrandList = () => {
+			apiCar
+				.getBrand()
+				.then((res) => {
+					setBrandlist(res.data);
+				})
+				.catch();
+		};
+		getBrandList();
+	}, []);
+
+	React.useEffect(() => {
+		const getModelList = () => {
+			const params = {
+				brand: brand,
+			};
+			if (brand != 'NONE' && brand != 'KHÁC') {
+				apiCar
+					.getModel(params)
+					.then((res) => {
+						setModellist(res.data);
+					})
+					.catch();
+			}
+			setModel('NONE');
+		};
+		getModelList();
+	}, [brand]);
+
 	const handleSent = () => {
 		let params = new FormData();
-		params.append('licenseplate',licenseplate)
-		params.append('brand',brand)
-		params.append('model',model)
-		params.append('type',type)
-		params.append('transmission',transmission)
-		params.append('fueltype',fueltype)
-		params.append('year',year)
-		params.append('fuelconsumption',fuelconsumption)
-		params.append('description',description)
-		params.append('rentprice',rentprice)
-		if(checked){
-			params.append('kmlimit',kmlimit)
-			params.append('priceover',priceover)
+		params.append('licenseplate', licenseplate);
+		params.append('brand', brand);
+		params.append('model', model);
+		params.append('type', type);
+		params.append('transmission', transmission);
+		params.append('fueltype', fueltype);
+		params.append('year', year);
+		params.append('fuelconsumption', fuelconsumption);
+		params.append('description', description);
+		params.append('rentprice', rentprice);
+		if (checked) {
+			params.append('kmlimit', kmlimit);
+			params.append('priceover', priceover);
 		}
-		params.append('rentterm',rentterm)
-		params.append('checked', checked)
-		params.append('imgfront',imgfront)
-		params.append('imgrear',imgrear)
-		params.append('imgleft',imgleft)
-		params.append('imgright',imgright)
+		params.append('rentterm', rentterm);
+		params.append('checked', checked);
+		params.append('vehicleimage', imgfront);
+		params.append('vehicleimage', imgrear);
+		params.append('vehicleimage', imgleft);
+		params.append('vehicleimage', imgright);
 
-		for (const value of params.values()) {
-			console.log(value);
-		  }
+		apiCar.registerCar(params).then((res) => {
+			toast.success('Gửi đăng ký thành công!!!');
+		}).catch(err => toast.warning(err.response.data.message));
 	};
 	const bodyProcess = () => {
 		switch (step) {
@@ -77,6 +111,8 @@ function VehicleSignupBody() {
 						setFuelconsumption={setFuelconsumption}
 						description={description}
 						setDescription={setDescription}
+						brandlist={brandlist}
+						modellist={modellist}
 					/>
 				);
 			case 2:
@@ -96,17 +132,18 @@ function VehicleSignupBody() {
 				);
 			case 3:
 				return (
-				<ImageForm 
-					imgfront={imgfront}
-					setImgfront={setImgfront}
-					imgrear={imgrear}
-					setImgrear = {setImgrear}
-					imgleft = {imgleft}
-					setImgleft = {setImgleft}
-					imgright = {imgright}
-					setImgright = {setImgright}
-					handleSent = {handleSent}
-				/>);
+					<ImageForm
+						imgfront={imgfront}
+						setImgfront={setImgfront}
+						imgrear={imgrear}
+						setImgrear={setImgrear}
+						imgleft={imgleft}
+						setImgleft={setImgleft}
+						imgright={imgright}
+						setImgright={setImgright}
+						handleSent={handleSent}
+					/>
+				);
 			default:
 				break;
 		}
