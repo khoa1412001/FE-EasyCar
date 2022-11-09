@@ -45,7 +45,7 @@ function Header() {
 	},[accesstoken])
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<LeftNavigation open={open} setOpen={setOpen}/>
+			{user && <LeftNavigation open={open} setOpen={setOpen}/>}
 			<AppBar position="static" sx={{ bgcolor: variables.maincolor }}>
 				<Toolbar>
 					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0,cursor:'pointer' }} onClick={()=> setOpen(true)}>
