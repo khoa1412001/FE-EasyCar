@@ -247,9 +247,7 @@ function CarDetails() {
           <DateTimePicker
             renderInput={(props) => <TextField {...props} size="small" />}
             value={startdatetime}
-            onChange={(newValue) => {
-              setStartDatetime(newValue);
-            }}
+            readOnly={true}
             size="small"
           />
         </LocalizationProvider>
@@ -264,9 +262,7 @@ function CarDetails() {
           <DateTimePicker
             renderInput={(props) => <TextField {...props} size="small" />}
             value={startdatetime}
-            onChange={(newValue) => {
-              setStartDatetime(newValue);
-            }}
+            readOnly={true}
             size="small"
           />
         </LocalizationProvider>

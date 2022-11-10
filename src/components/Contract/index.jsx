@@ -21,9 +21,9 @@ function Contract(props) {
 						Trách nhiệm của khách thuê xe và chủ xe trong giao dịch cho thuê xe tự lái
 					</Typography>
 					<Typography align="left" className="contract-container__text">
-						Mục đích lâu dài của Mioto là hướng đến việc xây dựng cộng đồng chia sẻ xe ô tô văn minh và uy tín tại Việt Nam.
+						Mục đích lâu dài của EasyCar là hướng đến việc xây dựng cộng đồng chia sẻ xe ô tô văn minh và uy tín tại Việt Nam.
 						Vì thế, để đảm bảo các giao dịch thuê xe trong cộng đồng được diễn ra một cách thuận lợi và thành công tốt đẹp thì
-						việc quy định trách nhiệm của các bên trong tuân thủ các chính sách của Mioto và các điều khoản cam kết là rất
+						việc quy định trách nhiệm của các bên trong tuân thủ các chính sách của EasyCar và các điều khoản cam kết là rất
 						quan trọng.
 					</Typography>
 					<Typography align="left" className="contract-container__heading">
@@ -65,20 +65,20 @@ function Contract(props) {
 						đồng) và các khoản phí vệ sinh xe nếu có.
 					</Typography>
 					<Typography align="left" className="contract-container__heading">
-						C. Trách nhiệm và khuyến nghị của Mioto
+						C. Trách nhiệm và khuyến nghị của EasyCar
 					</Typography>
 					<Typography align="left" className="contract-container__text">
-						- Mioto khuyến nghị Chủ xe và Khách thuê xe cần thực hiện việc giao kết bằng văn bản "Hợp đồng cho thuê xe tự lái"
+						- EasyCar khuyến nghị Chủ xe và Khách thuê xe cần thực hiện việc giao kết bằng văn bản "Hợp đồng cho thuê xe tự lái"
 						cũng như kí kết "Biên bản bàn giao xe" nhằm đảm bảo quyền lợi của cả 2 bên trong trường hợp phát sinh tranh chấp.
 					</Typography>
 					<Typography align="left" className="contract-container__text">
-						- Chủ xe có thể tham khảo sử dụng mẫu "Hợp đồng thuê xe tự lái" và "Biên bản bàn giao xe" của Mioto (vui lòng cung
-						cấp email cho bộ phận CSKH của Mioto để nhận thông tin).
+						- Chủ xe có thể tham khảo sử dụng mẫu "Hợp đồng thuê xe tự lái" và "Biên bản bàn giao xe" của EasyCar (vui lòng cung
+						cấp email cho bộ phận CSKH của EasyCar để nhận thông tin).
 					</Typography>
 					<Typography align="left" className="contract-container__text">
 						- Chủ xe và khách thuê xe tự chịu toàn bộ trách nhiệm dân sự và hình sự nếu có phát sinh tranh chấp giữa hai bên
-						nếu có. Mioto chỉ đóng vai trò hỗ trợ hai bên dàn xếp các vấn đề một cách tốt đẹp nhất, tuân theo các điều khoản,
-						chính sách và quy chế hoạt động cả hai bên đã cam kết với Mioto.
+						nếu có. EasyCar chỉ đóng vai trò hỗ trợ hai bên dàn xếp các vấn đề một cách tốt đẹp nhất, tuân theo các điều khoản,
+						chính sách và quy chế hoạt động cả hai bên đã cam kết với EasyCar.
 					</Typography>
 				</Stack>
 				<Stack direction={'row'} justifyContent="center" spacing={3} paddingTop={2}>

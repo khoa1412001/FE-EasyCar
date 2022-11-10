@@ -1,15 +1,30 @@
 @import '../../assets/variable';
 
+.blue {
+    color: $main-color
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
 .carstatusupdate-container {
     &__img {
-        width: 930px;
-        height: 465px;
-        justify-self: center;;
+        height: auto; 
+        width: auto; 
+        max-height: 800px; 
+        max-width: 800px;
+        align-self: center;
+    }
+
+    &__carname {
+        letter-spacing: 0.8px !important;
+        font-weight: bold !important;
+        color:$main-color;
     }
 
     &__upimg {
-        margin-left: 341px !important;
-        margin-top: 5px !important;
+       
     }
 
     &__upimg:hover {

@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
+import CheckAuthentication from 'components/CheckAuthentication';
 
 function App() {
 	const accessToken = useSelector((state) => state.auth.accessToken);
@@ -15,22 +16,24 @@ function App() {
 		axiosInstance(accessToken, dispatch);
 		axiosInstanceMultiPart(accessToken);
 	}
-	if(accessToken ==='') {
+	if (accessToken === '') {
 		axiosInstance('', dispatch);
 		axiosInstanceMultiPart('');
 	}
 	return (
 		<BrowserRouter>
 			<Header />
-			<ConfigRoute />
-			<ToastContainer
-				autoClose={1500}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				pauseOnFocusLoss
-				pauseOnHover={false}
-			/>
+			<CheckAuthentication>
+				<ConfigRoute />
+				<ToastContainer
+					autoClose={1500}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					pauseOnFocusLoss
+					pauseOnHover={false}
+				/>
+			</CheckAuthentication>
 			<Footer />
 		</BrowserRouter>
 	);

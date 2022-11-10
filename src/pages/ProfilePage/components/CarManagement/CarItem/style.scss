@@ -1,0 +1,38 @@
+@import '../../../../../assets/variable';
+
+.carmanagement-container-item {
+    width: 1032px;
+    min-height: 144px;
+    border-radius: 5px;
+    background-color: white;
+
+    &__img {
+        height: 140px;
+    }
+
+    &__name {
+        padding-bottom: 5px;
+    }
+
+    &__option {
+        padding-bottom: 10px;
+    }
+    
+    &__status:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+
+    &__stop:hover {
+        color:white;
+        background-color: $orange-color !important;
+        border-color: $orange-color !important;
+    }
+
+    &__delete:hover {
+        color: white;
+        background-color: $red-color !important;
+        border-color: $red-color !important;
+    }
+}

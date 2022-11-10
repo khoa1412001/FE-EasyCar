@@ -126,17 +126,6 @@ function Fillter(props) {
 					MenuProps={MenuProps}
 				>
 					<MenuItem value={'ALL'}>Tất cả</MenuItem>
-					<MenuItem value={'BMW'}>BMW</MenuItem>
-					<MenuItem value={'CHERVOLET'}>Chervolet</MenuItem>
-					<MenuItem value={'HONDA'}>Honda</MenuItem>
-					<MenuItem value={'HUYNDAI'}>Huyndai</MenuItem>
-					<MenuItem value={'SUZUKI'}>Suzuki</MenuItem>
-					<MenuItem value={'MAZDA'}>Mazda</MenuItem>
-					<MenuItem value={'MITSUBISHI'}>Mitsubishi</MenuItem>
-					<MenuItem value={'VINFAST'}>Vinfast</MenuItem>
-					<MenuItem value={'TOYOTA'}>Toyota</MenuItem>
-					<MenuItem value={'FORD'}>Ford</MenuItem>
-					<MenuItem value={'KIA'}>KIA</MenuItem>
 				</Select>
 				<Divider sx={{ paddingTop: '8px' }}></Divider>
 				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }} paddingTop="8px">

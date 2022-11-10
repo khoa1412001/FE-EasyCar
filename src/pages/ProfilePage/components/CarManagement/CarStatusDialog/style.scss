@@ -4,6 +4,10 @@
     color: $main-color
 }
 
+.bold {
+    font-weight: bold !important;
+}
+
 .carstatus-container {
     &__upimg:hover {
         color: white;
@@ -12,13 +16,17 @@
     }
 
     &__img {
-        width: 731px;
-        height: 400px;
+        height: auto; 
+        width: auto; 
+        max-height: 700px; 
+        max-width: 700px;
+        align-self: center;
     }
 
     &__carname {
         letter-spacing: 0.8px !important;
         font-weight: bold !important;
+        color:$main-color;
     }
 
     &__text {

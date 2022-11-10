@@ -14,152 +14,137 @@ import {
 	Stack,
 	TextField,
 	Typography,
+	Paper,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 function CarStatusUpdate() {
 	const [selectedImage, setSelectedImage] = React.useState();
 	const [selectedVideo, setSelectedVideo] = React.useState();
 	return (
-		<Stack className="carstatusupdate-container" padding={2}>
-			<Typography className="carstatusupdate-container__carname" variant="h5" paddingBottom={1}>
-				KIA MORNING 2020 - 51K 13116
-			</Typography>
-			<Grid container spacing={1} paddingBottom={1}>
-				<Grid item xs={6}>
-					<Typography align="center" className="carstatusupdate-container__text">
-						Ảnh mặt trước
-					</Typography>
-					<img
-						className="carstatusupdate-container__img"
-						src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
-					></img>
-					<Button
-						variant="outlined"
-						size="medium"
-						className="carstatusupdate-container__upimg"
-						component="label"
-						align="center"
-						sx={{
-							color: variables.textgreencolor,
-							borderColor: variables.textgreencolor,
-							fontWeight: 'bold',
-							width: '250px',
-							alignSelf: 'center',
+		<Paper sx={{ margin: '15px' }} elevation={3}>
+			<Stack className="carstatusupdate-container" padding={2} spacing={1}>
+				<Typography className="carstatusupdate-container__carname" variant="h4" paddingBottom={1} align="center">
+					CẬP NHẬT TRẠNG THÁI XE
+				</Typography>
+				<Typography className="carstatusupdate-container__carname" variant="h5" paddingBottom={1}>
+					KIA MORNING 2020 - 51K 13116
+				</Typography>
+				<Typography align="center" className="carstatusupdate-container__text">
+					Ảnh mặt trước
+				</Typography>
+				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carstatusupdate-container__upimg"
+					component="label"
+					align="center"
+					sx={{
+						color: variables.textgreencolor,
+						borderColor: variables.textgreencolor,
+						fontWeight: 'bold',
+						width: '250px',
+						alignSelf: 'center',
+					}}
+				>
+					CHỌN ẢNH
+					<input
+						type="file"
+						hidden
+						accept=".jpg,.png"
+						onChange={(event) => {
+							setSelectedImage(event.target.files[0]);
 						}}
-					>
-						CHỌN ẢNH
-						<input
-							type="file"
-							hidden
-							accept=".jpg,.png"
-							onChange={(event) => {
-								setSelectedImage(event.target.files[0]);
-							}}
-						/>
-					</Button>
-				</Grid>
-				<Grid item xs={6}>
-					<Typography align="center" className="carstatusupdate-container__text">
-						Ảnh mặt sau
-					</Typography>
-					<img
-						className="carstatusupdate-container__img"
-						src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
-					></img>
-					<Button
-						variant="outlined"
-						size="medium"
-						className="carstatusupdate-container__upimg"
-						component="label"
-						align="center"
-						sx={{
-							color: variables.textgreencolor,
-							borderColor: variables.textgreencolor,
-							fontWeight: 'bold',
-							width: '250px',
-							alignSelf: 'center',
+					/>
+				</Button>
+				<Typography align="center" className="carstatusupdate-container__text">
+					Ảnh mặt sau
+				</Typography>
+				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carstatusupdate-container__upimg"
+					component="label"
+					align="center"
+					sx={{
+						color: variables.textgreencolor,
+						borderColor: variables.textgreencolor,
+						fontWeight: 'bold',
+						width: '250px',
+						alignSelf: 'center',
+					}}
+				>
+					CHỌN ẢNH
+					<input
+						type="file"
+						hidden
+						accept=".jpg,.png"
+						onChange={(event) => {
+							setSelectedImage(event.target.files[0]);
 						}}
-					>
-						CHỌN ẢNH
-						<input
-							type="file"
-							hidden
-							accept=".jpg,.png"
-							onChange={(event) => {
-								setSelectedImage(event.target.files[0]);
-							}}
-						/>
-					</Button>
-				</Grid>
-				<Grid item xs={6}>
-					<Typography align="center" className="carstatusupdate-container__text">
-						Ảnh bên trái
-					</Typography>
-					<img
-						className="carstatusupdate-container__img"
-						src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
-					></img>
-					<Button
-						variant="outlined"
-						size="medium"
-						className="carstatusupdate-container__upimg"
-						component="label"
-						align="center"
-						sx={{
-							color: variables.textgreencolor,
-							borderColor: variables.textgreencolor,
-							fontWeight: 'bold',
-							width: '250px',
-							alignSelf: 'center',
+					/>
+				</Button>
+
+				<Typography align="center" className="carstatusupdate-container__text">
+					Ảnh bên trái
+				</Typography>
+				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carstatusupdate-container__upimg"
+					component="label"
+					align="center"
+					sx={{
+						color: variables.textgreencolor,
+						borderColor: variables.textgreencolor,
+						fontWeight: 'bold',
+						width: '250px',
+						alignSelf: 'center',
+					}}
+				>
+					CHỌN ẢNH
+					<input
+						type="file"
+						hidden
+						accept=".jpg,.png"
+						onChange={(event) => {
+							setSelectedImage(event.target.files[0]);
 						}}
-					>
-						CHỌN ẢNH
-						<input
-							type="file"
-							hidden
-							accept=".jpg,.png"
-							onChange={(event) => {
-								setSelectedImage(event.target.files[0]);
-							}}
-						/>
-					</Button>
-				</Grid>
-				<Grid item xs={6}>
-					<Typography align="center" className="carstatusupdate-container__text">
-						Ảnh bên phải
-					</Typography>
-					<img
-						className="carstatusupdate-container__img"
-						src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
-					></img>
-					<Button
-						variant="outlined"
-						size="medium"
-						className="carstatusupdate-container__upimg"
-						component="label"
-						align="center"
-						sx={{
-							color: variables.textgreencolor,
-							borderColor: variables.textgreencolor,
-							fontWeight: 'bold',
-							width: '250px',
-							alignSelf: 'center',
+					/>
+				</Button>
+
+				<Typography align="center" className="carstatusupdate-container__text">
+					Ảnh bên phải
+				</Typography>
+				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carstatusupdate-container__upimg"
+					component="label"
+					align="center"
+					sx={{
+						color: variables.textgreencolor,
+						borderColor: variables.textgreencolor,
+						fontWeight: 'bold',
+						width: '250px',
+						alignSelf: 'center',
+					}}
+				>
+					CHỌN ẢNH
+					<input
+						type="file"
+						hidden
+						accept=".jpg,.png"
+						onChange={(event) => {
+							setSelectedImage(event.target.files[0]);
 						}}
-					>
-						CHỌN ẢNH
-						<input
-							type="file"
-							hidden
-							accept=".jpg,.png"
-							onChange={(event) => {
-								setSelectedImage(event.target.files[0]);
-							}}
-						/>
-					</Button>
-				</Grid>
-			</Grid>
-			<Stack padding={2} spacing={1}>
-				<Typography variant="h6" sx={{ alignSelf: 'start' }}>
+					/>
+				</Button>
+
+				<Typography variant="h6" sx={{ marginTop: '8px', color: variables.maincolor, fontWeight: 'bold' }}>
 					TRẠNG THÁI XE
 				</Typography>
 				<Typography sx={{ alignSelf: 'start' }}>Video trạng thái xe: {selectedVideo ? selectedVideo.name : ''}</Typography>
@@ -188,7 +173,7 @@ function CarStatusUpdate() {
 					/>
 				</Button>
 				<Typography className="carstatusupdate-container__text" sx={{ alignSelf: 'start' }}>
-					Ngoại thất:
+					<span className="bold blue">NGOẠI THẤT:</span>
 				</Typography>
 				<TextField
 					className="carstatusupdate-container__textfield"
@@ -198,9 +183,9 @@ function CarStatusUpdate() {
 					sx={{ width: '500px' }}
 				></TextField>
 				<Typography className="carstatusupdate-container__text" sx={{ alignSelf: 'start' }}>
-					Nội thất:
+					<span className="bold blue">NỘI:</span>
 				</Typography>
-                <TextField
+				<TextField
 					className="carstatusupdate-container__textfield"
 					multiline={true}
 					rows={5}
@@ -208,9 +193,9 @@ function CarStatusUpdate() {
 					sx={{ width: '500px' }}
 				></TextField>
 				<Typography className="carstatusupdate-container__text" sx={{ alignSelf: 'start' }}>
-					Động cơ:
+					<span className="bold blue">ĐỘNG CƠ:</span>
 				</Typography>
-                <TextField
+				<TextField
 					className="carstatusupdate-container__textfield"
 					multiline={true}
 					rows={5}
@@ -233,7 +218,7 @@ function CarStatusUpdate() {
 					CẬP NHẬT TRẠNG THÁI
 				</Button>
 			</Stack>
-		</Stack>
+		</Paper>
 	);
 }
 

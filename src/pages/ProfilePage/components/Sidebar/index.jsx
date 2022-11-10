@@ -1,3 +1,12 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import CarCrashIcon from '@mui/icons-material/CarCrash';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import HistoryIcon from '@mui/icons-material/History';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import LogoutIcon from '@mui/icons-material/Logout';
+import WalletIcon from '@mui/icons-material/Wallet';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -5,23 +14,13 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/system';
 import 'assets/style.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import './style.scss';
-import { useSelector } from 'react-redux';
-import stringAvatar from 'utils/stringavatar';
 import variables from 'assets/_variable.scss';
-import { useDispatch } from 'react-redux';
-import { clearUserInfo } from 'slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { logoutSuccess } from 'slices/authSlice';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import HistoryIcon from '@mui/icons-material/History';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
-import CarCrashIcon from '@mui/icons-material/CarCrash';
-import LockResetIcon from '@mui/icons-material/LockReset';
-import LogoutIcon from '@mui/icons-material/Logout';
-import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
-import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import { axiosClientWithToken, axiosClientWithTokenMultiPart } from 'apis/axiosClient';
+import { clearUserInfo } from 'slices/userSlice';
+import stringAvatar from 'utils/stringavatar';
+import './style.scss';
 
 function Sidebar() {
 	const user = useSelector((state) => state.user.info) || {};
@@ -62,6 +61,9 @@ function Sidebar() {
 						<CancelRoundedIcon fontSize="small" className="sidebar-container__icon red" />
 					)}
 				</Typography>
+				<Typography className="sidebar-container__verifystatus" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
+					Tài khoản:<span className='green bold large'> 190000 đ</span>
+				</Typography>
 				<Divider sx={{ paddingTop: '8px' }} />
 				<Button
 					component={Link}
@@ -75,6 +77,20 @@ function Sidebar() {
 					startIcon={<AccountCircleIcon />}
 				>
 					THÔNG TIN TÀI KHOẢN
+				</Button>
+				<Divider />
+				<Button
+					component={Link}
+					to="/profile/wallet"
+					size="medium"
+					className="sidebar-container__button"
+					sx={{
+						fontWeight: 'bold',
+						height: '45px',
+					}}
+					startIcon={<WalletIcon />}
+				>
+					QUẢN LÝ VÍ
 				</Button>
 				<Divider />
 				<Button

@@ -3,12 +3,14 @@
 .imageform-container {
 
     &__img {
-        height: 250px;
-        width: 388px;
+        height: auto; 
+        width: auto; 
+        max-height: 600px; 
+        max-width: 600px;
+        align-self: center;
     }
 
     &__upimg {
-        margin-left: 69px !important;
     }
 
     &__upimg:hover {

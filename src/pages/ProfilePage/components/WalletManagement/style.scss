@@ -1,0 +1,41 @@
+@import '../../../../assets/variable';
+
+.fontLarge {
+    font-size: 18px;
+}
+
+.success {
+    color: white !important;
+    background-color:$text-green-color !important;
+}
+
+.walletmanagement-container {
+    height: 860px;
+    width: 1065px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+    overflow-y: auto;
+    background-color: $main-grey-color;
+
+    &__title {
+        padding-top: 8px;
+        padding-bottom: 16px;
+        color: $main-color;
+    }
+
+    &__detail {
+        color: $main-lighter-color;
+    }
+
+    &__update:hover {
+        color: $main-yellow-color;
+        background-color: $main-lighter-color !important;
+    }
+
+    &__withdraw:hover {
+        background-color: $darker-green !important;
+        border-color: $darker-green !important;
+    }
+}

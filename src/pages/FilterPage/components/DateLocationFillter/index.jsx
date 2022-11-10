@@ -19,6 +19,7 @@ function DateLocationFillter(props) {
 					freeSolo
 					disableClearable
 					options={suggestion.map((option) => option.address)}
+					value={address}
 					onSelect={(event) => setAddress(event.target.value)}
 					renderInput={(params) => (
 						<TextField
@@ -26,7 +27,6 @@ function DateLocationFillter(props) {
 							placeholder="Nhập vị trí thành phố, quận, đường..."
 							variant="standard"
 							size="small"
-							value={address}
 							onChange={(event) => setAddress(event.target.value)}
               sx={{width:'239px'}}
 						/>
