@@ -20,7 +20,9 @@ import {useDispatch} from 'react-redux'
 import {setUserInfo} from 'slices/userSlice'
 import apiAuth from 'apis/apiAuth';
 import LeftNavigation from 'components/LeftNavigation';
+import ConfirmDialog from 'components/ConfirmDialog';
 function Header() {
+	const [openDialog, setOpenDialog] = React.useState(true)
 	const [openSignin, setOpenSignin] = React.useState(false);
 	const user = useSelector((state) => state.user.info);
 	const accesstoken = useSelector((state) => state.auth.accessToken);
@@ -128,6 +130,7 @@ function Header() {
 					)}
 				</Toolbar>
 			</AppBar>
+			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog}/>
 			<SigninPage openSignin={openSignin} setOpenSignin={setOpenSignin}></SigninPage>
 		</Box>
 	);

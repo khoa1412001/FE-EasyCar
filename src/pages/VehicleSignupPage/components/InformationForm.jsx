@@ -115,7 +115,7 @@ function InformationForm(props) {
 						Loại nhiên liệu
 					</Typography>
 					<Select fullWidth displayEmpty value={fueltype} onChange={(event) => setFueltype(event.target.value)}>
-						<MenuItem value="GASOLINE">Xăng</MenuItem>
+						<MenuItem value="PETRO">Xăng</MenuItem>
 						<MenuItem value="DIESEL">Dầu DO</MenuItem>
 						<MenuItem value="ELECTRIC">Điện</MenuItem>
 					</Select>

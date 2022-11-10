@@ -6,6 +6,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import LogoutIcon from '@mui/icons-material/Logout';
+import WalletIcon from '@mui/icons-material/Wallet';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -60,6 +61,9 @@ function Sidebar() {
 						<CancelRoundedIcon fontSize="small" className="sidebar-container__icon red" />
 					)}
 				</Typography>
+				<Typography className="sidebar-container__verifystatus" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
+					Tài khoản:<span className='green bold large'> 190000 đ</span>
+				</Typography>
 				<Divider sx={{ paddingTop: '8px' }} />
 				<Button
 					component={Link}
@@ -73,6 +77,20 @@ function Sidebar() {
 					startIcon={<AccountCircleIcon />}
 				>
 					THÔNG TIN TÀI KHOẢN
+				</Button>
+				<Divider />
+				<Button
+					component={Link}
+					to="/profile/wallet"
+					size="medium"
+					className="sidebar-container__button"
+					sx={{
+						fontWeight: 'bold',
+						height: '45px',
+					}}
+					startIcon={<WalletIcon />}
+				>
+					QUẢN LÝ VÍ
 				</Button>
 				<Divider />
 				<Button

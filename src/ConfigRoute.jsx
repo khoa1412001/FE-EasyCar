@@ -13,6 +13,7 @@ import AccountVerify from "pages/ProfilePage/components/AccountVerify";
 import CarManagement from "pages/ProfilePage/components/CarManagement";
 import CarDetails from "pages/CarDetails";
 import CarStatusUpdate from "pages/CarStatusUpdate";
+import WalletManagement from "pages/ProfilePage/components/WalletManagement";
 function ConfigRoute() {
   return (
     <Routes>
@@ -27,6 +28,7 @@ function ConfigRoute() {
         <Route path="changepassword" element={<ChangePassword />} />
         <Route path="verify" element={<AccountVerify />} />
         <Route path="carmanage" element={<CarManagement />} />
+        <Route path="wallet" element={<WalletManagement/>}/>
       </Route>
       <Route path="fillter" element={<FilterPage />} />
       <Route path="fillter/details" element={<CarDetails />} />

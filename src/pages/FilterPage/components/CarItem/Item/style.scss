@@ -1,0 +1,27 @@
+@import '../../../../../assets/variable';
+
+.caritem-container {
+    width: 758px;
+    min-height: 144px;
+    border-radius: 5px;
+    background-color: white;
+
+    &__img {
+        height: 140px;
+    }
+
+    &__name {
+        padding-bottom: 5px;
+    }
+
+    &__option {
+        padding-bottom: 10px;
+    }
+
+    &__button:hover {
+        color:white;
+        background-color: $text-green-color !important;
+        border-color: $text-green-color !important;
+    }
+   
+}

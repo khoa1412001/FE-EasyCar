@@ -3,12 +3,13 @@ import { Box } from '@mui/material';
 import _debounce from 'lodash/debounce';
 import Fillter from 'pages/FilterPage/components/Fillter';
 import DateLocationFillter from './components/DateLocationFillter';
-import CarItem from './components/CarItem';
 import { Stack } from '@mui/system';
 import 'pages/FilterPage/style.scss';
 import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 import apiUtils from 'apis/apiUtils';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import CarTable from './components/CarItem';
 
 function FilterPage() {
 	const [suggestion, setSuggestion] = React.useState([]);
@@ -90,6 +91,7 @@ function FilterPage() {
 		address: address,
 		startdate: startdate.unix(),
 		enddate: enddate.unix(),
+		rating: rating,
 	});
 
 	React.useEffect(() => {
@@ -114,6 +116,9 @@ function FilterPage() {
 		[]
 	);
 
+	const handleGetCar = () => {
+		console.log('next');
+	};
 	React.useEffect(() => {
 		const changeFillter = () => {
 			let cartypefillter = ['ALL'];
@@ -139,10 +144,11 @@ function FilterPage() {
 				address: address,
 				startdate: startdate.unix(),
 				enddate: enddate.unix(),
+				rating:rating,
 			});
 		};
 		changeFillter();
-	}, [price, carbrand, cartype, fueltype, transmission, rating, startdate, enddate, address]);
+	}, [price, carbrand, cartype, fueltype, transmission, rating, startdate, enddate, address,rating]);
 
 	React.useEffect(() => {
 		handleApi(fillter);
@@ -184,8 +190,8 @@ function FilterPage() {
 							rating={rating}
 							setRating={setRating}
 						/>
-						<Box paddingLeft={'5px'}>
-							<CarItem />
+						<Box paddingLeft={'5px'} id="caritem-box">
+							<CarTable />
 						</Box>
 					</Stack>
 				</Box>
