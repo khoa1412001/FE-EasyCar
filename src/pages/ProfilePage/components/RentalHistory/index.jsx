@@ -13,6 +13,7 @@ function RentalHistory() {
 	return (
 		<Stack className="rentalhistory-container" padding={1} marginLeft="5px" spacing={1} flexWrap="nowrap">
 			<HistoryItem/>
+			<HistoryItem/>
 		</Stack>
 	);
 }
