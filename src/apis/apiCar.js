@@ -14,6 +14,11 @@ const apiCar = {
     getModel: async (params) => {
         const res = await axiosClient.get(`/vehicle/models?brand=${params.brand}`)
         return res.data;
-    }
+    },
+
+    getCarFillter: async (params) => {
+        const res = await axiosClient.post(`/filter/`,params)
+        return res.data;
+    },
 }
 export default apiCar;

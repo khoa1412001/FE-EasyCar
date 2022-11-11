@@ -10,8 +10,12 @@ import moment from 'moment';
 import apiUtils from 'apis/apiUtils';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CarTable from './components/CarItem';
+import apiCar from 'apis/apiCar';
 
 function FilterPage() {
+	const [carinforlist, setCarinfolist] = React.useState([]);
+	const [page, setPage] = React.useState(1);
+	const [total,setTotal] = React.useState(1);
 	const [suggestion, setSuggestion] = React.useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [startdate, setStartdate] = React.useState(moment.unix(searchParams.get('startdate')));
@@ -155,10 +159,28 @@ function FilterPage() {
 	}, [fillter]);
 	const handleApi = React.useCallback(
 		_debounce((fillter) => {
-			console.log(fillter);
+			apiCar.getCarFillter(fillter).then((res) => {
+				setTotal(res.totalPage)
+				setPage(1)
+				setCarinfolist(res.data)
+			})
 		}, 1000),
 		[]
 	);
+	
+	const nextPage = () => {
+		if(page < total) {
+			const params = {
+				page: page
+			}
+			handleApi(params).then((res)=> {
+				setTotal(res.totalPage)
+				setCarinfolist([...carinforlist],res.data)
+				setPage(page+1)
+			})
+		}
+	}
+
 
 	return (
 		<Box>
@@ -191,7 +213,7 @@ function FilterPage() {
 							setRating={setRating}
 						/>
 						<Box paddingLeft={'5px'} id="caritem-box">
-							<CarTable />
+							<CarTable nextPage={nextPage}  carinforlist={carinforlist} setCarinfolist={setCarinfolist} />
 						</Box>
 					</Stack>
 				</Box>
