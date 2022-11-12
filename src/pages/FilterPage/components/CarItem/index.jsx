@@ -11,14 +11,14 @@ import * as React from 'react';
 function CarTable(props) {
 	const {nextPage, page, setPage, carinforlist} = props
 	return (
-		<Stack id="carlist-scroll" className="carlist-container" padding={1} spacing={1} flexWrap="nowrap">
+		<Stack id="carlist-scroll" className="carlist-container" padding={1} flexWrap="nowrap">
 			<InfiniteScroll
 				dataLength={carinforlist.length}
-				next={nextPage}
+				next={() => nextPage()}
 				hasMore={true}
 				scrollableTarget="carlist-scroll"
 			>
-				<Item />
+				{carinforlist.map((item) =>(<Item item={item}/>))}
 			</InfiniteScroll>
 		</Stack>
 	);

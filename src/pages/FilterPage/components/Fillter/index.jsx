@@ -138,8 +138,8 @@ function Fillter(props) {
 					size="small"
 				>
 					<MenuItem value={'ALL'}>Tất cả</MenuItem>
-					<MenuItem value={'MANUAL'}>Số tự động</MenuItem>
-					<MenuItem value={'AUTO'}>Số sàn</MenuItem>
+					<MenuItem value={'MANUAL'}>Số sàn</MenuItem>
+					<MenuItem value={'AUTO'}>Tự động</MenuItem>
 				</Select>
 				<Divider sx={{ paddingTop: '8px' }}></Divider>
 				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }} paddingTop="8px">
@@ -147,8 +147,8 @@ function Fillter(props) {
 				</Typography>
 				<Select id="fillter-container__selectfueltype" value={fueltype} onChange={handleFueltypeChange} size="small">
 					<MenuItem value={'ALL'}>Tất cả</MenuItem>
-					<MenuItem value={'PETRO'}>Xăng</MenuItem>
-					<MenuItem value={'DIESEL'}>Dầu</MenuItem>
+					<MenuItem value={'GASOLINE'}>Xăng</MenuItem>
+					<MenuItem value={'DIESEL'}>Dầu Diesel</MenuItem>
 					<MenuItem value={'ELECTRIC'}>Điện</MenuItem>
 				</Select>
 				<Divider sx={{ paddingTop: '8px' }}></Divider>

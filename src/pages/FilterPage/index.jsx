@@ -169,14 +169,15 @@ function FilterPage() {
 	);
 	
 	const nextPage = () => {
-		if(page < total) {
+		if(page <= total) {
 			const params = {
-				page: page
+				...fillter,
+				page: page + 1
 			}
-			handleApi(params).then((res)=> {
-				setTotal(res.totalPage)
-				setCarinfolist([...carinforlist],res.data)
+			apiCar.getCarFillter(params).then((res)=> {
+				setCarinfolist([...carinforlist,...res.data])
 				setPage(page+1)
+				console.log(carinforlist)
 			})
 		}
 	}

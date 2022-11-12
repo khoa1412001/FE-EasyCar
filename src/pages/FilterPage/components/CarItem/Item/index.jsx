@@ -6,9 +6,29 @@ import "assets/style.scss";
 import variables from "assets/_variable.scss";
 import "./style.scss";
 
-function Item() {
+function Item(props) {
+	const {item} = props
+	const transmission = (transmissiontype) => {
+		switch (transmissiontype){
+			case 'AUTO':
+				return 'Tự động'
+			case 'MANUAL':
+				return 'Số sàn'
+		};
+	}
+
+	const fuel = (fueltype) => {
+		switch (fueltype){
+			case 'GASOLINE':
+				return 'Xăng'
+			case 'DIESEL':
+				return 'Dầu Diesel'
+			case 'ELECTRIC':
+				return 'Điện'
+		};
+	}
 	return (
-		<Stack direction={'row'} className="caritem-container" padding={1}>
+		<Stack direction={'row'} className="caritem-container" padding={1} marginTop={1}>
 			<img
 				className="caritem-container__img"
 				src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
@@ -23,7 +43,7 @@ function Item() {
 						letterSpacing: '0.6px',
 					}}
 				>
-					Mazda CX-3
+					{item.brand}{' '}{item.model}
 				</Typography>
 				<Typography
 					className="caritem-container__option"
@@ -34,7 +54,7 @@ function Item() {
 						color: variables.textgreycolor,
 					}}
 				>
-					Tự động - Xăng - 5 Ghế
+					{transmission(item.transmission)}{' '}-{' '}{fuel(item.fueltype)}{' '}-{' '}{item.seats}{' '}Ghế
 				</Typography>
 				<Typography
 					className="caritem-container__rating"
@@ -45,7 +65,7 @@ function Item() {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> 5.00 - 8k kms
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> {item.rating} - 8k kms
 				</Typography>
 			</Stack>
 			<Typography
