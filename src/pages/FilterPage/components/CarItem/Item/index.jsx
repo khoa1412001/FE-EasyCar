@@ -5,7 +5,7 @@ import { Stack } from "@mui/system";
 import "assets/style.scss";
 import variables from "assets/_variable.scss";
 import "./style.scss";
-
+import numWithSpace from "utils/numWithSpace";
 function Item(props) {
 	const {item} = props
 	const transmission = (transmissiontype) => {
@@ -88,7 +88,7 @@ function Item(props) {
 						color: variables.textgreencolor,
 					}}
 				>
-					2,738,225₫
+					{numWithSpace(item.totalprice)} ₫
 				</Typography>
 				<Button
 					variant="outlined"

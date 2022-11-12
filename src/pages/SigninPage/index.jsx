@@ -45,7 +45,6 @@ function SigninPage(props) {
 					dispatch(loginSuccess(res));
 					toast.success('Đăng nhập thành công');
 					setOpenSignin(false);
-					navigate('/profile')
 				}
 
 			})
