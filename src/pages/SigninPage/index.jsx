@@ -62,7 +62,6 @@ function SigninPage(props) {
 		console.log(result)
 	}
 	const handleLoginGoogle = async (googleData) => {
-		console.log(googleData)
 		const res = await fetch("http://localhost:5000/api/auth/google", {
       method: "POST",
       body: JSON.stringify({token: googleData.access_token}),
