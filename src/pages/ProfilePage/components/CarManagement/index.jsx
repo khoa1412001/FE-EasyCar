@@ -11,7 +11,8 @@ import CarItem from "./CarItem";
 function CarManagement() {
   const [openCarStatus, setOpenCarStatus] = React.useState(true)
   return (
-    <Stack className='carmanagement-container' padding={1} marginLeft="5px">
+    <Stack className='carmanagement-container' padding={1} spacing={1} marginLeft="5px">
+       <CarItem/>
        <CarItem/>
     </Stack>
   )
