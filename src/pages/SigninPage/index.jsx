@@ -18,6 +18,8 @@ import {
 } from '@mui/material';
 import apiAuth from 'apis/apiAuth';
 import * as React from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
+
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -55,6 +57,20 @@ function SigninPage(props) {
 				
 			});
 	};
+
+	const handleFailure = (result) => {
+		console.log(result)
+	}
+	const handleLoginGoogle = async (googleData) => {
+		const res = await fetch("http://localhost:5000/api/auth/google", {
+      method: "POST",
+      body: JSON.stringify({token: googleData.access_token}),
+     headers: {"Content-Type": "application/json"}
+  })}
+	const login = useGoogleLogin({
+		onSuccess: handleLoginGoogle,
+		onError: handleFailure
+	})
 	return (
 		<Dialog open={openSignin} maxWidth="sm" fullWidth onClose={() => setOpenSignin(false)}>
 			<DialogTitle>
@@ -142,9 +158,14 @@ function SigninPage(props) {
 									},
 								}}
 								startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
+								onClick = {() => login()}
 							>
 								Google
 							</Button>
+							
+							{/* <GoogleLogin
+  						onSuccess={handleLoginGoogle}
+							onError={handleFailure}/> */}
 						</Box>
 					</Stack>
 				</Stack>
