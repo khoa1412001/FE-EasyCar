@@ -11,6 +11,10 @@ const apiAuth = {
         const res = await axiosClient.post(`/auth/login`,params)
         return res.data;
     },
+    loginGoogle: async (params) => {
+        const res = await axiosClient.post(`/auth/google`,params)
+        return res.data;
+    },
     getuserinfo: async(params) => {
         const res = await axiosClientWithToken.get(`/auth/`,params)
         return res.data
