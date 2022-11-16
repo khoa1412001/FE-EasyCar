@@ -18,13 +18,16 @@ import {
 } from '@mui/material';
 import apiAuth from 'apis/apiAuth';
 import * as React from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { loginSuccess } from 'slices/authSlice';
 import { setUserInfo } from 'slices/userSlice';
+import { logingoogleSucess } from 'slices/authSlice';
 import variables from '../../assets/_variable.scss';
 import './signin.scss';
+import apiUser from 'apis/apiUser';
 
 function SigninPage(props) {
 	const { title, children, openSignin, setOpenSignin } = props;
@@ -46,15 +49,35 @@ function SigninPage(props) {
 					toast.success('Đăng nhập thành công');
 					setOpenSignin(false);
 				}
-
 			})
 			.catch((err) => {
 				toast.error(err.response.data.message);
 			})
-			.finally(() => {
-				
-			});
+			.finally(() => {});
 	};
+
+	const handleFailure = (result) => {
+		console.log(result);
+	};
+	const handleLoginGoogle = async (googleData) => {
+		const params = {
+			token: googleData.access_token
+		}
+		apiAuth.loginGoogle(params).then((res) => {
+			if (res) {
+				dispatch(logingoogleSucess(googleData));
+				toast.success('Đăng nhập thành công');
+				setOpenSignin(false);
+			}
+		}).catch((err) => {
+			toast.error(err.response.data.message);
+		})
+
+	};
+	const login = useGoogleLogin({
+		onSuccess: handleLoginGoogle,
+		onError: handleFailure,
+	});
 	return (
 		<Dialog open={openSignin} maxWidth="sm" fullWidth onClose={() => setOpenSignin(false)}>
 			<DialogTitle>
@@ -142,9 +165,11 @@ function SigninPage(props) {
 									},
 								}}
 								startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
+								onClick={() => login()}
 							>
 								Google
 							</Button>
+
 						</Box>
 					</Stack>
 				</Stack>

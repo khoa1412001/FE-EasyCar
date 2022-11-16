@@ -11,7 +11,7 @@ import * as React from 'react';
 function CarTable(props) {
 	const {nextPage, page, setPage, carinforlist} = props
 	return (
-		<Stack id="carlist-scroll" className="carlist-container" padding={1} flexWrap="nowrap">
+		<Stack id="carlist-scroll" className="carlist-container" paddingLeft={1} flexWrap="nowrap">
 			<InfiniteScroll
 				dataLength={carinforlist.length}
 				next={() => nextPage()}

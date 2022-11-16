@@ -1,32 +1,45 @@
-import StarIcon from "@mui/icons-material/Star";
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
-import { Stack } from "@mui/system";
-import "assets/style.scss";
-import variables from "assets/_variable.scss";
-import "./style.scss";
-import numWithSpace from "utils/numWithSpace";
+import StarIcon from '@mui/icons-material/Star';
+import { Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import { Stack } from '@mui/system';
+import 'assets/style.scss';
+import variables from 'assets/_variable.scss';
+import './style.scss';
+import numWithSpace from 'utils/numWithSpace';
+import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import moment from 'moment';
+import * as React from 'react';
 function Item(props) {
-	const {item} = props
+	const { item } = props;
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [startdate, setStartdate] = React.useState(moment.unix(searchParams.get('startdate')));
+	const [enddate, setEnddate] = React.useState(moment.unix(searchParams.get('enddate')));
+	const navigate = useNavigate();
+	const handleDetails = () => {
+		window.open(`/details?id=${item._id}&startdate=${startdate.unix()}&enddate=${enddate.unix()}`,'_blank')
+		// navigate(`/details?id=${id}&startdate=${startdate.unix()}enddate=${enddate.unix()}`);
+	};
 	const transmission = (transmissiontype) => {
-		switch (transmissiontype){
+		switch (transmissiontype) {
 			case 'AUTO':
-				return 'Tự động'
+				return 'Tự động';
 			case 'MANUAL':
-				return 'Số sàn'
-		};
-	}
+				return 'Số sàn';
+		}
+	};
 
 	const fuel = (fueltype) => {
-		switch (fueltype){
+		switch (fueltype) {
 			case 'GASOLINE':
-				return 'Xăng'
+				return 'Xăng';
 			case 'DIESEL':
-				return 'Dầu Diesel'
+				return 'Dầu Diesel';
 			case 'ELECTRIC':
-				return 'Điện'
-		};
-	}
+				return 'Điện';
+		}
+	};
+
 	return (
 		<Stack direction={'row'} className="caritem-container" padding={1} marginTop={1}>
 			<img
@@ -34,7 +47,7 @@ function Item(props) {
 				src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
 				alt=""
 			/>
-			<Stack paddingLeft={'5px'}>
+			<Stack paddingLeft={'5px'} width="176px">
 				<Typography
 					className="caritem-container__name"
 					sx={{
@@ -43,7 +56,7 @@ function Item(props) {
 						letterSpacing: '0.6px',
 					}}
 				>
-					{item.brand}{' '}{item.model}
+					{item.brand} {item.model}
 				</Typography>
 				<Typography
 					className="caritem-container__option"
@@ -54,7 +67,7 @@ function Item(props) {
 						color: variables.textgreycolor,
 					}}
 				>
-					{transmission(item.transmission)}{' '}-{' '}{fuel(item.fueltype)}{' '}-{' '}{item.seats}{' '}Ghế
+					{transmission(item.transmission)} - {fuel(item.fueltype)} - {item.seats} Ghế
 				</Typography>
 				<Typography
 					className="caritem-container__rating"
@@ -72,9 +85,10 @@ function Item(props) {
 				className="caritem-container__location"
 				paddingTop={'5px'}
 				paddingLeft={'20px'}
+				width='210px'
 				sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 			>
-				Phường 12, Quận Gò Vấp
+				{item.ownerId.location}
 			</Typography>
 			<Stack>
 				<Typography
@@ -94,6 +108,7 @@ function Item(props) {
 					variant="outlined"
 					size="medium"
 					className="caritem-container__button"
+					onClick={handleDetails}
 					sx={{
 						borderColor: variables.textgreencolor,
 						color: variables.textgreencolor,

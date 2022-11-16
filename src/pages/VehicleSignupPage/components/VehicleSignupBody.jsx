@@ -8,6 +8,7 @@ import RentForm from './RentForm';
 import ImageForm from './ImageForm';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
+import { Navigate,useNavigate } from 'react-router-dom';
 
 function VehicleSignupBody() {
 	const [step, setStep] = useState(1);
@@ -31,6 +32,10 @@ function VehicleSignupBody() {
 	const [imgright, setImgright] = React.useState();
 	const [brandlist, setBrandlist] = React.useState([]);
 	const [modellist, setModellist] = React.useState([]);
+	const [modelimage, setModelimage] = React.useState('');
+	const [turnoffback, setTurnofback] = React.useState(false);
+	const [turnoffforward, setTurnofforward] = React.useState(false);
+	const navigate = useNavigate();
 	React.useEffect(() => {
 		const getBrandList = () => {
 			apiCar
@@ -60,6 +65,10 @@ function VehicleSignupBody() {
 		};
 		getModelList();
 	}, [brand]);
+	const getImage = (modelstring) => {
+		const modelobj = modellist.find(item => item.model === modelstring)
+		setModelimage(modelobj.image)
+	}
 
 	const handleSent = () => {
 		let params = new FormData();
@@ -79,6 +88,7 @@ function VehicleSignupBody() {
 		}
 		params.append('rentterm', rentterm);
 		params.append('checked', checked);
+		params.append('modelimage',modelimage)
 		params.append('vehicleimage', imgfront);
 		params.append('vehicleimage', imgrear);
 		params.append('vehicleimage', imgleft);
@@ -86,6 +96,8 @@ function VehicleSignupBody() {
 
 		apiCar.registerCar(params).then((res) => {
 			toast.success('Gửi đăng ký thành công!!!');
+			navigate('/');
+			
 		}).catch(err => toast.warning(err.response.data.message));
 	};
 	const bodyProcess = () => {
@@ -113,6 +125,8 @@ function VehicleSignupBody() {
 						setDescription={setDescription}
 						brandlist={brandlist}
 						modellist={modellist}
+						setModelimage={setModelimage}
+						getImage={getImage}
 					/>
 				);
 			case 2:
@@ -154,6 +168,23 @@ function VehicleSignupBody() {
 	const handlePrev = () => {
 		if (step !== 1) setStep(step - 1);
 	};
+	React.useEffect(() => {
+		const checkStep = () => {
+			if(step == 1){
+				setTurnofback(true)
+			}
+			else {
+				setTurnofback(false)
+			}
+			if(step == 3){
+				setTurnofforward(true)
+			}
+			else {
+				setTurnofforward(false)
+			}
+		}
+		checkStep()
+	}, [step])
 	return (
 		<Stack justifyContent="center" direction="row" bgcolor="#e8eaef">
 			<Stack maxWidth="800px" width="800px" py={5} spacing={2}>
@@ -209,10 +240,10 @@ function VehicleSignupBody() {
 
 				{bodyProcess()}
 				<Stack direction="row" justifyContent="space-between">
-					<Button variant="contained" onClick={handlePrev} sx={{ width: '120px' }}>
+					<Button variant="contained" onClick={handlePrev} sx={{ width: '120px' }} disabled={turnoffback}>
 						Quay lại
 					</Button>
-					<Button variant="contained" onClick={handleNext} sx={{ width: '120px' }}>
+					<Button variant="contained" onClick={handleNext} sx={{ width: '120px' }} disabled={turnoffforward}>
 						Tiếp theo
 					</Button>
 				</Stack>

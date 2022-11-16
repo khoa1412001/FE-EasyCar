@@ -24,6 +24,8 @@ function InformationForm(props) {
 		setDescription,
 		brandlist,
 		modellist,
+		setModelimage,
+		getImage,
 	} = props;
 
 	return (
@@ -76,6 +78,7 @@ function InformationForm(props) {
 						value={model}
 						onChange={(event) => {
 							setModel(event.target.value);
+							getImage(event.target.value);
 						}}
 					>
 						<MenuItem value="NONE">Chọn mẫu xe</MenuItem>
@@ -115,7 +118,7 @@ function InformationForm(props) {
 						Loại nhiên liệu
 					</Typography>
 					<Select fullWidth displayEmpty value={fueltype} onChange={(event) => setFueltype(event.target.value)}>
-						<MenuItem value="PETRO">Xăng</MenuItem>
+						<MenuItem value="GASOLINE">Xăng</MenuItem>
 						<MenuItem value="DIESEL">Dầu DO</MenuItem>
 						<MenuItem value="ELECTRIC">Điện</MenuItem>
 					</Select>
