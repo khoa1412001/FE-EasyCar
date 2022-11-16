@@ -23,8 +23,9 @@ function Fillter(props) {
 		setPrice,
 		transmission,
 		setTransmission,
-    rating,
-    setRating
+    	rating,
+   		setRating,
+		brandlist,
 	} = props;
 	const ITEM_HEIGHT = 48;
 	const ITEM_PADDING_TOP = 8;
@@ -126,6 +127,11 @@ function Fillter(props) {
 					MenuProps={MenuProps}
 				>
 					<MenuItem value={'ALL'}>Tất cả</MenuItem>
+					{brandlist.map((item) => (
+							<MenuItem value={item.brand} key={item.id}>
+								{item.brand}
+							</MenuItem>
+						))}
 				</Select>
 				<Divider sx={{ paddingTop: '8px' }}></Divider>
 				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }} paddingTop="8px">

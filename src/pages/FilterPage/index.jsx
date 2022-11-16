@@ -8,7 +8,6 @@ import 'pages/FilterPage/style.scss';
 import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 import apiUtils from 'apis/apiUtils';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import CarTable from './components/CarItem';
 import apiCar from 'apis/apiCar';
 
@@ -25,6 +24,7 @@ function FilterPage() {
 	const [fueltype, setFueltype] = React.useState('ALL');
 	const [carbrand, setCarbrand] = React.useState('ALL');
 	const [transmission, setTransmission] = React.useState('ALL');
+	const [brandlist, setBrandlist] = React.useState([]);
 	const [cartype, setCartype] = React.useState([
 		{
 			id: 1,
@@ -98,6 +98,17 @@ function FilterPage() {
 		rating: rating,
 	});
 
+	React.useEffect(() => {
+		const getBrandList = () => {
+			apiCar
+				.getBrand()
+				.then((res) => {
+					setBrandlist(res.data);
+				})
+				.catch();
+		};
+		getBrandList();
+	}, []);
 	React.useEffect(() => {
 		const GetLocations = (address) => {
 			handleFind(address);
@@ -212,6 +223,7 @@ function FilterPage() {
 							setCartype={setCartype}
 							rating={rating}
 							setRating={setRating}
+							brandlist={brandlist}
 						/>
 						<Box paddingLeft={'5px'} id="caritem-box">
 							<CarTable nextPage={nextPage}  carinforlist={carinforlist} setCarinfolist={setCarinfolist} />

@@ -20,5 +20,10 @@ const apiCar = {
         const res = await axiosClient.post(`/filter/`,params)
         return res.data;
     },
+
+    getCarDetails: async (params) => {
+        const res = await axiosClient.get(`/vehicle/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
+        return res.data;
+    }
 }
 export default apiCar;

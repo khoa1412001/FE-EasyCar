@@ -31,7 +31,7 @@ function ConfigRoute() {
         <Route path="wallet" element={<WalletManagement/>}/>
       </Route>
       <Route path="fillter" element={<FilterPage />} />
-      <Route path="fillter/details" element={<CarDetails />} />
+      <Route path="details" element={<CarDetails />} />
       <Route path="carmanage/carstatus" element={<CarStatusUpdate/>}/>
     </Routes>
   );

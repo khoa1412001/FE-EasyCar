@@ -89,7 +89,7 @@ function Header() {
 									<Avatar {...stringAvatar('Nguyen Phuc An')} />
 								)}
 							</IconButton>
-							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}}>
+							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}} id="username">
 								{user.username}
 							</Typography>
 						</Stack>
