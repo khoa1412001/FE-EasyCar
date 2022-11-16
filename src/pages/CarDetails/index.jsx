@@ -25,6 +25,7 @@ import { useSearchParams } from 'react-router-dom';
 import apiCar from "apis/apiCar";
 import {toast} from 'react-toastify';
 import numWithSpace from "utils/numWithSpace";
+import remove3Digit from "utils/remove3Digit";
 
 function CarDetails() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -270,7 +271,7 @@ function CarDetails() {
           sx={{ fontWeight: "bold", color: variables.textgreyercolor }}
           alignSelf="center"
         >
-          <span className="payment-container__price">{carinfo.rentprice}K</span> /ngày
+          <span className="payment-container__price">{carinfo.rentprice} ₫ </span> /ngày
         </Typography>
         <Typography
           className="payment-container__title"

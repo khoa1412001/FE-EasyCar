@@ -11,13 +11,13 @@ import * as React from 'react';
 function CarItem() {
 	const [openCarStatus, setOpenCarStatus] = React.useState(true);
 	return (
-		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={2}>
+		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1}>
 			<img
 				className="carmanagement-container-item__img"
 				src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
 				alt=""
 			/>
-			<Stack paddingLeft={'5px'}>
+			<Stack width="200px">
 				<Typography
 					className="carmanagement-container-item__name"
 					sx={{
@@ -48,14 +48,14 @@ function CarItem() {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> 5.00 - 8k kms
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="carmanagement-container-item__icon"/> 5.00 
 				</Typography>
 			</Stack>
-			<Stack>
+			<Stack width="200px">
 				<Typography
 					className="carmanagement-container-item__location"
 					paddingTop={'5px'}
-					paddingLeft={'20px'}
+			
 					sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 				>
 					Phường 12, Quận Gò Vấp
@@ -63,7 +63,7 @@ function CarItem() {
 				<Typography
 					className="carmanagement-container-item__startdate"
 					paddingTop={'5px'}
-					paddingLeft={'20px'}
+				
 					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
 				>
 					Từ: 09/10/2022
@@ -71,13 +71,13 @@ function CarItem() {
 				<Typography
 					className="carmanagement-container-item__enddate"
 					paddingTop={'5px'}
-					paddingLeft={'20px'}
+			
 					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
 				>
 					Đến: 11/10/2022
 				</Typography>
 			</Stack>
-			<Stack justifyContent={'center'}>
+			<Stack justifyContent={'center'} width="150px">
 				<Typography
 					className="carmanagement-container-item__price"
 					paddingLeft={'20px'}
@@ -100,7 +100,7 @@ function CarItem() {
 						borderColor: variables.textgreencolor,
 						color: variables.textgreencolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>
@@ -114,7 +114,7 @@ function CarItem() {
 						borderColor: variables.orangecolor,
 						color: variables.orangecolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>
@@ -128,7 +128,7 @@ function CarItem() {
 						borderColor: variables.redcolor,
 						color: variables.redcolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>

@@ -12,6 +12,7 @@ $text-green-color: #10a310;
 $darker-green: #0e940e;
 $orange-color: #FF731D;
 $red-color: #DD5353;
+$blue-color: #1976D2;
 //header color
 
 :export {
@@ -28,4 +29,5 @@ $red-color: #DD5353;
     textgreyercolor: $text-greyer-color;
     textblackcolor: $text-black-color;
     darkergreen: $darker-green;
+    bluecolor: $blue-color;
 }
