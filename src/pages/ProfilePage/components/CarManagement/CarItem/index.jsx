@@ -4,12 +4,14 @@ import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/system';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
-import CarStatusDialog from '../CarStatusDialog';
 import './style.scss';
 import * as React from 'react';
+import CarStatusList from '../CarStatusListDialog';
+import HistoryList from '../HistoryList';
 
 function CarItem() {
-	const [openCarStatus, setOpenCarStatus] = React.useState(true);
+	const [openHistoryList, setOpenHistoryList] = React.useState(false);
+	const [openStatusList, setOpenStatusList] = React.useState(false);
 	return (
 		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1}>
 			<img
@@ -50,8 +52,21 @@ function CarItem() {
 				>
 					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="carmanagement-container-item__icon"/> 5.00 
 				</Typography>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carmanagement-container-item__history"
+					onClick={() => setOpenHistoryList(true)}
+					sx={{
+						fontWeight: 'bold',
+						width: '180px ',
+						marginTop:'14px'
+					}}
+				>
+					LỊCH SỬ
+				</Button>
 			</Stack>
-			<Stack width="200px">
+			<Stack width="200px" justifyContent='space-between'>
 				<Typography
 					className="carmanagement-container-item__location"
 					paddingTop={'5px'}
@@ -59,22 +74,6 @@ function CarItem() {
 					sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 				>
 					Phường 12, Quận Gò Vấp
-				</Typography>
-				<Typography
-					className="carmanagement-container-item__startdate"
-					paddingTop={'5px'}
-				
-					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
-				>
-					Từ: 09/10/2022
-				</Typography>
-				<Typography
-					className="carmanagement-container-item__enddate"
-					paddingTop={'5px'}
-			
-					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
-				>
-					Đến: 11/10/2022
 				</Typography>
 			</Stack>
 			<Stack justifyContent={'center'} width="150px">
@@ -96,6 +95,7 @@ function CarItem() {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__status"
+					onClick={() => setOpenStatusList(true)}
 					sx={{
 						borderColor: variables.textgreencolor,
 						color: variables.textgreencolor,
@@ -135,7 +135,8 @@ function CarItem() {
 					XOÁ
 				</Button>
 			</Stack>
-			<CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus}></CarStatusDialog>
+			<CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList}/>
+			<HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList}/>
 		</Stack>
 	);
 }

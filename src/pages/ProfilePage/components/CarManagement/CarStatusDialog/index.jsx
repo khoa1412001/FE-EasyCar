@@ -1,21 +1,13 @@
-import * as React from 'react';
-import './style.scss';
-import 'assets/style.scss';
-import variables from 'assets/_variable.scss';
 import {
-	Box,
 	Button,
 	Dialog,
 	DialogContent,
-	DialogTitle,
-	Divider,
-	IconButton,
-	InputAdornment,
-	Stack,
-	TextField,
-	Typography,
+	DialogTitle, Stack, Typography
 } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import 'assets/style.scss';
+import variables from 'assets/_variable.scss';
+import * as React from 'react';
+import './style.scss';
 function CarStatusDialog(props) {
 	const { openCarStatus, setOpenCarStatus } = props;
 	const [selectedImage, setSelectedImage] = React.useState();

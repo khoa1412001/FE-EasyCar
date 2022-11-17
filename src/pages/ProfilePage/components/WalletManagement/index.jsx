@@ -248,33 +248,33 @@ function WalletManagement() {
 					</TableHead>
 					<TableBody>
 						<TableRow key={1} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="right"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000</span></TableCell>
+							<TableCell align="left"><span className='bold'>1</span></TableCell>
+							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
 							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success'/>): (<Chip label="TỪ CHỐI" sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
 						</TableRow>
                         <TableRow key={2} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="right"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000</span></TableCell>
+							<TableCell align="left"><span className='bold'>1</span></TableCell>
+							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
 							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success'/>): (<Chip label="TỪ CHỐI" sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
 						</TableRow>
                         <TableRow key={3} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="right"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000</span></TableCell>
+							<TableCell align="left"><span className='bold'>1</span></TableCell>
+							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
 							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success'/>): (<Chip label="TỪ CHỐI" sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
 						</TableRow>
                         <TableRow key={4} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="right"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000</span></TableCell>
+							<TableCell align="left"><span className='bold'>1</span></TableCell>
+							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
 							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success'/>): (<Chip label="TỪ CHỐI" sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<TablePagination component="div" count={5} rowsPerPage={10} page={0} />
+			<TablePagination component="div" count={-1} rowsPerPage={4} page={0} rowsPerPageOptions={4} />
 		</Stack>
 	);
 }
