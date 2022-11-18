@@ -18,7 +18,6 @@ function CheckAuthentication(props) {
             if(isPrivate){
                 if(user == null){
                     navigate('/')
- 
                 }
                 if(accessToken === ''){
                     navigate('/')

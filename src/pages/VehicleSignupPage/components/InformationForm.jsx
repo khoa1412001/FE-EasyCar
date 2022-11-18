@@ -1,5 +1,4 @@
 import { TextField, Typography, Grid, Select, MenuItem, Stack } from '@mui/material';
-import { set } from 'lodash';
 import * as React from 'react';
 
 function InformationForm(props) {
@@ -24,7 +23,6 @@ function InformationForm(props) {
 		setDescription,
 		brandlist,
 		modellist,
-		setModelimage,
 		getImage,
 	} = props;
 

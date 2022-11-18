@@ -36,7 +36,7 @@ function LeftNavigation(props) {
 								sx={{ width: '80px', height: '80px' }}
 							/>
 						) : (
-							<Avatar {...stringAvatar('Nguyen Phuc An')} sx={{ width: '80px', height: '80px' }} />
+							<Avatar {...stringAvatar(user.username)} sx={{ width: '80px', height: '80px' }} />
 						)}
 						<Stack>
 							<Typography className="leftnavigation-container__name">{user.username}</Typography>

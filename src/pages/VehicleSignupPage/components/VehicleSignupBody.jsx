@@ -8,7 +8,7 @@ import RentForm from './RentForm';
 import ImageForm from './ImageForm';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
-import { Navigate,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function VehicleSignupBody() {
 	const [step, setStep] = useState(1);
@@ -53,7 +53,7 @@ function VehicleSignupBody() {
 			const params = {
 				brand: brand,
 			};
-			if (brand != 'NONE' && brand != 'KHÁC') {
+			if (brand !== 'NONE' && brand !== 'KHÁC') {
 				apiCar
 					.getModel(params)
 					.then((res) => {
@@ -170,13 +170,13 @@ function VehicleSignupBody() {
 	};
 	React.useEffect(() => {
 		const checkStep = () => {
-			if(step == 1){
+			if(step === 1){
 				setTurnofback(true)
 			}
 			else {
 				setTurnofback(false)
 			}
-			if(step == 3){
+			if(step === 3){
 				setTurnofforward(true)
 			}
 			else {

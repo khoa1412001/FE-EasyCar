@@ -269,7 +269,7 @@ function WalletManagement() {
 							<TableCell align="left"><span className='bold'>1</span></TableCell>
 							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
 							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+							<TableCell align="right">{true ? (<Chip label="CHỜ DUYỆT" sx={{bgcolor:variables.orangecolor, color:'white',fontWeight:'bold'}} />): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>
