@@ -15,6 +15,7 @@ import CarDetails from "pages/CarDetails";
 import CarStatusUpdate from "pages/CarStatusUpdate";
 import WalletManagement from "pages/ProfilePage/components/WalletManagement";
 import ActivatePage from "pages/ActivatePage";
+import ContractPaper from "components/ContractPaper";
 function ConfigRoute() {
   return (
     <Routes>
@@ -23,6 +24,7 @@ function ConfigRoute() {
       <Route path="validate" element={<ActivatePage/>} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="car-signup" element={<VehicleSignupPage />} />
+      <Route path="contract" element={<ContractPaper />} />
       <Route path="profile" element={<ProfilePage />}>
         <Route index element={<AccountInfo />} />
         <Route path="info" element={<AccountInfo />} />
