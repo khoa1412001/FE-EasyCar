@@ -7,10 +7,35 @@ import { Stack } from '@mui/system';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
+import numWithSpace from 'utils/numWithSpace';
+import HistoryDetail from '../HistoryDetail';
 
-function HistoryItem() {
+function HistoryItem(props) {
+	const { item } = props;
+	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
+	const [startdate, setStartdate] = React.useState(new Date(item.rentalDateStart));
+	const [enddate, setEnddate] = React.useState(new Date(item.rentalDateEnd));
+	const transmission = (transmissiontype) => {
+		switch (transmissiontype) {
+			case 'AUTO':
+				return 'Tự động';
+			case 'MANUAL':
+				return 'Số sàn';
+		}
+	};
+
+	const fuel = (fueltype) => {
+		switch (fueltype) {
+			case 'GASOLINE':
+				return 'Xăng';
+			case 'DIESEL':
+				return 'Dầu Diesel';
+			case 'ELECTRIC':
+				return 'Điện';
+		}
+	};
 	return (
-		<Stack direction={'row'} className="rentalhistory-container-item" padding={1} spacing={1}>
+		<Stack direction={'row'} className="rentalhistory-container-item" padding={1} spacing={1} marginTop={1}>
 			<img
 				className="rentalhistory-container-item__img"
 				src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
@@ -25,7 +50,7 @@ function HistoryItem() {
 						letterSpacing: '0.6px',
 					}}
 				>
-					Mazda CX-3
+					{item.vehicleId.brand} {item.vehicleId.model}
 				</Typography>
 				<Typography
 					className="rentalhistory-container-item__option"
@@ -36,7 +61,7 @@ function HistoryItem() {
 						color: variables.textgreycolor,
 					}}
 				>
-					Tự động - Xăng - 5 Ghế
+					{transmission(item.vehicleId.transmission)} - {fuel(item.vehicleId.fueltype)} - {item.vehicleId.seats} Ghế
 				</Typography>
 				<Typography
 					className="rentalhistory-container-item__rating"
@@ -47,7 +72,8 @@ function HistoryItem() {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="rentalhistory-container-item__icon"/> 5.00 
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="rentalhistory-container-item__icon" />{' '}
+					5.00
 				</Typography>
 				<Rating name="no-value" value={null} sx={{ paddingTop: '20px' }} />
 			</Stack>
@@ -57,21 +83,21 @@ function HistoryItem() {
 					paddingTop={'5px'}
 					sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 				>
-					Phường 12, Quận Gò Vấp
+					{item.vehicleId.ownerId.location}
 				</Typography>
 				<Typography
 					className="rentalhistory-container-item__startdate"
 					paddingTop={'5px'}
 					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
 				>
-					Từ: 09/10/2022
+					Từ: {startdate.getDate()}/{startdate.getMonth() + 1}/{startdate.getFullYear()}
 				</Typography>
 				<Typography
 					className="rentalhistory-container-item__enddate"
 					paddingTop={'5px'}
 					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
 				>
-					Đến: 11/10/2022
+					Đến: {enddate.getDate()}/{enddate.getMonth() + 1}/{enddate.getFullYear()}
 				</Typography>
 			</Stack>
 			<Stack justifyContent={'center'} width="150px">
@@ -84,14 +110,15 @@ function HistoryItem() {
 						color: variables.textgreencolor,
 					}}
 				>
-					2 738 225₫
+					{numWithSpace(item.totalPrice)} ₫
 				</Typography>
 			</Stack>
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
-			<Button
+				<Button
 					variant="outlined"
 					size="medium"
 					className="rentalhistory-container-item__details"
+					onClick={() => setOpenHistoryDialog(true)}
 					sx={{
 						borderColor: variables.bluecolor,
 						color: variables.bluecolor,
@@ -116,21 +143,39 @@ function HistoryItem() {
 				>
 					ĐẶT LẠI
 				</Button>
-				<Button
-					variant="outlined"
-					size="medium"
-					className="rentalhistory-container-item__updatestatus"
-					sx={{
-						borderColor: variables.orangecolor,
-						color: variables.orangecolor,
-						fontWeight: 'bold',
-						width: '180px ',
-						alignSelf: 'center',
-					}}
-				>
-					CẬP NHẬT
-				</Button>
+				{item.carstatusupdate ? (
+					<Button
+						variant="outlined"
+						size="medium"
+						className="rentalhistory-container-item__updatestatus"
+						sx={{
+							borderColor: variables.orangecolor,
+							color: variables.orangecolor,
+							fontWeight: 'bold',
+							width: '180px ',
+							alignSelf: 'center',
+						}}
+					>
+						XEM TRẠNG THÁI
+					</Button>
+				) : (
+					<Button
+						variant="outlined"
+						size="medium"
+						className="rentalhistory-container-item__updatestatus"
+						sx={{
+							borderColor: variables.orangecolor,
+							color: variables.orangecolor,
+							fontWeight: 'bold',
+							width: '180px ',
+							alignSelf: 'center',
+						}}
+					>
+						CẬP NHẬT
+					</Button>
+				)}
 			</Stack>
+			<HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog}/>
 		</Stack>
 	);
 }

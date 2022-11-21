@@ -125,7 +125,7 @@ function HistoryOwnerDialog(props) {
 						<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
 							<Grid item xs={3}>
 								<Typography className="historyinfo-container__spectext" sx={{ fontWeight: 'bold' }}>
-									CHỦ XE
+									NGƯỜI THUÊ XE
 								</Typography>
 							</Grid>
 							<Grid item xs={9} spacing={2}>
@@ -136,6 +136,10 @@ function HistoryOwnerDialog(props) {
 											<Typography className="historyinfo-container__name">
                                                 {/* {carinfo.ownerId && carinfo.ownerId.username} */}
                                                 Khoa Dang
+                                                </Typography>
+												<Typography className="historyinfo-container__name">
+                                                {/* {carinfo.ownerId && carinfo.ownerId.username} */}
+                                                0928776640
                                                 </Typography>
 										</Stack>
 									</Stack>

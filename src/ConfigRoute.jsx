@@ -14,11 +14,13 @@ import CarManagement from "pages/ProfilePage/components/CarManagement";
 import CarDetails from "pages/CarDetails";
 import CarStatusUpdate from "pages/CarStatusUpdate";
 import WalletManagement from "pages/ProfilePage/components/WalletManagement";
+import ActivatePage from "pages/ActivatePage";
 function ConfigRoute() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route index element={<HomePage />} />
+      <Route path="validate" element={<ActivatePage/>} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="car-signup" element={<VehicleSignupPage />} />
       <Route path="profile" element={<ProfilePage />}>

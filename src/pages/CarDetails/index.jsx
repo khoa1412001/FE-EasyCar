@@ -375,7 +375,7 @@ function CarDetails() {
             Đơn giá thuê:
           </Typography>
           <Typography className="payment-container__smalltext">
-            {carinfo.rentprice} 000 / ngày
+            {carinfo.rentprice} 000 ₫/ ngày
           </Typography>
         </Stack>
         <Stack
@@ -388,7 +388,7 @@ function CarDetails() {
             Phí dịch vụ:
           </Typography>
           <Typography className="payment-container__smalltext">
-            {carinfo.servicefee} 000 / ngày
+            {carinfo.servicefee} 000 ₫/ ngày
           </Typography>
         </Stack>
         <Stack
@@ -401,7 +401,7 @@ function CarDetails() {
             Tổng phí thuê xe:
           </Typography>
           <Typography className="payment-container__smalltext">
-            {carinfo.servicefee + carinfo.rentprice} 000 x {carinfo.days} ngày
+            {carinfo.servicefee + carinfo.rentprice} 000 ₫ x {carinfo.days} ngày
           </Typography>
         </Stack>
         <Divider sx={{ marginBottom: "5px" }} />

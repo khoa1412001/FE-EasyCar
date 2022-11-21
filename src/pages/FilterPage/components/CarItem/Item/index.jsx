@@ -18,7 +18,6 @@ function Item(props) {
 	const navigate = useNavigate();
 	const handleDetails = () => {
 		window.open(`/details?id=${item._id}&startdate=${startdate.unix()}&enddate=${enddate.unix()}`,'_blank')
-		// navigate(`/details?id=${id}&startdate=${startdate.unix()}enddate=${enddate.unix()}`);
 	};
 	const transmission = (transmissiontype) => {
 		switch (transmissiontype) {

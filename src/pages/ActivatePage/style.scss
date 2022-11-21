@@ -1,0 +1,9 @@
+@import '../../assets/variable';
+
+.activatepage-container {
+    height: 100vh;
+
+    &__icon {
+       color: $text-green-color;
+    }
+}

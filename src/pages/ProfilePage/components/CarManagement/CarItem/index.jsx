@@ -8,12 +8,33 @@ import './style.scss';
 import * as React from 'react';
 import CarStatusList from '../CarStatusListDialog';
 import HistoryList from '../HistoryList';
+import numWithSpace from 'utils/numWithSpace';
 
-function CarItem() {
+function CarItem(props) {
+	const {item} = props;
+	const transmission = (transmissiontype) => {
+		switch (transmissiontype) {
+			case 'AUTO':
+				return 'Tự động';
+			case 'MANUAL':
+				return 'Số sàn';
+		}
+	};
+
+	const fuel = (fueltype) => {
+		switch (fueltype) {
+			case 'GASOLINE':
+				return 'Xăng';
+			case 'DIESEL':
+				return 'Dầu Diesel';
+			case 'ELECTRIC':
+				return 'Điện';
+		}
+	};
 	const [openHistoryList, setOpenHistoryList] = React.useState(false);
 	const [openStatusList, setOpenStatusList] = React.useState(false);
 	return (
-		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1}>
+		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1} marginTop={1}>
 			<img
 				className="carmanagement-container-item__img"
 				src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
@@ -28,7 +49,7 @@ function CarItem() {
 						letterSpacing: '0.6px',
 					}}
 				>
-					Mazda CX-3
+					{item.brand} {item.model}
 				</Typography>
 				<Typography
 					className="carmanagement-container-item__option"
@@ -39,7 +60,7 @@ function CarItem() {
 						color: variables.textgreycolor,
 					}}
 				>
-					Tự động - Xăng - 5 Ghế
+					{transmission(item.transmission)} - {fuel(item.fueltype)} - {item.seats} Ghế
 				</Typography>
 				<Typography
 					className="carmanagement-container-item__rating"
@@ -73,7 +94,7 @@ function CarItem() {
 			
 					sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 				>
-					Phường 12, Quận Gò Vấp
+					{item.ownerId.location}
 				</Typography>
 			</Stack>
 			<Stack justifyContent={'center'} width="150px">
@@ -87,7 +108,7 @@ function CarItem() {
 						color: variables.textgreencolor,
 					}}
 				>
-					2,738,225₫
+					{numWithSpace(item.rentprice)} ₫
 				</Typography>
 			</Stack>
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
