@@ -61,18 +61,20 @@ function SigninPage(props) {
 	};
 	const handleLoginGoogle = async (googleData) => {
 		const params = {
-			token: googleData.access_token
-		}
-		apiAuth.loginGoogle(params).then((res) => {
-			if (res) {
-				dispatch(logingoogleSucess(googleData));
-				toast.success('Đăng nhập thành công');
-				setOpenSignin(false);
-			}
-		}).catch((err) => {
-			toast.error(err.response.data.message);
-		})
-
+			token: googleData.access_token,
+		};
+		apiAuth
+			.loginGoogle(params)
+			.then((res) => {
+				if (res) {
+					dispatch(logingoogleSucess(googleData));
+					toast.success('Đăng nhập thành công');
+					setOpenSignin(false);
+				}
+			})
+			.catch((err) => {
+				toast.error(err.response.data.message);
+			});
 	};
 	const login = useGoogleLogin({
 		onSuccess: handleLoginGoogle,
@@ -123,7 +125,7 @@ function SigninPage(props) {
 							}}
 						/>
 						<Box display="flex" sx={{ justifyContent: 'flex-end' }}>
-							<Typography>Quên mật khẩu</Typography>
+							<Typography><a href='#'>Quên mật khẩu</a></Typography>
 						</Box>
 						<Button
 							align="center"
@@ -139,38 +141,26 @@ function SigninPage(props) {
 						</Button>
 						<Stack spacing={1} direction="row">
 							<Typography color="gray">Bạn chưa là thành viên?</Typography>
-							<Typography>Hãy đăng kí ngay!</Typography>
+							<Typography><a href='http://localhost:3000/signup'>Hãy đăng kí ngay!</a></Typography>
 						</Stack>
 						<Divider />
 						<Typography align="center">Hoặc đăng nhập bằng tài khoản</Typography>
-						<Box
-							sx={{
-								display: 'flex',
-								justifyContent: 'space-between',
-								bgcolor: 'background.paper',
-								borderRadius: 1,
-							}}
-						>
-							<Button variant="outlined" sx={{ px: 6 }} startIcon={<FacebookIcon />}>
-								Facebook
-							</Button>
-							<Button
-								variant="standard"
-								sx={{
-									px: 7,
-									bgcolor: '#f34a38',
-									color: '#FFFFFF',
-									'&.MuiButtonBase-root:hover': {
-										bgcolor: '#f34a38',
-									},
-								}}
-								startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
-								onClick={() => login()}
-							>
-								Google
-							</Button>
 
-						</Box>
+						<Button
+							variant="standard"
+							sx={{
+								px: 7,
+								bgcolor: '#f34a38',
+								color: '#FFFFFF',
+								'&.MuiButtonBase-root:hover': {
+									bgcolor: '#f34a38',
+								},
+							}}
+							startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
+							onClick={() => login()}
+						>
+							Google
+						</Button>
 					</Stack>
 				</Stack>
 			</DialogContent>

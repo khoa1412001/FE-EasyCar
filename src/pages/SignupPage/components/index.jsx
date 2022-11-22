@@ -49,7 +49,7 @@ function SigninBody() {
 
         apiAuth.register(params)
             .then(res => {
-                toast.success("Đăng ký tài khoản thành công")
+                toast.success("Đăng ký tài khoản thành công, vui lòng truy cập email đã đăng ký để kích hoạt tài khoản")
                 navigate('/')
             })
             .catch(err => {
@@ -190,17 +190,6 @@ function SigninBody() {
 
 					<Divider />
 					<Typography align="center">Hoặc đăng nhập bằng tài khoản</Typography>
-					<Box
-						sx={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							bgcolor: 'background.paper',
-							borderRadius: 1,
-						}}
-					>
-						<Button variant="outlined" sx={{ px: 6 }} startIcon={<FacebookIcon />}>
-							Facebook
-						</Button>
 						<Button
 							variant="standard"
 							sx={{
@@ -215,7 +204,6 @@ function SigninBody() {
 						>
 							Google
 						</Button>
-					</Box>
 				</Stack>
 			</form>
 		</Stack>

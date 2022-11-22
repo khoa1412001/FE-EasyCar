@@ -4,9 +4,13 @@ import 'assets/style.scss';
 import * as React from 'react';
 import { Avatar, Box, Button, Divider, Drawer, Stack, Typography } from '@mui/material';
 
-function PaperContract() {
+const PaperContract = React.forwardRef((props,ref) =>{
+	const getPageMargins = () => {
+		return `@page { margin: 40px 20px 40px 20px !important; }`;
+	  };
 	return (
-		<Box className="papercontract-container">
+		<Box className="papercontract-container" ref={ref} px={4}>
+			<style>{getPageMargins()}</style>
 			<Typography className="time bold center" sx={{ fontSize: '18px' }}>
 				CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
 			</Typography>
@@ -248,7 +252,6 @@ function PaperContract() {
 				<span className="bold">7.6 </span>Hợp đồng được lập thành 02 (hai) bản, mỗi bên giữ một bản và có giá trị như nhau.
 				<br />
 				<br />
-				<br />
 			</Typography>
 			<Typography className="time" sx={{ fontSize: '18px', textAlign:'center' }}>
 				<span className="bold">
@@ -256,7 +259,6 @@ function PaperContract() {
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Bên B – Khách thuê xe
 				</span>
-        <br/>
         <br/>
         <br/>
         <br/>
@@ -271,6 +273,9 @@ function PaperContract() {
       <br/>
 		</Box>
 	);
-}
+})
+
+
+
 
 export default PaperContract;

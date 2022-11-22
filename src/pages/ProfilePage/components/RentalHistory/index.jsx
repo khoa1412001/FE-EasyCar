@@ -1,15 +1,10 @@
-import * as React from 'react';
-import StarIcon from '@mui/icons-material/Star';
-import Button from '@mui/material/Button';
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/system';
-import 'assets/style.scss';
-import variables from 'assets/_variable.scss';
-import './style.scss';
-import HistoryItem from './HistoryItem';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import apiUser from 'apis/apiUser';
+import 'assets/style.scss';
+import * as React from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import HistoryItem from './HistoryItem';
+import './style.scss';
 
 function RentalHistory() {
 	const [rentalhistory, setRentalhistory] = React.useState([]);
