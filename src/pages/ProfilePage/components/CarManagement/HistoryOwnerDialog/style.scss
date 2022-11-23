@@ -1,12 +1,12 @@
-@import '../../assets/variable';
+@import '../../../../../assets/variable';
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
 
 .bold {
     font-weight: bold !important;
 }
 
-.carinfo-container {
-    min-height: 1200px;
+.historyinfo-container {
+    min-height: 1000px;
     height: fit-content;
     width: 800px;
     border-radius: 5px;
@@ -33,12 +33,9 @@
         height: 450px;
     }
 
-    &__name {
-        font-size: 20px;
-    }
 }
 
-.payment-container {
+.paymenthistory-container {
     min-height: 800px;
     height: fit-content;
     width: 410px;
@@ -101,10 +98,5 @@
         color: $text-green-color !important;
         background-color: white !important;
         border-color: $text-green-color !important;
-    }
-
-    &__checkbox {
-        padding-bottom: 5px !important;
-        padding-top: 5px !important;
     }
 }

@@ -35,4 +35,8 @@
         background-color: $red-color !important;
         border-color: $red-color !important;
     }
+    &__icon {   
+        position: relative;
+        top: 3px;
+    }
 }

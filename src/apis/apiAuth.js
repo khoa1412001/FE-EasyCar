@@ -27,6 +27,11 @@ const apiAuth = {
         const res = await axiosClientWithToken.post(`/auth/change-password`,params)
         return res.data
     },
+
+    activateaccount: async(params) => {
+        const res = await axiosClient.get(`/auth/validate-mail/${params.token}`)
+        return res.data
+    },
    
 }
 export default apiAuth;

@@ -1,4 +1,5 @@
 import CheckIcon from '@mui/icons-material/Check';
+import { Autocomplete } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -19,10 +20,13 @@ import apiUser from 'apis/apiUser';
 import { toast } from 'react-toastify';
 import apiAuth from 'apis/apiAuth';
 import { setUserInfo } from 'slices/userSlice';
-
+import _debounce from 'lodash/debounce';
+import apiUtils from 'apis/apiUtils';
 function AccountInfo() {
+	const [suggestion, setSuggestion] = React.useState([]);
 	const user = useSelector((state) => state.user.info) || {};
-	const [gender, setGender] = React.useState(user.gender || 'MALE');
+	const [gender, setGender] = React.useState(user.gender);
+	const [location, setLocation] = React.useState(user.location);
 	const dispatch = useDispatch();
 	React.useEffect(() => {
 		reset(user);
@@ -39,14 +43,34 @@ function AccountInfo() {
 		defaultValues: {
 			username: user.username,
 			phoneNumber: user.phoneNumber,
-			location: user.location,
 		},
 	});
 
+	React.useEffect(() => {
+		const GetLocations = (location) => {handleApi(location)};
+		GetLocations(location);
+	}, [location]);
+
+	const handleApi = React.useCallback(
+		_debounce((location) => {
+			const params = {
+				address: location,
+			};
+			apiUtils
+				.findLocation(params)
+				.then((res) => {
+					setSuggestion(res)
+				})
+				.catch((err) => {});
+		}, 1000),
+		[]
+	);
+
+
 	const onSubmit = (data) => {
-		const { location, phoneNumber, username } = data;
+		const { phoneNumber, username } = data;
 		const params = {
-			location,
+			location: location,
 			username,
 			phoneNumber,
 			gender,
@@ -167,21 +191,24 @@ function AccountInfo() {
 						<Typography className="accountinfo-container__text" paddingRight={'10px'}>
 							Địa chỉ:
 						</Typography>
-						<Controller
-							name={'location'}
-							control={control}
-							render={({ field, fieldState: { error } }) => (
+						<Autocomplete
+							freeSolo
+							disableClearable
+							value={location}
+							options={suggestion.map((option) => option.address)}
+							onSelect={(event) => setLocation(event.target.value)}
+							renderInput={(params) => (
 								<TextField
-									{...field}
-									error={error !== undefined}
-									helperText={error ? error.message : ''}
-									id="accountinfo-container__email"
+									{...params}
+									placeholder="Nhập vị trí thành phố, quận, đường..."
+									iid="accountinfo-container__email"
 									variant="outlined"
 									size="small"
-									sx={{ marginLeft: '70px' }}
+									sx={{ marginLeft: '70px',width: '224px' }}
 								/>
 							)}
 						/>
+	
 					</Stack>
 					<Button
 						variant="outlined"

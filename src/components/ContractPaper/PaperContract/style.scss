@@ -1,0 +1,35 @@
+@import '../../../assets/variable';
+
+.center {
+    text-align: center !important;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.italic {
+    font-style: italic !important;
+}
+
+.time {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+.underline {
+    text-decoration: underline !important;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.papercontract-container {
+    width: 820px;
+    margin: auto;
+    background-color: white;
+
+    &__signature {
+        margin-right: 20px;
+    }
+}

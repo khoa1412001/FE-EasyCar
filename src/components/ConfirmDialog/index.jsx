@@ -1,10 +1,10 @@
-import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle, Stack, Typography } from '@mui/material';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
 
 function ConfirmDialog(props) {
-	const { openDialog, setOpenDialog } = props;
+	const { openDialog, setOpenDialog, text, handleApi } = props;
 	return (
 		<Dialog open={openDialog} maxWidth="xs" fullWidth onClose={() => setOpenDialog(false)} className="dialog-container">
 			<DialogTitle>
@@ -13,7 +13,7 @@ function ConfirmDialog(props) {
 				</Typography>
 			</DialogTitle>
 			<DialogContent align="center" dividers="true">
-				<DialogContentText>Nội dung</DialogContentText>
+				<Typography>{text}</Typography>
 				<Stack direction={'row'} justifyContent="center" spacing={3} paddingTop={2}>
 					<Button
 						variant="standard"
@@ -31,6 +31,11 @@ function ConfirmDialog(props) {
 					</Button>
 					<Button
 						variant="standard"
+						onClick={() => {
+							handleApi()
+							setOpenDialog(false)
+							}
+						}
 						sx={{
 							width: '300px',
 							bgcolor: variables.textgreencolor,

@@ -5,9 +5,11 @@ import {
 } from '@mui/material';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
+import { useNavigate } from 'react-router-dom';
 import './style.scss';
 function Contract(props) {
-	const { title, children, openSignin, setOpenSignin } = props;
+	const { openSignin, setOpenSignin, handleApi } = props;
+	const navigate = useNavigate();
 	return (
 		<Dialog open={openSignin} maxWidth="xl" fullWidth onClose={() => setOpenSignin(false)} className="contract-container">
 			<DialogTitle>
@@ -84,7 +86,7 @@ function Contract(props) {
 				<Stack direction={'row'} justifyContent="center" spacing={3} paddingTop={2}>
 					<Button
 						variant="standard"
-            onClick={()=>setOpenSignin(false)}
+            			onClick={()=>setOpenSignin(false)}
 						sx={{
 							width:'300px',
 							bgcolor: '#f34a38',
@@ -98,6 +100,11 @@ function Contract(props) {
 					</Button>
 					<Button
 						variant="standard"
+						onClick={() => {
+							handleApi()
+							setOpenSignin(false)
+							navigate('/profile/history')
+						}}
 						sx={{
 							width:'300px',
 							bgcolor: variables.textgreencolor,

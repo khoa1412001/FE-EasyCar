@@ -4,20 +4,53 @@ import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/system';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
-import CarStatusDialog from '../CarStatusDialog';
 import './style.scss';
 import * as React from 'react';
+import CarStatusList from '../CarStatusListDialog';
+import HistoryList from '../HistoryList';
+import numWithSpace from 'utils/numWithSpace';
+import ConfirmDialog from 'components/ConfirmDialog';
+import apiCar from 'apis/apiCar';
 
-function CarItem() {
-	const [openCarStatus, setOpenCarStatus] = React.useState(true);
+function CarItem(props) {
+	const {item} = props;
+	const [handleApi, setHandleApi] = React.useState(()=> () => {handlePostpone()})
+	const [text, setText] = React.useState('')
+	const [openDialog, setOpenDialog] = React.useState(false);
+
+	const handlePostpone = () => {
+	}
+	const handleDelete = () => {
+	}
+	const transmission = (transmissiontype) => {
+		switch (transmissiontype) {
+			case 'AUTO':
+				return 'Tự động';
+			case 'MANUAL':
+				return 'Số sàn';
+		}
+	};
+
+	const fuel = (fueltype) => {
+		switch (fueltype) {
+			case 'GASOLINE':
+				return 'Xăng';
+			case 'DIESEL':
+				return 'Dầu Diesel';
+			case 'ELECTRIC':
+				return 'Điện';
+		}
+	};
+	const [openHistoryList, setOpenHistoryList] = React.useState(false);
+	const [openStatusList, setOpenStatusList] = React.useState(false);
 	return (
-		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={2}>
+		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1} marginTop={1}>
 			<img
 				className="carmanagement-container-item__img"
 				src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
 				alt=""
 			/>
-			<Stack paddingLeft={'5px'}>
+			<Stack width="200px">
 				<Typography
 					className="carmanagement-container-item__name"
 					sx={{
@@ -26,7 +59,7 @@ function CarItem() {
 						letterSpacing: '0.6px',
 					}}
 				>
-					Mazda CX-3
+					{item.brand} {item.model}
 				</Typography>
 				<Typography
 					className="carmanagement-container-item__option"
@@ -37,7 +70,7 @@ function CarItem() {
 						color: variables.textgreycolor,
 					}}
 				>
-					Tự động - Xăng - 5 Ghế
+					{transmission(item.transmission)} - {fuel(item.fueltype)} - {item.seats} Ghế
 				</Typography>
 				<Typography
 					className="carmanagement-container-item__rating"
@@ -48,36 +81,33 @@ function CarItem() {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> 5.00 - 8k kms
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="carmanagement-container-item__icon"/> 5.00 
 				</Typography>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="carmanagement-container-item__history"
+					onClick={() => setOpenHistoryList(true)}
+					sx={{
+						fontWeight: 'bold',
+						width: '180px ',
+						marginTop:'14px'
+					}}
+				>
+					LỊCH SỬ
+				</Button>
 			</Stack>
-			<Stack>
+			<Stack width="200px" justifyContent='space-between'>
 				<Typography
 					className="carmanagement-container-item__location"
 					paddingTop={'5px'}
-					paddingLeft={'20px'}
+			
 					sx={{ fontWeight: '600', fontSize: '12px', letterSpacing: '0.6px' }}
 				>
-					Phường 12, Quận Gò Vấp
-				</Typography>
-				<Typography
-					className="carmanagement-container-item__startdate"
-					paddingTop={'5px'}
-					paddingLeft={'20px'}
-					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
-				>
-					Từ: 09/10/2022
-				</Typography>
-				<Typography
-					className="carmanagement-container-item__enddate"
-					paddingTop={'5px'}
-					paddingLeft={'20px'}
-					sx={{ fontSize: '14px', letterSpacing: '0.8px' }}
-				>
-					Đến: 11/10/2022
+					{item.ownerId.location}
 				</Typography>
 			</Stack>
-			<Stack justifyContent={'center'}>
+			<Stack justifyContent={'center'} width="150px">
 				<Typography
 					className="carmanagement-container-item__price"
 					paddingLeft={'20px'}
@@ -88,7 +118,7 @@ function CarItem() {
 						color: variables.textgreencolor,
 					}}
 				>
-					2,738,225₫
+					{numWithSpace(item.rentprice)} ₫
 				</Typography>
 			</Stack>
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
@@ -96,11 +126,12 @@ function CarItem() {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__status"
+					onClick={() => setOpenStatusList(true)}
 					sx={{
 						borderColor: variables.textgreencolor,
 						color: variables.textgreencolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>
@@ -110,11 +141,16 @@ function CarItem() {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__stop"
+					onClick={() => {
+						setText('Bạn có chắc muốn tạm dừng cho thuê xe ?')
+						setHandleApi(() => () => {handlePostpone()})
+						setOpenDialog(true)
+					}}
 					sx={{
 						borderColor: variables.orangecolor,
 						color: variables.orangecolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>
@@ -124,18 +160,25 @@ function CarItem() {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__delete"
+					onClick={() => {
+						setText('Bạn có chắc muốn xoá thông tin xe ?')
+						setHandleApi(() => () => {handleDelete()})
+						setOpenDialog(true)
+					}}
 					sx={{
 						borderColor: variables.redcolor,
 						color: variables.redcolor,
 						fontWeight: 'bold',
-						width: '215px ',
+						width: '180px ',
 						alignSelf: 'center',
 					}}
 				>
 					XOÁ
 				</Button>
 			</Stack>
-			<CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus}></CarStatusDialog>
+			<CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList}/>
+			<HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList}/>
+			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />
 		</Stack>
 	);
 }

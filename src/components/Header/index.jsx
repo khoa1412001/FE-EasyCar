@@ -22,7 +22,7 @@ import apiAuth from 'apis/apiAuth';
 import LeftNavigation from 'components/LeftNavigation';
 import ConfirmDialog from 'components/ConfirmDialog';
 function Header() {
-	const [openDialog, setOpenDialog] = React.useState(true)
+	const [openDialog, setOpenDialog] = React.useState(false)
 	const [openSignin, setOpenSignin] = React.useState(false);
 	const user = useSelector((state) => state.user.info);
 	const accesstoken = useSelector((state) => state.auth.accessToken);
@@ -86,7 +86,7 @@ function Header() {
 								{user.avatar ? (
 									<Avatar alt="Remy Sharp" src={user.avatar} />
 								) : (
-									<Avatar {...stringAvatar('Nguyen Phuc An')} />
+									<Avatar {...stringAvatar(user.username)} />
 								)}
 							</IconButton>
 							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}} id="username">

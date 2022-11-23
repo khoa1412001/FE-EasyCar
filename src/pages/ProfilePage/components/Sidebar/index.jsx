@@ -42,7 +42,7 @@ function Sidebar() {
 						sx={{ width: '80px', height: '80px' }}
 					/>
 				) : (
-					<Avatar {...stringAvatar('Nguyen Phuc An')} sx={{ width: '80px', height: '80px' }} />
+					(user.username && <Avatar {...stringAvatar(user.username)} sx={{ width: '80px', height: '80px' }} />)
 				)}
 				<Typography className="sidebar-container__name" sx={{ fontWeight: 'bold', fontSize: '18px' }}>
 					{user.username}

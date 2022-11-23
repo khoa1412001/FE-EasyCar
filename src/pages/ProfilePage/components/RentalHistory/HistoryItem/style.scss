@@ -24,9 +24,20 @@
         border-color: $text-green-color !important;
     }
 
-    &__cancle:hover {
+    &__details:hover {
         color: white;
-        background-color: $red-color !important;
-        border-color: $red-color !important;
+        background-color: $blue-color !important;
+        border-color: $blue-color !important;
+    }
+
+    &__icon {   
+        position: relative;
+        top: 3px;
+    }
+
+    &__updatestatus:hover {
+        color: white;
+        background-color: $orange-color !important;
+        border-color: $orange-color !important;
     }
 }

@@ -1,6 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
 import EmailIcon from '@mui/icons-material/Email';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockIcon from '@mui/icons-material/Lock';
 import {
@@ -14,23 +13,20 @@ import {
 	InputAdornment,
 	Stack,
 	TextField,
-	Typography,
+	Typography
 } from '@mui/material';
+import { useGoogleLogin } from '@react-oauth/google';
 import apiAuth from 'apis/apiAuth';
 import * as React from 'react';
-import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loginSuccess } from 'slices/authSlice';
-import { setUserInfo } from 'slices/userSlice';
-import { logingoogleSucess } from 'slices/authSlice';
+import { logingoogleSucess, loginSuccess } from 'slices/authSlice';
 import variables from '../../assets/_variable.scss';
 import './signin.scss';
-import apiUser from 'apis/apiUser';
 
 function SigninPage(props) {
-	const { title, children, openSignin, setOpenSignin } = props;
+	const { openSignin, setOpenSignin } = props;
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const dispatch = useDispatch();
@@ -61,18 +57,20 @@ function SigninPage(props) {
 	};
 	const handleLoginGoogle = async (googleData) => {
 		const params = {
-			token: googleData.access_token
-		}
-		apiAuth.loginGoogle(params).then((res) => {
-			if (res) {
-				dispatch(logingoogleSucess(googleData));
-				toast.success('Đăng nhập thành công');
-				setOpenSignin(false);
-			}
-		}).catch((err) => {
-			toast.error(err.response.data.message);
-		})
-
+			token: googleData.access_token,
+		};
+		apiAuth
+			.loginGoogle(params)
+			.then((res) => {
+				if (res) {
+					dispatch(logingoogleSucess(googleData));
+					toast.success('Đăng nhập thành công');
+					setOpenSignin(false);
+				}
+			})
+			.catch((err) => {
+				toast.error(err.response.data.message);
+			});
 	};
 	const login = useGoogleLogin({
 		onSuccess: handleLoginGoogle,
@@ -123,7 +121,7 @@ function SigninPage(props) {
 							}}
 						/>
 						<Box display="flex" sx={{ justifyContent: 'flex-end' }}>
-							<Typography>Quên mật khẩu</Typography>
+							<Typography><a href='#'>Quên mật khẩu</a></Typography>
 						</Box>
 						<Button
 							align="center"
@@ -139,38 +137,26 @@ function SigninPage(props) {
 						</Button>
 						<Stack spacing={1} direction="row">
 							<Typography color="gray">Bạn chưa là thành viên?</Typography>
-							<Typography>Hãy đăng kí ngay!</Typography>
+							<Typography><a href='http://localhost:3000/signup'>Hãy đăng kí ngay!</a></Typography>
 						</Stack>
 						<Divider />
 						<Typography align="center">Hoặc đăng nhập bằng tài khoản</Typography>
-						<Box
-							sx={{
-								display: 'flex',
-								justifyContent: 'space-between',
-								bgcolor: 'background.paper',
-								borderRadius: 1,
-							}}
-						>
-							<Button variant="outlined" sx={{ px: 6 }} startIcon={<FacebookIcon />}>
-								Facebook
-							</Button>
-							<Button
-								variant="standard"
-								sx={{
-									px: 7,
-									bgcolor: '#f34a38',
-									color: '#FFFFFF',
-									'&.MuiButtonBase-root:hover': {
-										bgcolor: '#f34a38',
-									},
-								}}
-								startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
-								onClick={() => login()}
-							>
-								Google
-							</Button>
 
-						</Box>
+						<Button
+							variant="standard"
+							sx={{
+								px: 7,
+								bgcolor: '#f34a38',
+								color: '#FFFFFF',
+								'&.MuiButtonBase-root:hover': {
+									bgcolor: '#f34a38',
+								},
+							}}
+							startIcon={<GoogleIcon style={{ color: '#FFFFFF' }} />}
+							onClick={() => login()}
+						>
+							Google
+						</Button>
 					</Stack>
 				</Stack>
 			</DialogContent>

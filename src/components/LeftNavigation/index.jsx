@@ -30,18 +30,18 @@ function LeftNavigation(props) {
 					<Stack direction="row" alignItems={'center'} spacing={1} alignSelf="center">
 						{user.avatar ? (
 							<Avatar
-								className="sidebar-container__avatar"
+								className="leftnavigation-container__avatar"
 								alt="Remy Sharp"
 								src={user.avatar}
 								sx={{ width: '80px', height: '80px' }}
 							/>
 						) : (
-							<Avatar {...stringAvatar('Nguyen Phuc An')} sx={{ width: '80px', height: '80px' }} />
+							<Avatar {...stringAvatar(user.username)} sx={{ width: '80px', height: '80px' }} />
 						)}
 						<Stack>
-							<Typography className="leftnavigation-container__name">{user.username}</Typography>
-							<Typography className="leftnavigation-container__email">{user.phoneNumber}</Typography>
-							<Typography className="leftnavigation-container__phone">{user.email}</Typography>
+							<Typography className="leftnavigation-container__name"  sx={{ fontWeight: 'bold', fontSize: '18px' }}> {user.username}</Typography>
+							<Typography className="leftnavigation-container__phone" sx={{ fontSize: '14px' }}>{user.phoneNumber}</Typography>
+							<Typography className="leftnavigation-container__email" sx={{ fontSize: '14px' }}>{user.email}</Typography>
 						</Stack>
 					</Stack>
 					<Divider sx={{ paddingTop: '8px' }} />
