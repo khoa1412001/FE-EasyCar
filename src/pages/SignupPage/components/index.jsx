@@ -12,7 +12,6 @@ import {
 import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
 import variables from '../../../assets/_variable.scss';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
 import { yupResolver } from '@hookform/resolvers/yup';

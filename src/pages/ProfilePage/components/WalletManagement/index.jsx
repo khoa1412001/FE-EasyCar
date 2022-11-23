@@ -21,8 +21,35 @@ import './style.scss';
 import * as React from 'react';
 import variables from 'assets/_variable.scss';
 import CheckIcon from '@mui/icons-material/Check';
+import { useSelector } from 'react-redux';
+import ConfirmDialog from 'components/ConfirmDialog';
 function WalletManagement() {
-	const [bank, setBank] = React.useState('NONE');
+	const user = useSelector((state) => state.user.info) || {};
+	const [bank, setBank] = React.useState(user.bank || 'NONE');
+	const [bankaccountname, setBankaccountname] = React.useState(user.bankaccountname ||'');
+	const [banknumber, setBanknumber] = React.useState(user.banknumber || '')
+	const [updated, setUpdated] = React.useState(false)
+	const [openDialog, setOpenDialog] = React.useState(false)
+	const [handleApi, setHandleApi] = React.useState(() => () => {handleUpdate()})
+	const [text,setText] = React.useState('Vui lòng kiểm tra thông tin tài khoản ngân hàng kỹ càng, bạn chỉ có thể cập nhật thông tin 1 lần duy nhất, những lần sau bạn phải liên hệ người quản trị')
+	React.useEffect(() => {
+		const getBankinfo = () => {
+			if(user.banknumber !== ''){
+				setUpdated(true)
+			}
+		}
+		getBankinfo()
+	},[])
+
+	const handleUpdate = () => {
+		const params = {
+			bank: bank,
+			bankaccountname: bankaccountname,
+			banknumber: banknumber,
+		}
+		console.log(params)
+	}
+
 	const banklist = [
 		{
 			id: 1,
@@ -137,9 +164,10 @@ function WalletManagement() {
 						id="walletmanagement-container__email"
 						variant="outlined"
 						size="small"
-						disabled
+						disabled={updated}
+						onChange={(event) => setBankaccountname(event.target.value)}
 						sx={{ marginLeft: '81px' }}
-						value={0}
+						value={bankaccountname}
 					/>
 				</Stack>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">
@@ -150,9 +178,10 @@ function WalletManagement() {
 						id="walletmanagement-container__email"
 						variant="outlined"
 						size="small"
-						disabled
+						disabled={updated}
+						onChange={(event) => setBanknumber(event.target.value)}
 						sx={{ marginLeft: '60px' }}
-						value={0}
+						value={banknumber}
 					/>
 				</Stack>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">
@@ -165,6 +194,7 @@ function WalletManagement() {
 						size="small"
 						sx={{ width: '224px', marginLeft: '71px' }}
 						value={bank}
+						disabled={updated}
 						onChange={(event) => setBank(event.target.value)}
 					>
 						<MenuItem value="NONE">Chọn ngân hàng</MenuItem>
@@ -181,6 +211,13 @@ function WalletManagement() {
 					type="submit"
 					className="walletmanagement-container__update"
 					startIcon={<CheckIcon />}
+					disabled={updated}
+					onClick={
+						() => {
+							setHandleApi(() => () => handleUpdate())
+							setOpenDialog(true)
+						}
+					}
 					sx={{
 						color: variables.mainlightercolor,
 						bgcolor: variables.mainyellowcolor,
@@ -275,6 +312,7 @@ function WalletManagement() {
 				</Table>
 			</TableContainer>
 			<TablePagination component="div" count={-1} rowsPerPage={4} page={0} rowsPerPageOptions={4} />
+			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi}/>
 		</Stack>
 	);
 }

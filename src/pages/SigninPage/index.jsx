@@ -1,6 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
 import EmailIcon from '@mui/icons-material/Email';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockIcon from '@mui/icons-material/Lock';
 import {
@@ -14,23 +13,20 @@ import {
 	InputAdornment,
 	Stack,
 	TextField,
-	Typography,
+	Typography
 } from '@mui/material';
+import { useGoogleLogin } from '@react-oauth/google';
 import apiAuth from 'apis/apiAuth';
 import * as React from 'react';
-import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { loginSuccess } from 'slices/authSlice';
-import { setUserInfo } from 'slices/userSlice';
-import { logingoogleSucess } from 'slices/authSlice';
+import { logingoogleSucess, loginSuccess } from 'slices/authSlice';
 import variables from '../../assets/_variable.scss';
 import './signin.scss';
-import apiUser from 'apis/apiUser';
 
 function SigninPage(props) {
-	const { title, children, openSignin, setOpenSignin } = props;
+	const { openSignin, setOpenSignin } = props;
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const dispatch = useDispatch();

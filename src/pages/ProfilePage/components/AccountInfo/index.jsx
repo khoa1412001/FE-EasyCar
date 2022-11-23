@@ -25,7 +25,7 @@ import apiUtils from 'apis/apiUtils';
 function AccountInfo() {
 	const [suggestion, setSuggestion] = React.useState([]);
 	const user = useSelector((state) => state.user.info) || {};
-	const [gender, setGender] = React.useState(user.gender || 'MALE');
+	const [gender, setGender] = React.useState(user.gender);
 	const [location, setLocation] = React.useState(user.location);
 	const dispatch = useDispatch();
 	React.useEffect(() => {

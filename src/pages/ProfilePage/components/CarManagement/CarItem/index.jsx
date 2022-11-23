@@ -9,9 +9,19 @@ import * as React from 'react';
 import CarStatusList from '../CarStatusListDialog';
 import HistoryList from '../HistoryList';
 import numWithSpace from 'utils/numWithSpace';
+import ConfirmDialog from 'components/ConfirmDialog';
+import apiCar from 'apis/apiCar';
 
 function CarItem(props) {
 	const {item} = props;
+	const [handleApi, setHandleApi] = React.useState(()=> () => {handlePostpone()})
+	const [text, setText] = React.useState('')
+	const [openDialog, setOpenDialog] = React.useState(false);
+
+	const handlePostpone = () => {
+	}
+	const handleDelete = () => {
+	}
 	const transmission = (transmissiontype) => {
 		switch (transmissiontype) {
 			case 'AUTO':
@@ -131,6 +141,11 @@ function CarItem(props) {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__stop"
+					onClick={() => {
+						setText('Bạn có chắc muốn tạm dừng cho thuê xe ?')
+						setHandleApi(() => () => {handlePostpone()})
+						setOpenDialog(true)
+					}}
 					sx={{
 						borderColor: variables.orangecolor,
 						color: variables.orangecolor,
@@ -145,6 +160,11 @@ function CarItem(props) {
 					variant="outlined"
 					size="medium"
 					className="carmanagement-container-item__delete"
+					onClick={() => {
+						setText('Bạn có chắc muốn xoá thông tin xe ?')
+						setHandleApi(() => () => {handleDelete()})
+						setOpenDialog(true)
+					}}
 					sx={{
 						borderColor: variables.redcolor,
 						color: variables.redcolor,
@@ -158,6 +178,7 @@ function CarItem(props) {
 			</Stack>
 			<CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList}/>
 			<HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList}/>
+			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />
 		</Stack>
 	);
 }

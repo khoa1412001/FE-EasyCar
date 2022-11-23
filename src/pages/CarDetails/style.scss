@@ -6,7 +6,7 @@
 }
 
 .carinfo-container {
-    min-height: 1000px;
+    min-height: 1200px;
     height: fit-content;
     width: 800px;
     border-radius: 5px;
@@ -101,5 +101,10 @@
         color: $text-green-color !important;
         background-color: white !important;
         border-color: $text-green-color !important;
+    }
+
+    &__checkbox {
+        padding-bottom: 5px !important;
+        padding-top: 5px !important;
     }
 }
