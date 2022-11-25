@@ -78,6 +78,68 @@ function Fillter(props) {
 		setTransmission('ALL');
 		setFueltype('ALL');
 		setPrice('ALL');
+		setCarbrand('ALL');
+		setRating([
+			{
+				id: 1,
+				value: '3+',
+				selected: false,
+			},
+			{
+				id: 2,
+				value: '4+',
+				selected: false,
+			},
+			{
+				id: 3,
+				value: 'All',
+				selected: true,
+			},
+		]);
+		setCartype([
+			{
+				id: 1,
+				text: 'MINI',
+				subtext: '4 GHẾ',
+				value: 'MINI-4',
+				selected: false,
+			},
+			{
+				id: 2,
+				text: 'SEDAN',
+				subtext: '4 GHẾ',
+				value: 'SEDAN-4',
+				selected: false,
+			},
+			{
+				id: 3,
+				text: 'SUV',
+				subtext: '5 GHẾ',
+				value: 'SUV-5',
+				selected: false,
+			},
+			{
+				id: 4,
+				text: 'SUV',
+				subtext: '7 GHẾ',
+				value: 'SUV-7',
+				selected: false,
+			},
+			{
+				id: 5,
+				text: 'MPV',
+				subtext: '7 GHẾ',
+				value: 'MPV-7',
+				selected: false,
+			},
+			{
+				id: 6,
+				text: 'PICK-UP',
+				subtext: '4 GHẾ',
+				value: 'PU-4',
+				selected: false,
+			},
+		]);
 	};
 	return (
 		<Box className="fillter-container">

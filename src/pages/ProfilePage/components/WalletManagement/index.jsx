@@ -23,6 +23,9 @@ import variables from 'assets/_variable.scss';
 import CheckIcon from '@mui/icons-material/Check';
 import { useSelector } from 'react-redux';
 import ConfirmDialog from 'components/ConfirmDialog';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schema } from './schema';
+import { useForm, Controller } from 'react-hook-form';
 function WalletManagement() {
 	const user = useSelector((state) => state.user.info) || {};
 	const [bank, setBank] = React.useState(user.bank || 'NONE');
@@ -40,6 +43,21 @@ function WalletManagement() {
 		}
 		getBankinfo()
 	},[])
+
+	const { handleSubmit, control } = useForm({
+		mode: 'onChange',
+		resolver: yupResolver(schema),
+		reValidateMode: 'onChange',
+	});
+
+	const onSubmit = (data) => {
+		const { amount} = data
+       const params = {
+		amount:amount,
+	   }
+
+	   console.log(params)
+    }
 
 	const handleUpdate = () => {
 		const params = {
@@ -141,6 +159,7 @@ function WalletManagement() {
 			flexWrap="nowrap"
 			bgcolor="#FFFFFF"
 		>
+			<form onSubmit={handleSubmit(onSubmit)}>
 			<Stack>
 				<Typography
 					className="walletmanagement-container__title"
@@ -208,7 +227,6 @@ function WalletManagement() {
 				<Button
 					variant="outlined"
 					size="medium"
-					type="submit"
 					className="walletmanagement-container__update"
 					startIcon={<CheckIcon />}
 					disabled={updated}
@@ -238,26 +256,34 @@ function WalletManagement() {
 				</Typography>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">
 					<Typography className="walletmanagement-container__text" paddingRight={'10px'}>
-						Số tiền: <span className="green bold fontLarge"> 190000 đ</span>
+						Số tiền: <span className="green bold fontLarge">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {user.balance} đ</span>
 					</Typography>
 				</Stack>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">
 					<Typography className="walletmanagement-container__text" paddingRight={'10px'}>
 						Rút tiền:
 					</Typography>
-					<TextField
-						id="walletmanagement-container__email"
-						variant="outlined"
-						size="small"
-						disabled
-						sx={{ marginLeft: '94px' }}
-						value={0}
+					<Controller
+						name={'amount'}
+						control={control}
+						render={({ field, fieldState: { error } }) => (
+							<TextField
+								{...field}
+								error={error !== undefined}
+								id="walletmanagement-container__email"
+								variant="outlined"
+								size="small"
+								disabled={!updated}
+								sx={{ marginLeft: '94px' }}
+							/>
+						)}
 					/>
 				</Stack>
 				<Button
 					variant="outlined"
 					size="medium"
 					type="submit"
+					disabled={!updated}
 					className="walletmanagement-container__withdraw"
 					startIcon={<CheckIcon />}
 					sx={{
@@ -311,6 +337,7 @@ function WalletManagement() {
 					</TableBody>
 				</Table>
 			</TableContainer>
+			</form>
 			<TablePagination component="div" count={-1} rowsPerPage={4} page={0} rowsPerPageOptions={4} />
 			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi}/>
 		</Stack>
