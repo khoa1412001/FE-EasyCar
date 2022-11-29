@@ -15,6 +15,8 @@ function HistoryItem(props) {
 	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
 	const [startdate, setStartdate] = React.useState(new Date(item.rentalDateStart));
 	const [enddate, setEnddate] = React.useState(new Date(item.rentalDateEnd));
+	const [rating, setRating] = React.useState(item.rating);
+
 	const transmission = (transmissiontype) => {
 		switch (transmissiontype) {
 			case 'AUTO':
@@ -34,6 +36,25 @@ function HistoryItem(props) {
 				return 'Điện';
 		}
 	};
+
+	const israteable = () => {
+		if(item.rating == 0){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	React.useEffect(() => {
+		const handleRating = () => {
+			if(!israteable() && (rating !== 0)){
+				console.log(rating)
+				window.location.reload(false);
+			}
+		}
+		handleRating()
+	},[rating])
 	return (
 		<Stack direction={'row'} className="rentalhistory-container-item" padding={1} spacing={1} marginTop={1}>
 			<img
@@ -73,9 +94,9 @@ function HistoryItem(props) {
 					}}
 				>
 					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="rentalhistory-container-item__icon" />{' '}
-					5.00
+					{item.vehicleId.rating}
 				</Typography>
-				<Rating name="no-value" value={null} sx={{ paddingTop: '20px' }} />
+				<Rating name="no-value" value={rating} disabled={israteable()} onChange={(event) => setRating(event.target.value)} sx={{ paddingTop: '20px' }} />
 			</Stack>
 			<Stack width="200px">
 				<Typography

@@ -26,6 +26,11 @@ import ConfirmDialog from 'components/ConfirmDialog';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useForm, Controller } from 'react-hook-form';
+import apiUser from 'apis/apiUser';
+import { toast } from 'react-toastify';
+import {useDispatch} from 'react-redux'
+import {setUserInfo} from 'slices/userSlice'
+import apiAuth from 'apis/apiAuth';
 function WalletManagement() {
 	const user = useSelector((state) => state.user.info) || {};
 	const [bank, setBank] = React.useState(user.bank || 'NONE');
@@ -34,12 +39,22 @@ function WalletManagement() {
 	const [updated, setUpdated] = React.useState(false)
 	const [openDialog, setOpenDialog] = React.useState(false)
 	const [handleApi, setHandleApi] = React.useState(() => () => {handleUpdate()})
+	const dispatch = useDispatch();
+	const [withdrawlist, setWithdrawlist] = React.useState([])
 	const [text,setText] = React.useState('Vui lòng kiểm tra thông tin tài khoản ngân hàng kỹ càng, bạn chỉ có thể cập nhật thông tin 1 lần duy nhất, những lần sau bạn phải liên hệ người quản trị')
+	const [page, setPage] = React.useState(0);
+	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 4 - withdrawlist.length) : 0;
+
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	  };
+
 	React.useEffect(() => {
 		const getBankinfo = () => {
-			if(user.banknumber !== ''){
+			if(user.bank !== ""){
 				setUpdated(true)
 			}
+			apiUser.getWithdrawlist().then((res) => {setWithdrawlist(res.data)}).catch(err => toast.error(err.response.data.message))
 		}
 		getBankinfo()
 	},[])
@@ -59,13 +74,36 @@ function WalletManagement() {
 	   console.log(params)
     }
 
+	const chipStatus = (status) => {
+		switch (status) {
+			case 0:
+				return (<Chip label="CHỜ DUYỆT" sx={{bgcolor:variables.orangecolor, color:'white',fontWeight:'bold'}} />);
+			case 1:
+				return (<Chip label="CHẤP NHẬN" className='success bold'/>)
+			case 2:
+				return (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)
+		}
+	}
+
 	const handleUpdate = () => {
 		const params = {
 			bank: bank,
 			bankaccountname: bankaccountname,
 			banknumber: banknumber,
 		}
-		console.log(params)
+		apiUser.updateBankinfo(params).then((res) => {
+			toast.success('Cập nhật thông tin tài khoản ngân hàng thành công')
+			apiAuth.getuserinfo()
+				.then((res) => {
+					if (res) {
+						dispatch(setUserInfo(res));
+					}
+				})
+				.catch()
+				.finally();
+			window.location.reload(false);
+		})
+		.catch((err) => {toast.error(err.response.data.message)})
 	}
 
 	const banklist = [
@@ -310,35 +348,19 @@ function WalletManagement() {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						<TableRow key={1} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="left"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
-							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
+						{(withdrawlist.slice(page * 4, page * 4 + 4)).map((row) => (
+							<TableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableCell align="left"><span className='bold'>{row._id}</span></TableCell>
+							<TableCell align="right"><span className="green bold fontLarge">{row.amount} ₫</span></TableCell>
+							<TableCell align="right"><span className='bold'>{(new Date(row.createAt)).getDate()}/{(new Date(row.createAt)).getMonth() + 1}/{(new Date(row.createAt)).getFullYear()}</span></TableCell>
+							<TableCell align="right">{chipStatus(row.status)}</TableCell>
 						</TableRow>
-                        <TableRow key={2} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="left"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
-							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{false ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
-						</TableRow>
-                        <TableRow key={3} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="left"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
-							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{true ? (<Chip label="CHẤP NHẬN" className='success bold'/>): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
-						</TableRow>
-                        <TableRow key={4} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell align="left"><span className='bold'>1</span></TableCell>
-							<TableCell align="right"><span className="green bold fontLarge">190000 ₫</span></TableCell>
-							<TableCell align="right"><span className='bold'>24/12/2012</span></TableCell>
-							<TableCell align="right">{true ? (<Chip label="CHỜ DUYỆT" sx={{bgcolor:variables.orangecolor, color:'white',fontWeight:'bold'}} />): (<Chip label="TỪ CHỐI" className='bold' sx={{bgcolor:'red', color:'white'}}/>)}</TableCell>
-						</TableRow>
+						))}
 					</TableBody>
 				</Table>
 			</TableContainer>
 			</form>
-			<TablePagination component="div" count={-1} rowsPerPage={4} page={0} rowsPerPageOptions={4} />
+			<TablePagination component="div" count={withdrawlist.length} rowsPerPage={4} page={page} rowsPerPageOptions={4}  onPageChange={handleChangePage}/>
 			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi}/>
 		</Stack>
 	);

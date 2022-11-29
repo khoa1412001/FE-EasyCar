@@ -18,8 +18,27 @@ import {
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 function CarStatusUpdate() {
-	const [selectedImage, setSelectedImage] = React.useState();
-	const [selectedVideo, setSelectedVideo] = React.useState();
+	const [statusvideo, setStatusvideo] = React.useState();
+	const [imgfront, setImgfront] = React.useState();
+	const [imgrear, setImgrear] = React.useState();
+	const [imgleft, setImgleft] = React.useState();
+	const [imgright, setImgright] = React.useState();
+	const [engstatus, setEngstatus] = React.useState('');
+	const [intstatus, setIntstatus] = React.useState('');
+	const [extstatus, setExtstatus] = React.useState('');
+
+	const handleUpdateStatus = () => {
+		let params = new FormData();
+		params.append('statusimage', imgfront);
+		params.append('statusimage', imgrear);
+		params.append('statusimage', imgleft);
+		params.append('statusimage', imgright);
+		params.append('engstatus', engstatus);
+		params.append('extstatus', extstatus);
+		params.append('intstatus', intstatus);
+		params.append('statusvideo',statusvideo);
+		console.log(params.getAll('statusimage'))
+	}
 	return (
 		<Paper sx={{ margin: '15px' }} elevation={3}>
 			<Stack className="carstatusupdate-container" padding={2} spacing={1}>
@@ -32,7 +51,7 @@ function CarStatusUpdate() {
 				<Typography align="center" className="carstatusupdate-container__text">
 					Ảnh mặt trước
 				</Typography>
-				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<img className="carstatusupdate-container__img" src={imgfront ? URL.createObjectURL(imgfront) : ''}></img>
 				<Button
 					variant="outlined"
 					size="medium"
@@ -53,14 +72,14 @@ function CarStatusUpdate() {
 						hidden
 						accept=".jpg,.png"
 						onChange={(event) => {
-							setSelectedImage(event.target.files[0]);
+							setImgfront(event.target.files[0]);
 						}}
 					/>
 				</Button>
 				<Typography align="center" className="carstatusupdate-container__text">
 					Ảnh mặt sau
 				</Typography>
-				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<img className="carstatusupdate-container__img" src={imgrear ? URL.createObjectURL(imgrear) : ''}></img>
 				<Button
 					variant="outlined"
 					size="medium"
@@ -81,7 +100,7 @@ function CarStatusUpdate() {
 						hidden
 						accept=".jpg,.png"
 						onChange={(event) => {
-							setSelectedImage(event.target.files[0]);
+							setImgrear(event.target.files[0]);
 						}}
 					/>
 				</Button>
@@ -89,7 +108,7 @@ function CarStatusUpdate() {
 				<Typography align="center" className="carstatusupdate-container__text">
 					Ảnh bên trái
 				</Typography>
-				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<img className="carstatusupdate-container__img" src={imgleft ? URL.createObjectURL(imgleft) : ''}></img>
 				<Button
 					variant="outlined"
 					size="medium"
@@ -110,7 +129,7 @@ function CarStatusUpdate() {
 						hidden
 						accept=".jpg,.png"
 						onChange={(event) => {
-							setSelectedImage(event.target.files[0]);
+							setImgleft(event.target.files[0]);
 						}}
 					/>
 				</Button>
@@ -118,7 +137,7 @@ function CarStatusUpdate() {
 				<Typography align="center" className="carstatusupdate-container__text">
 					Ảnh bên phải
 				</Typography>
-				<img className="carstatusupdate-container__img" src={selectedImage ? URL.createObjectURL(selectedImage) : ''}></img>
+				<img className="carstatusupdate-container__img" src={imgright ? URL.createObjectURL(imgright) : ''}></img>
 				<Button
 					variant="outlined"
 					size="medium"
@@ -139,7 +158,7 @@ function CarStatusUpdate() {
 						hidden
 						accept=".jpg,.png"
 						onChange={(event) => {
-							setSelectedImage(event.target.files[0]);
+							setImgright(event.target.files[0]);
 						}}
 					/>
 				</Button>
@@ -147,7 +166,7 @@ function CarStatusUpdate() {
 				<Typography variant="h6" sx={{ marginTop: '8px', color: variables.maincolor, fontWeight: 'bold' }}>
 					TRẠNG THÁI XE
 				</Typography>
-				<Typography sx={{ alignSelf: 'start' }}>Video trạng thái xe: {selectedVideo ? selectedVideo.name : ''}</Typography>
+				<Typography sx={{ alignSelf: 'start' }}>Video trạng thái xe: {statusvideo ? statusvideo.name : ''}</Typography>
 				<Button
 					variant="outlined"
 					size="medium"
@@ -168,7 +187,7 @@ function CarStatusUpdate() {
 						hidden
 						accept=".mp4,.mpv,.mkv,.avi,.m4v"
 						onChange={(event) => {
-							setSelectedVideo(event.target.files[0]);
+							setStatusvideo(event.target.files[0]);
 						}}
 					/>
 				</Button>
@@ -179,17 +198,19 @@ function CarStatusUpdate() {
 					className="carstatusupdate-container__textfield"
 					multiline={true}
 					rows={5}
-					maxRows={7}
+					value={extstatus}
+					onChange={(event) => setExtstatus(event.target.value)}
 					sx={{ width: '500px' }}
 				></TextField>
 				<Typography className="carstatusupdate-container__text" sx={{ alignSelf: 'start' }}>
-					<span className="bold blue">NỘI:</span>
+					<span className="bold blue">NỘI THẤT:</span>
 				</Typography>
 				<TextField
 					className="carstatusupdate-container__textfield"
 					multiline={true}
 					rows={5}
-					maxRows={7}
+					value={intstatus}
+					onChange={(event) => setIntstatus(event.target.value)}
 					sx={{ width: '500px' }}
 				></TextField>
 				<Typography className="carstatusupdate-container__text" sx={{ alignSelf: 'start' }}>
@@ -199,13 +220,15 @@ function CarStatusUpdate() {
 					className="carstatusupdate-container__textfield"
 					multiline={true}
 					rows={5}
-					maxRows={7}
+					value={engstatus}
+					onChange={(event) => setEngstatus(event.target.value)}
 					sx={{ width: '500px' }}
 				></TextField>
 				<Button
 					alignSelf="center"
 					className="carstatusupdate-container__update"
 					variant="contained"
+					onClick={handleUpdateStatus}
 					sx={{
 						color: '#FFF',
 						borderColor: variables.textgreencolor,

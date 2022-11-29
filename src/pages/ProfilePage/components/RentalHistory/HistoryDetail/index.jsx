@@ -293,6 +293,9 @@ function HistoryDetail(props) {
 								{/* {carinfo.totalprice && numWithSpace(carinfo.totalprice)} 000 đ */}1 000 000đ
 							</Typography>
 						</Stack>
+						<Button variant='contained'>
+							IN HỘP ĐỒNG
+						</Button>
 					</Stack>
 				</Stack>
 			</DialogContent>

@@ -257,6 +257,9 @@ function HistoryOwnerDialog(props) {
                                 1 000 000đ
 							</Typography>
 						</Stack>
+						<Button variant='contained'>
+							IN HỘP ĐỒNG
+						</Button>
 					</Stack>
 				</Stack>
 			</DialogContent>

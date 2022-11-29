@@ -11,6 +11,7 @@ import HistoryList from '../HistoryList';
 import numWithSpace from 'utils/numWithSpace';
 import ConfirmDialog from 'components/ConfirmDialog';
 import apiCar from 'apis/apiCar';
+import { toast } from 'react-toastify';
 
 function CarItem(props) {
 	const {item} = props;
@@ -21,6 +22,14 @@ function CarItem(props) {
 	const handlePostpone = () => {
 	}
 	const handleDelete = () => {
+		const params = {
+			id: item._id
+		}
+		apiCar.deleteCar(params).then(res => {
+			toast.success('Xoá xe thành công!!!')
+			window.location.reload(false)
+		}
+		).catch(err => toast.error(err.response.data.message))
 	}
 	const transmission = (transmissiontype) => {
 		switch (transmissiontype) {

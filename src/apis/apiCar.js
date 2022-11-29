@@ -25,12 +25,11 @@ const apiCar = {
         const res = await axiosClient.get(`/vehicle/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
         return res.data;
     },
-
     deleteCar: async (params) => {
-        const res = await axiosClientWithToken.get(`/vehicle/delete`)
+        const res = await axiosClientWithToken.delete(`/vehicle/${params.id}`)
         return res.data;
     },
-
+    
     postponeCar: async (params) => {
         const res = await axiosClientWithToken.get(`/vehicle/postpone`)
         return res.data;
