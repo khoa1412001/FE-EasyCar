@@ -25,7 +25,10 @@ const apiUser = {
         const res = await axiosClientWithToken.get(`/user/withdraw-list`)
         return res.data;
     },
-    
+    addWithdrawrequest: async (params) => {
+        const res = await axiosClientWithToken.post(`/user/withdraw`, params)
+        return res.data;
+    },
     addRentalHistory: async (params) => {
         const res = await axiosClientWithToken.post(`/user/add-contract`,params)
         return res.data;

@@ -71,7 +71,10 @@ function WalletManagement() {
 		amount:amount,
 	   }
 
-	   console.log(params)
+	   apiUser.addWithdrawrequest(params).then(res => {
+		toast.success('Gửi yêu cầu rút tiền thành công, vui lòng chờ hệ thống xử lý!!!')
+		window.location.reload(false);
+	   }).catch((err) => {toast.error(err.response.data.message)})
     }
 
 	const chipStatus = (status) => {
