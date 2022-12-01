@@ -355,7 +355,7 @@ function WalletManagement() {
 							<TableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 							<TableCell align="left"><span className='bold'>{row._id}</span></TableCell>
 							<TableCell align="right"><span className="green bold fontLarge">{row.amount} ₫</span></TableCell>
-							<TableCell align="right"><span className='bold'>{(new Date(row.createAt)).getDate()}/{(new Date(row.createAt)).getMonth() + 1}/{(new Date(row.createAt)).getFullYear()}</span></TableCell>
+							<TableCell align="right"><span className='bold'>{(new Date(row.createdAt)).getDate()}/{(new Date(row.createdAt)).getMonth() + 1}/{(new Date(row.createdAt)).getFullYear()}</span></TableCell>
 							<TableCell align="right">{chipStatus(row.status)}</TableCell>
 						</TableRow>
 						))}

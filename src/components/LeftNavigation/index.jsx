@@ -13,6 +13,7 @@ import { logoutSuccess } from 'slices/authSlice';
 import { clearUserInfo } from 'slices/userSlice';
 import './style.scss';
 import stringAvatar from 'utils/stringavatar';
+import WalletIcon from '@mui/icons-material/Wallet';
 function LeftNavigation(props) {
 	const { open, setOpen } = props;
 	const user = useSelector((state) => state.user.info) || {};
@@ -57,6 +58,20 @@ function LeftNavigation(props) {
 						startIcon={<AccountCircleIcon />}
 					>
 						THÔNG TIN TÀI KHOẢN
+					</Button>
+					<Divider />
+					<Button
+					component={Link}
+					to="/profile/wallet"
+					size="medium"
+					className="sidebar-container__button"
+					sx={{
+						fontWeight: 'bold',
+						height: '45px',
+					}}
+					startIcon={<WalletIcon />}
+					>
+						QUẢN LÝ VÍ
 					</Button>
 					<Divider />
 					<Button

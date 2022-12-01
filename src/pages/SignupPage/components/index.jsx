@@ -22,10 +22,12 @@ import * as React from 'react';
 import { toast } from 'react-toastify';
 import apiAuth from 'apis/apiAuth'
 import {useNavigate} from 'react-router-dom'
-
+import { useGoogleLogin } from '@react-oauth/google';
+import { logingoogleSucess, loginSuccess } from 'slices/authSlice';
+import { useDispatch } from 'react-redux';
 function SigninBody() {
 	const [checked, setChecked] = React.useState(false);
-
+	const dispatch = useDispatch();
     const navigate = useNavigate();
 	const { handleSubmit, control } = useForm({
 		mode: 'onChange',
@@ -58,6 +60,30 @@ function SigninBody() {
 
             })
     }
+
+	const handleFailure = (result) => {
+		console.log(result);
+	};
+	const handleLoginGoogle = async (googleData) => {
+		const params = {
+			token: googleData.access_token,
+		};
+		apiAuth
+			.loginGoogle(params)
+			.then((res) => {
+				if (res) {
+					dispatch(logingoogleSucess(googleData));
+					toast.success('Đăng nhập thành công');
+				}
+			})
+			.catch((err) => {
+				toast.error(err.response.data.message);
+			});
+	};
+	const login = useGoogleLogin({
+		onSuccess: handleLoginGoogle,
+		onError: handleFailure,
+	});
 	return (
 		<Stack justifyContent="center" direction="row">
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -191,6 +217,7 @@ function SigninBody() {
 					<Typography align="center">Hoặc đăng nhập bằng tài khoản</Typography>
 						<Button
 							variant="standard"
+							onClick={() => login()}
 							sx={{
 								px: 7,
 								bgcolor: '#f34a38',
