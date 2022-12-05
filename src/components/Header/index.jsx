@@ -36,7 +36,7 @@ function Header() {
 					.getuserinfo()
 					.then((res) => {
 						if (res) {
-							dispatch(setUserInfo(res));
+							dispatch(setUserInfo(res.data));
 						}
 					})
 					.catch()

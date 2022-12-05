@@ -29,6 +29,7 @@ function CarStatusUpdate() {
 
 	const handleUpdateStatus = () => {
 		let params = new FormData();
+		// params.append('id',id);
 		params.append('statusimage', imgfront);
 		params.append('statusimage', imgrear);
 		params.append('statusimage', imgleft);

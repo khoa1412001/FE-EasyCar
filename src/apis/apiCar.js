@@ -22,16 +22,22 @@ const apiCar = {
     },
 
     getCarDetails: async (params) => {
-        const res = await axiosClient.get(`/vehicle/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
+        const res = await axiosClient.get(`/vehicle/detail/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
         return res.data;
     },
+
     deleteCar: async (params) => {
-        const res = await axiosClientWithToken.delete(`/vehicle/${params.id}`)
+        const res = await axiosClientWithToken.delete(`/vehicle/delete/${params.id}`)
         return res.data;
     },
     
     postponeCar: async (params) => {
-        const res = await axiosClientWithToken.get(`/vehicle/postpone`)
+        const res = await axiosClientWithToken.post(`/vehicle/postpone/${params.id}`)
+        return res.data;
+    },
+
+    getCarStatusList: async (params) => {
+        const res = await axiosClientWithToken.post(`/status/${params.id}`)
         return res.data;
     },
 }

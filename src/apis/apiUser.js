@@ -10,11 +10,11 @@ const apiUser = {
         return res.data;
     },
     getOwnedVehicle: async () => {
-        const res = await axiosClientWithToken.get(`/user/ownedvehicle`)
+        const res = await axiosClientWithToken.get(`/my-vehicle/owned-vehicle`)
         return res.data;
     },
     getRentalHistory: async () => {
-        const res = await axiosClientWithToken.get(`/user/rentalhistory`)
+        const res = await axiosClientWithToken.get(`/history/list`)
         return res.data;
     },
     updateBankinfo: async (params) => {
@@ -22,15 +22,19 @@ const apiUser = {
         return res.data;
     },
     getWithdrawlist: async () => {
-        const res = await axiosClientWithToken.get(`/user/withdraw-list`)
+        const res = await axiosClientWithToken.get(`/payment/list`)
         return res.data;
     },
     addWithdrawrequest: async (params) => {
-        const res = await axiosClientWithToken.post(`/user/withdraw`, params)
+        const res = await axiosClientWithToken.post(`/payment/new-withdraw`, params)
         return res.data;
     },
     addRentalHistory: async (params) => {
-        const res = await axiosClientWithToken.post(`/user/add-contract`,params)
+        const res = await axiosClientWithToken.post(`/history/add-contract`,params)
+        return res.data;
+    },
+    getRentalHistoryOfVehicle: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/vehicle-rental-list/${params.id}`)
         return res.data;
     },
 }

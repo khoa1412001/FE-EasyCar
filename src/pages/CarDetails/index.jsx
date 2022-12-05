@@ -73,7 +73,7 @@ function CarDetails() {
 			}
 			if (carinfo.basicinsurance) {
 				setInsurance(carinfo.basicinsurance);
-        setInsurancetype(0);
+        		setInsurancetype(0);
 				setBasic(`Bảo hiểm Basic ${carinfo.basicinsurance} đ`);
 				setPremium(`Bảo hiểm Premium ${carinfo.premiuminsurance} đ`);
 			}
