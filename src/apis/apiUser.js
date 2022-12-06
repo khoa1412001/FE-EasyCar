@@ -9,10 +9,6 @@ const apiUser = {
         const res = await axiosClientWithTokenMultiPart.post('/user/verify', params)
         return res.data;
     },
-    getOwnedVehicle: async () => {
-        const res = await axiosClientWithToken.get(`/my-vehicle/owned-vehicle`)
-        return res.data;
-    },
     getRentalHistory: async () => {
         const res = await axiosClientWithToken.get(`/history/list`)
         return res.data;
@@ -33,9 +29,6 @@ const apiUser = {
         const res = await axiosClientWithToken.post(`/history/add-contract`,params)
         return res.data;
     },
-    getRentalHistoryOfVehicle: async (params) => {
-        const res = await axiosClientWithToken.get(`/my-vehicle/vehicle-rental-list/${params.id}`)
-        return res.data;
-    },
+
 }
 export default apiUser;

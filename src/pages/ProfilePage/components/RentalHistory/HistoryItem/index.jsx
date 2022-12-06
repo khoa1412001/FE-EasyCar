@@ -9,7 +9,9 @@ import variables from 'assets/_variable.scss';
 import './style.scss';
 import numWithSpace from 'utils/numWithSpace';
 import HistoryDetail from '../HistoryDetail';
-
+import apiPayment from 'apis/apiPayment';
+import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from "uuid";
 function HistoryItem(props) {
 	const { item } = props;
 	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
@@ -55,6 +57,108 @@ function HistoryItem(props) {
 		}
 		handleRating()
 	},[rating])
+
+	const makePayment = () => {
+		const params = {
+			orderId: uuidv4(),
+			recordId: item._id,
+		}
+		apiPayment.makePaymentmomo(params).then((result) => {
+			if (result.payUrl) {
+				window.location.replace(result.payUrl);
+			  } else {
+				toast.warning(
+				  "Có lỗi trong quá trình giao dịch, vui lòng thực hiện lại"
+				);
+			  }
+		});
+		console.log("Thanh toán ");
+	}
+
+	const status = (status) => {
+		if(status) {
+			return (
+			<>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="rentalhistory-container-item__details"
+					onClick={() => setOpenHistoryDialog(true)}
+					sx={{
+						borderColor: variables.bluecolor,
+						color: variables.bluecolor,
+						fontWeight: 'bold',
+						width: '180px ',
+						alignSelf: 'center',
+					}}
+				>
+					CHI TIẾT
+				</Button>
+				<Button
+					variant="outlined"
+					size="medium"
+					className="rentalhistory-container-item__rebook"
+					sx={{
+						borderColor: variables.textgreencolor,
+						color: variables.textgreencolor,
+						fontWeight: 'bold',
+						width: '180px ',
+						alignSelf: 'center',
+					}}
+				>
+					ĐẶT LẠI
+				</Button>
+				{item.carstatusupdate ? (
+					<Button
+						variant="outlined"
+						size="medium"
+						className="rentalhistory-container-item__updatestatus"
+						sx={{
+							borderColor: variables.orangecolor,
+							color: variables.orangecolor,
+							fontWeight: 'bold',
+							width: '180px ',
+							alignSelf: 'center',
+						}}
+					>
+						XEM TRẠNG THÁI
+					</Button>
+				) : (
+					<Button
+						variant="outlined"
+						size="medium"
+						className="rentalhistory-container-item__updatestatus"
+						sx={{
+							borderColor: variables.orangecolor,
+							color: variables.orangecolor,
+							fontWeight: 'bold',
+							width: '180px ',
+							alignSelf: 'center',
+						}}
+					>
+						CẬP NHẬT
+					</Button>
+				)}
+			</>)
+		}
+		else {
+			return (<Button
+				variant="outlined"
+				size="medium"
+				className="rentalhistory-container-item__rebook"
+				onClick={makePayment}
+				sx={{
+					borderColor: variables.textgreencolor,
+					color: variables.textgreencolor,
+					fontWeight: 'bold',
+					width: '180px ',
+					alignSelf: 'center',
+				}}
+			>
+				THANH TOÁN
+			</Button>)
+		}
+	}
 	return (
 		<Stack direction={'row'} className="rentalhistory-container-item" padding={1} spacing={1} marginTop={1}>
 			<img
@@ -135,66 +239,7 @@ function HistoryItem(props) {
 				</Typography>
 			</Stack>
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
-				<Button
-					variant="outlined"
-					size="medium"
-					className="rentalhistory-container-item__details"
-					onClick={() => setOpenHistoryDialog(true)}
-					sx={{
-						borderColor: variables.bluecolor,
-						color: variables.bluecolor,
-						fontWeight: 'bold',
-						width: '180px ',
-						alignSelf: 'center',
-					}}
-				>
-					CHI TIẾT
-				</Button>
-				<Button
-					variant="outlined"
-					size="medium"
-					className="rentalhistory-container-item__rebook"
-					sx={{
-						borderColor: variables.textgreencolor,
-						color: variables.textgreencolor,
-						fontWeight: 'bold',
-						width: '180px ',
-						alignSelf: 'center',
-					}}
-				>
-					ĐẶT LẠI
-				</Button>
-				{item.carstatusupdate ? (
-					<Button
-						variant="outlined"
-						size="medium"
-						className="rentalhistory-container-item__updatestatus"
-						sx={{
-							borderColor: variables.orangecolor,
-							color: variables.orangecolor,
-							fontWeight: 'bold',
-							width: '180px ',
-							alignSelf: 'center',
-						}}
-					>
-						XEM TRẠNG THÁI
-					</Button>
-				) : (
-					<Button
-						variant="outlined"
-						size="medium"
-						className="rentalhistory-container-item__updatestatus"
-						sx={{
-							borderColor: variables.orangecolor,
-							color: variables.orangecolor,
-							fontWeight: 'bold',
-							width: '180px ',
-							alignSelf: 'center',
-						}}
-					>
-						CẬP NHẬT
-					</Button>
-				)}
+				{status(item.status)}
 			</Stack>
 			<HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog}/>
 		</Stack>

@@ -28,6 +28,16 @@ function CarItem(props) {
 			setTimeout(() => {window.location.reload(false)},2000)
 		}).catch(err => toast.error(err.response.data.message))
 	}
+
+	const handleResume = () => {
+		const params = {
+			id: item._id
+		}
+		apiCar.resumeCar(params).then(res => {
+			toast.success('Tiếp tục cho thuê xe thành công!!!')
+			setTimeout(() => {window.location.reload(false)},2000)
+		}).catch(err => toast.error(err.response.data.message))
+	}
 	const handleStatus = (status) => {
 		switch (status) {
 			case 2:
@@ -57,7 +67,7 @@ function CarItem(props) {
 					className="carmanagement-container-item__stop"
 					onClick={() => {
 						setText('Bạn có chắc muốn tiếp tục cho thuê xe ?')
-						setHandleApi(() => () => {handlePostpone()})
+						setHandleApi(() => () => {handleResume()})
 						setOpenDialog(true)
 					}}
 					sx={{

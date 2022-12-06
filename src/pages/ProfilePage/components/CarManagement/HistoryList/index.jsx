@@ -22,6 +22,7 @@ import * as React from 'react';
 import HistoryOwnerDialog from '../HistoryOwnerDialog';
 import './style.scss';
 import { toast } from 'react-toastify';
+import apiCar from 'apis/apiCar';
 
 function HistoryList(props) {
     const {openHistoryList, setOpenHistoryList, vehicleId} = props
@@ -40,9 +41,10 @@ function HistoryList(props) {
 				id: vehicleId,
 			}
 
-			apiUser.getRentalHistoryOfVehicle(params).then(res => {
+			apiCar.getRentalHistoryOfVehicle(params).then(res => {
 				setHistorylist(res.data);
 			}).catch(err => toast.error(err.response.data.message))
+
 		}
 
 		getHistoryList()

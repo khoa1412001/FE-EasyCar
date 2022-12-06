@@ -10,11 +10,12 @@ import * as React from 'react';
 import CarItem from './CarItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import apiUser from 'apis/apiUser';
+import apiCar from 'apis/apiCar';
 function CarManagement() {
 	const [carinforlist, setCarinforlist] = React.useState([]);
 	const nextPage = () => {};
 	React.useEffect(() => {
-		apiUser.getOwnedVehicle().then((res) => setCarinforlist(res.data));
+		apiCar.getOwnedVehicle().then((res) => setCarinforlist(res.data));
 	}, []);
 	return (
 		<Stack className="carmanagement-container" paddingLeft={1} spacing={1} marginLeft="5px">
