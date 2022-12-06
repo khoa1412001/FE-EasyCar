@@ -10,7 +10,10 @@ function RentalHistory() {
 	const [rentalhistory, setRentalhistory] = React.useState([]);
 	const nextPage = () => {};
 	React.useEffect(() => {
-		apiUser.getRentalHistory().then(res => {setRentalhistory(res.data)})
+		const getRentalhistory = () => {
+			apiUser.getRentalHistory().then(res => {setRentalhistory(res.data)})
+		}
+		getRentalhistory()
 	}, []);
 	return (
 		<Stack className="rentalhistory-container" paddingLeft={1}  marginLeft="5px" spacing={1} flexWrap="nowrap">

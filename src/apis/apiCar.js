@@ -22,17 +22,37 @@ const apiCar = {
     },
 
     getCarDetails: async (params) => {
-        const res = await axiosClient.get(`/vehicle/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
+        const res = await axiosClient.get(`/vehicle/detail/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
         return res.data;
     },
 
     deleteCar: async (params) => {
-        const res = await axiosClientWithToken.get(`/vehicle/delete`)
+        const res = await axiosClientWithToken.delete(`/my-vehicle/delete/${params.id}`)
+        return res.data;
+    },
+    
+    postponeCar: async (params) => {
+        const res = await axiosClientWithToken.post(`/my-vehicle/postpone/${params.id}`)
         return res.data;
     },
 
-    postponeCar: async (params) => {
-        const res = await axiosClientWithToken.get(`/vehicle/postpone`)
+    resumeCar: async (params) => {
+        const res = await axiosClientWithToken.post(`/my-vehicle/resume/${params.id}`)
+        return res.data;
+    },
+
+    getCarStatusList: async (params) => {
+        const res = await axiosClientWithToken.post(`/my-vehicle/status/${params.id}`)
+        return res.data;
+    },
+
+    getOwnedVehicle: async () => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/list`)
+        return res.data;
+    },
+
+    getRentalHistoryOfVehicle: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/history/${params.id}`)
         return res.data;
     },
 }

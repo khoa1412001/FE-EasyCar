@@ -9,13 +9,26 @@ const apiUser = {
         const res = await axiosClientWithTokenMultiPart.post('/user/verify', params)
         return res.data;
     },
-    getOwnedVehicle: async () => {
-        const res = await axiosClientWithToken.get(`/user/ownedvehicle`)
-        return res.data;
-    },
     getRentalHistory: async () => {
-        const res = await axiosClientWithToken.get(`/user/rentalhistory`)
+        const res = await axiosClientWithToken.get(`/history/list`)
         return res.data;
     },
+    updateBankinfo: async (params) => {
+        const res = await axiosClientWithToken.post(`/user/update-bank-info`,params)
+        return res.data;
+    },
+    getWithdrawlist: async () => {
+        const res = await axiosClientWithToken.get(`/payment/list`)
+        return res.data;
+    },
+    addWithdrawrequest: async (params) => {
+        const res = await axiosClientWithToken.post(`/payment/new-withdraw`, params)
+        return res.data;
+    },
+    addRentalHistory: async (params) => {
+        const res = await axiosClientWithToken.post(`/history/add-contract`,params)
+        return res.data;
+    },
+
 }
 export default apiUser;

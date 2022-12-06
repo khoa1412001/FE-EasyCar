@@ -16,7 +16,7 @@ const apiAuth = {
         return res.data;
     },
     getuserinfo: async(params) => {
-        const res = await axiosClientWithToken.get(`/auth/`,params)
+        const res = await axiosClientWithToken.get(`/user/`,params)
         return res.data
     },
     checkEmail: async(params) => {

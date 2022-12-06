@@ -55,14 +55,14 @@ function Sidebar() {
 				</Typography>
 				<Typography className="sidebar-container__verifystatus" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
 					Trạng thái xác thực:{' '}
-					{false ? (
+					{user.verification ? (
 						<CheckCircleRoundedIcon fontSize="small" className="sidebar-container__icon green" />
 					) : (
 						<CancelRoundedIcon fontSize="small" className="sidebar-container__icon red" />
 					)}
 				</Typography>
 				<Typography className="sidebar-container__verifystatus" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
-					Tài khoản:<span className='green bold large'> 190000 đ</span>
+					Tài khoản:<span className='green bold large'> {user.balance} đ</span>
 				</Typography>
 				<Divider sx={{ paddingTop: '8px' }} />
 				<Button

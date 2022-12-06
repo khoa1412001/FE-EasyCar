@@ -20,11 +20,12 @@ import moment from 'moment';
 import TextField from '@mui/material/TextField';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
 import numWithSpace from 'utils/numWithSpace';
 import Contract from 'components/Contract';
+import apiUser from 'apis/apiUser';
 
 function CarDetails() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -39,8 +40,8 @@ function CarDetails() {
 	const [premium, setPremium] = React.useState('');
 	const [checkedbasic, setCheckedbasic] = React.useState(true);
 	const [checkedpremium, setCheckedpremium] = React.useState(false);
-  const [insurancetype, setInsurancetype] = React.useState(0);
-
+  	const [insurancetype, setInsurancetype] = React.useState(0);
+	const navigate = useNavigate();
 	React.useEffect(() => {
 		const getInfo = () => {
 			const params = {
@@ -72,7 +73,7 @@ function CarDetails() {
 			}
 			if (carinfo.basicinsurance) {
 				setInsurance(carinfo.basicinsurance);
-        setInsurancetype(0);
+        		setInsurancetype(0);
 				setBasic(`Bảo hiểm Basic ${carinfo.basicinsurance} đ`);
 				setPremium(`Bảo hiểm Premium ${carinfo.premiuminsurance} đ`);
 			}
@@ -126,7 +127,10 @@ function CarDetails() {
       rentprice: carinfo.rentprice,
       totalPrice: carinfo.totalprice,
     };
-    console.log(params);
+    apiUser.addRentalHistory(params).then(res => {
+		toast.success("Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!")
+		setTimeout(() => {navigate('/profile/history')},5000)
+	}).catch(err => toast.error(err.response.data.message))
   }
 
 	return (

@@ -10,6 +10,8 @@ import {
     TextField,
     Grid,
     Divider,
+	FormControlLabel,
+	Checkbox,
 } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
@@ -29,6 +31,32 @@ function HistoryOwnerDialog(props) {
 	const { openHistoryOwnerDialog, setOpenHistoryOwnerDialog } = props;
     const [startdate, setStartdate] = React.useState(moment());
     const [enddate, setEndate] = React.useState(moment());
+	const insurance = () => {
+		switch(2) {
+			case 1: 
+				return (<><FormControlLabel
+					control={
+						<Checkbox
+							checked={true}
+							className="payment-container__checkbox"
+						/>
+					}
+					label={`Bảo hiểm Basic ${500000} đ`}
+				/>
+				<Typography className="payment-container__smalltext">Bạn trả tối đa 50% tổng giá trị thiệt hại</Typography></>)
+			case 2: 
+				return (<><FormControlLabel
+					control={
+						<Checkbox
+							checked={true}
+							className="payment-container__checkbox"
+						/>
+					}
+					label={`Bảo hiểm Premium ${500000} đ`}
+				/>
+				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
+		}
+	}
 	return (
 		<Dialog
 			open={openHistoryOwnerDialog}
@@ -225,6 +253,11 @@ function HistoryOwnerDialog(props) {
 							</Typography>
 						</Box>
 						<Box padding="10px" />
+						<Typography className="payment-container__title" sx={{ fontWeight: 'bold', color: variables.textblackcolor }}>
+							Bảo hiểm
+						</Typography>
+						{insurance()}
+						<Box padding="10px" />
 						<Typography className="paymenthistory-container__title" sx={{ fontWeight: 'bold', color: variables.textblackcolor }}>
 							Chi tiết giá
 						</Typography>
@@ -257,6 +290,9 @@ function HistoryOwnerDialog(props) {
                                 1 000 000đ
 							</Typography>
 						</Stack>
+						<Button variant='contained'>
+							IN HỘP ĐỒNG
+						</Button>
 					</Stack>
 				</Stack>
 			</DialogContent>
