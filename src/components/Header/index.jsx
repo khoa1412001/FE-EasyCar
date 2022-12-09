@@ -83,11 +83,9 @@ function Header() {
 								onClick={() => navigate('/profile')}
 								color="inherit"
 							>
-								{user.avatar ? (
+								{user.avatar && (
 									<Avatar alt="Remy Sharp" src={user.avatar} />
-								) : (
-									<Avatar {...stringAvatar(user.username)} />
-								)}
+								) }
 							</IconButton>
 							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}} id="username">
 								{user.username}
