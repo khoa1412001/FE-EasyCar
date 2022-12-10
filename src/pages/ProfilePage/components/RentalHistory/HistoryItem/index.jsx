@@ -241,7 +241,7 @@ function HistoryItem(props) {
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
 				{status(item.status)}
 			</Stack>
-			<HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog}/>
+			{openHistoryDialog && <HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog} rentalid={item._id}/>}
 		</Stack>
 	);
 }
