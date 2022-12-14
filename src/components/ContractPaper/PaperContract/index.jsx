@@ -2,12 +2,35 @@ import './style.scss';
 import variables from 'assets/_variable.scss';
 import 'assets/style.scss';
 import * as React from 'react';
-import { Avatar, Box, Button, Divider, Drawer, Stack, Typography } from '@mui/material';
-
+import { Box, Typography } from '@mui/material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import apiRentalHistory from 'apis/apiRentalHistory';
+import { toast } from 'react-toastify';
+import numWithDot from 'utils/numWithDot';
 const PaperContract = React.forwardRef((props,ref) =>{
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [id, setId] = React.useState(searchParams.get('id'));
+	const [contractdata, setContractdata] = React.useState({});
 	const getPageMargins = () => {
 		return `@page { margin: 40px 20px 40px 20px !important; }`;
 	  };
+
+	const navigate = useNavigate();
+	React.useEffect(() => {
+		const GetContractData = () => {
+			const params = {
+				id:id,
+			}
+			apiRentalHistory.getContractData(params)
+			.then(res => setContractdata(res.data))
+			.catch(err => {
+				toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
+				setTimeout(() => {navigate('/profile/')},3000)
+			})
+		}
+		GetContractData()
+	},[])
+	
 	return (
 		<Box className="papercontract-container" ref={ref} px={4}>
 			<style>{getPageMargins()}</style>
@@ -30,29 +53,29 @@ const PaperContract = React.forwardRef((props,ref) =>{
 				<br />- Căn cứ theo nhu cầu và khả năng cung ứng của hai bên
 			</Typography>
 			<Typography className="time " sx={{ fontSize: '18px' }}>
-				Hôm nay, ngày {'20/11/2022'}, tại địa chỉ số {'153/24 Lê Hoàng Phái, Phường 17, Quận Gò Vấp, TP. Hồ Chí Minh'}
+				Hôm nay, ngày {(new Date(contractdata.rentalDateStart)).getDate()}/{(new Date(contractdata.rentalDateStart)).getMonth() + 1}/{(new Date(contractdata.rentalDateStart)).getFullYear()}, tại địa chỉ số {contractdata.vehicleId && contractdata.vehicleId.ownerId.location}
 				<br />
 				chúng tôi gồm có:
 			</Typography>
 			<Typography className="time" sx={{ fontSize: '18px', paddingTop: '5px' }}>
-				<span className="bold">BÊN CHO THUÊ XE (BÊN A):</span> {'Nguyễn Phúc An'}
+				<span className="bold">BÊN CHO THUÊ XE (BÊN A):</span> {contractdata.vehicleId && contractdata.vehicleId.ownerId.username}
 			</Typography>
 			<Typography className="time" sx={{ fontSize: '18px' }}>
-				CMND/CCCD số: {'079201033255'} cấp ngày: .../.../...... tại ....................................
+				CMND/CCCD số: {contractdata.vehicleId && contractdata.vehicleId.ownerId.socialId} cấp ngày: .../.../...... tại ....................................
 				<br />
-				Địa chỉ: {'153/24 Lê Hoàng Phái, Phường 17, Quận Gò Vấp, TP. Hồ Chí Minh'}
+				Địa chỉ: {contractdata.vehicleId && contractdata.vehicleId.ownerId.location}
 				<br />
-				Điện thoại: {'0907893960'}
+				Điện thoại: {contractdata.vehicleId && contractdata.vehicleId.ownerId.phoneNumber}
 			</Typography>
 			<Typography className="time" sx={{ fontSize: '18px', paddingTop: '5px' }}>
-				<span className="bold">BÊN CHO THUÊ XE (BÊN B):</span> {'Nguyễn Phúc An'}
+				<span className="bold">BÊN THUÊ XE (BÊN B):</span> {contractdata.userId && contractdata.userId.username}
 			</Typography>
 			<Typography className="time justify" sx={{ fontSize: '18px' }}>
-				CMND/CCCD số: {'079201033255'} cấp ngày: .../.../...... tại ....................................
+				CMND/CCCD số: {contractdata.userId && contractdata.userId.socialId} cấp ngày: .../.../...... tại ....................................
 				<br />
-				Địa chỉ: {'153/24 Lê Hoàng Phái, Phường 17, Quận Gò Vấp, TP. Hồ Chí Minh'}
+				Địa chỉ: {contractdata.userId && contractdata.userId.location}
 				<br />
-				Điện thoại: {'0907893960'}
+				Điện thoại: {contractdata.userId && contractdata.userId.phoneNumber}
 				<br />
 				Hộ khẩu/ Tạm trú/ Passport số:.................... cấp ngày: .../.../...... tại ....................................
 				<br />
@@ -76,13 +99,13 @@ const PaperContract = React.forwardRef((props,ref) =>{
 			</Typography>
 			<Typography className="time justify" sx={{ fontSize: '18px' }}>
 				Bên A cho Bên B thuê 01 (một) chiếc xe ô tô có thông tin sau đây:
-				<br /> - Biển số xe: {'51A-123.23'} Nhãn hiệu: {'Mazda'} {'CX-1'}
-				<br /> - Sản xuất năm: {'2012'} Màu:.................................................
+				<br /> - Biển số xe: {contractdata.vehicleId && contractdata.vehicleId.licenseplate} Nhãn hiệu: {contractdata.vehicleId && contractdata.vehicleId.brand} {contractdata.vehicleId && contractdata.vehicleId.model}
+				<br /> - Sản xuất năm: {contractdata.vehicleId && contractdata.vehicleId.year} Màu:.................................................
 				<br /> - Giấy đăng ký xe ô tô số: ......................................................... ngày
 				cấp:..........................
 				<br /> Tại
 				.......................................................................................................................................
-				<br /> - Tên chủ xe: {'Nguyễn Phúc An'}
+				<br /> - Tên chủ xe: {contractdata.vehicleId && contractdata.vehicleId.ownerId.username}
 			</Typography>
 			<Typography className="time bold" sx={{ fontSize: '18px', paddingTop: '5px' }}>
 				<span className="underline">ĐIỀU 2</span>: MỤC ĐÍCH THUÊ XE
@@ -94,27 +117,27 @@ const PaperContract = React.forwardRef((props,ref) =>{
 				<span className="underline">ĐIỀU 3</span>: GIÁ TRỊ HỢP ĐỒNG, PHƯƠNG THỨC THANH TOÁN, ĐỊA ĐIỂM BÀN GIAO XE
 			</Typography>
 			<Typography className="time justify" sx={{ fontSize: '18px' }}>
-				<span className="bold">3.1.</span> Đơn giá thuê: {'700.000'}VNĐ/ngày
+				<span className="bold">3.1.</span> Đơn giá thuê: {contractdata.rentprice && numWithDot(contractdata.rentprice)} VNĐ/ngày
 				<br />
-				<span className="bold">3.2.</span> Khống chế quảng đường: {'300'}km/ngày
+				<span className="bold">3.2.</span> Khống chế quảng đường: {contractdata.vehicleId && numWithDot(contractdata.vehicleId.kmlimit)}km/ngày
 				<br />
-				Phụ trội: {'3000'}VNĐ/km
+				Phụ trội: {contractdata.vehicleId && contractdata.vehicleId.priceover} VNĐ/km
 				<br />
 				<span className="bold">3.3.</span> Thời gian thuê
-				<br /> - Từ .......giờ.......phút, ngày {'20/11/2022'}
-				<br /> - Đến .......giờ.......phút, ngày {'20/11/2022'}
-				<br /> - Phụ trội: 90.000VNĐ/giờ
+				<br /> - Từ .......giờ.......phút, ngày {(new Date(contractdata.rentalDateStart)).getDate()}/{(new Date(contractdata.rentalDateStart)).getMonth() + 1}/{(new Date(contractdata.rentalDateStart)).getFullYear()}
+				<br /> - Đến .......giờ.......phút, ngày {(new Date(contractdata.rentalDateEnd)).getDate()}/{(new Date(contractdata.rentalDateEnd)).getMonth() + 1}/{(new Date(contractdata.rentalDateEnd)).getFullYear()}
+				<br /> - Phụ trội: 90.000 VNĐ/giờ
 				<br /> - Quá thời gian thuê 3 giờ nêu trên mà bên B chưa bàn giao xe cho bên A thì tính thêm 1 (một) ngày thuê xe.
-				<br /> <span className="bold">Tổng giá trị thuê xe là: {'800.000'}VNĐ</span>
+				<br /> <span className="bold">Tổng giá trị thuê xe là: {contractdata.totalPrice && numWithDot(contractdata.totalPrice)} VNĐ</span>
 				<br />
 				<span className="bold">3.5.</span> Hình thức thanh toán
 				<br /> - Bên B thanh toán trước <span className="bold">30% giá trị hợp đồng tại Điều 3.4</span> sau khi kết nối
-				thành công với bên A thông qua ứng dụng EasyCar {'20/11/2022'}
+				thành công với bên A thông qua ứng dụng EasyCar 
 				<br /> - Bên B thanh toán <span className="bold">70% còn lại</span> cho bên A bằng hình thức tiền mặt hoặc chuyển
-				khoản sau khi ký hợp đồng này. {'20/11/2022'}
+				khoản sau khi ký hợp đồng này. 
 				<br />
 				<span className="bold">3.6.</span> Địa điểm bàn giao xe:{' '}
-				{'153/24 Lê Hoàng Phái, Phường 17, Quận Gò Vấp, TP. Hồ Chí Minh'}
+				{contractdata.vehicleId && contractdata.vehicleId.ownerId.location}
 			</Typography>
 			<Typography className="time bold" sx={{ fontSize: '18px', paddingTop: '5px' }}>
 				<span className="underline">ĐIỀU 4</span>: QUYỀN VÀ NGHĨA VỤ CỦA BÊN GIAO XE

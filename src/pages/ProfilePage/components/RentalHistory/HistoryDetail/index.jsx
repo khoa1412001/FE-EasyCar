@@ -99,6 +99,9 @@ function HistoryDetail(props) {
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
 		}
 	}
+	const handleContract = () => {
+		window.open(`/contract?id=${rentalid}`,'_blank')
+	}
 	return (
 		<Dialog
 			open={openHistoryDialog}
@@ -364,7 +367,7 @@ function HistoryDetail(props) {
 								{historydetail.totalPrice && numWithSpace(historydetail.totalPrice)} đ
 							</Typography>
 						</Stack>
-						<Button variant='contained'>
+						<Button variant='contained' onClick={handleContract}>
 							IN HỘP ĐỒNG
 						</Button>
 					</Stack>

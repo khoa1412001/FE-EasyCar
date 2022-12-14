@@ -27,8 +27,9 @@ import StarIcon from "@mui/icons-material/Star";
 import moment from "moment";
 import apiRentalHistory from 'apis/apiRentalHistory';
 import numWithSpace from 'utils/numWithSpace';
-
+import { useSelector } from 'react-redux';
 function HistoryOwnerDialog(props) {
+	const user = useSelector((state) => state.user.info);
 	const { openHistoryOwnerDialog, setOpenHistoryOwnerDialog, rentalid } = props;
     const [startdate, setStartdate] = React.useState(moment());
     const [enddate, setEnddate] = React.useState(moment());
@@ -99,6 +100,10 @@ function HistoryOwnerDialog(props) {
 				/>
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
 		}
+	}
+
+	const handleContract = () => {
+		window.open(`/contract?id=${rentalid}`,'_blank')
 	}
 	return (
 		<Dialog
@@ -252,7 +257,7 @@ function HistoryOwnerDialog(props) {
 						</Typography>
 						<Typography className="paymenthistory-container__location">
 							<LocationOnIcon className="paymenthistory-container__icon" /> 
-                            {historydetail.userId && historydetail.userId.location}
+                            {user.location}
 						</Typography>
 						<Box padding="10px" />
 						<Typography className="paymenthistory-container__title" sx={{ fontWeight: 'bold', color: variables.textblackcolor }}>
@@ -326,7 +331,7 @@ function HistoryOwnerDialog(props) {
 								{historydetail.totalPrice && numWithSpace(historydetail.totalPrice)} đ
 							</Typography>
 						</Stack>
-						<Button variant='contained'>
+						<Button variant='contained' onClick={handleContract}>
 							IN HỘP ĐỒNG
 						</Button>
 					</Stack>

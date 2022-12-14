@@ -9,10 +9,10 @@ import {
 	Typography,
 	Paper,
 } from '@mui/material';
-import { useNavigate,useSearchParams } from 'react-router-dom';
-import apiCar from 'apis/apiCar';
+import { useSearchParams,useNavigate } from 'react-router-dom';
+import apiRentalHistory from 'apis/apiRentalHistory';
 import { toast } from 'react-toastify';
-function CarStatusUpdate() {
+function RentalStatusUpdate() {
 	const [statusvideo, setStatusvideo] = React.useState();
 	const [imgfront, setImgfront] = React.useState();
 	const [imgrear, setImgrear] = React.useState();
@@ -36,7 +36,7 @@ function CarStatusUpdate() {
 		params.append('extstatus', extstatus);
 		params.append('intstatus', intstatus);
 		params.append('statusvideo',statusvideo);
-		apiCar.updateCarStatus(params).then(res => {
+		apiRentalHistory.updateRentalStatus(params).then(res => {
 			toast.success("Cập nhật trạng thái cho xe thành công!!")
 			setTimeout(() => {navigate('/profile/carmanage')},3000)
 		}
@@ -48,7 +48,7 @@ function CarStatusUpdate() {
 			const params = {
 				id: id
 			}
-			apiCar.getCarInfoForStatusUpdate(params).then(res => setCarinfo(res.data))
+			apiRentalHistory.getCarInfoForStatusUpdate(params).then(res => setCarinfo(res.data))
 		}
 		getCarInfo()
 	},[id])
@@ -59,7 +59,7 @@ function CarStatusUpdate() {
 					CẬP NHẬT TRẠNG THÁI XE
 				</Typography>
 				<Typography className="carstatusupdate-container__carname" variant="h5" paddingBottom={1}>
-					{carinfo.brand} {carinfo.model} {carinfo.year} - {carinfo.licenseplate}
+				{carinfo.vehicleId && carinfo.vehicleId.brand} {carinfo.vehicleId && carinfo.vehicleId.model} {carinfo.vehicleId && carinfo.vehicleId.year} - {carinfo.vehicleId && carinfo.vehicleId.licenseplate}
 				</Typography>
 				<Typography align="center" className="carstatusupdate-container__text">
 					Ảnh mặt trước
@@ -258,4 +258,4 @@ function CarStatusUpdate() {
 	);
 }
 
-export default CarStatusUpdate;
+export default RentalStatusUpdate;

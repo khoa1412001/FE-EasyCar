@@ -16,6 +16,7 @@ import CarStatusUpdate from "pages/CarStatusUpdate";
 import WalletManagement from "pages/ProfilePage/components/WalletManagement";
 import ActivatePage from "pages/ActivatePage";
 import ContractPaper from "components/ContractPaper";
+import RentalStatusUpdate from "pages/RentalStatusUpdate";
 function ConfigRoute() {
   return (
     <Routes>
@@ -36,7 +37,8 @@ function ConfigRoute() {
       </Route>
       <Route path="fillter" element={<FilterPage />} />
       <Route path="details" element={<CarDetails />} />
-      <Route path="carmanage/carstatus" element={<CarStatusUpdate/>}/>
+      <Route path="/carstatus" element={<CarStatusUpdate/>}/>
+      <Route path="/rentalstatus" element={<RentalStatusUpdate/>}/>
     </Routes>
   );
 }

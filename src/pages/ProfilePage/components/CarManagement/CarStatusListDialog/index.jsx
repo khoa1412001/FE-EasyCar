@@ -28,7 +28,12 @@ function CarStatusList(props) {
     const [openCarStatus, setOpenCarStatus] = React.useState(false);
     const [carstatuslist, setCarstatuslist] = React.useState([]);
 	const [page, setPage] = React.useState(0);
+	const [id,setId] = React.useState('');
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 10 - carstatuslist.length) : 0;
+
+	const updatestatus = () => {
+		window.open(`/carstatus?id=${vehicleId}`,'_blank')
+	}
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -78,15 +83,23 @@ function CarStatusList(props) {
 						<TableRow key={1} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 							<TableCell align="left"><span className='bold'>{row._id}</span></TableCell>
 							<TableCell align="right"><span className='bold'>{(new Date(row.createdAt)).getDate()}/{(new Date(row.createdAt)).getMonth() + 1}/{(new Date(row.createdAt)).getFullYear()}</span></TableCell>
-							<TableCell align="right"><Chip label="XEM TRẠNG THÁI" className='success bold' onClick={() => setOpenCarStatus(true)}/></TableCell>
+							<TableCell align="right"><Chip label="XEM TRẠNG THÁI" className='success bold' onClick={() => {
+								setOpenCarStatus(true)
+								setId(row._id)
+								}}/></TableCell>
 						</TableRow>
 						))}
 					</TableBody>
 				</Table>
 			</TableContainer>
 			<TablePagination component="div" count={carstatuslist.length} rowsPerPage={10} page={page} rowsPerPageOptions={10} onPageChange={handleChangePage}/>
-            </DialogContent>
-            <CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus}></CarStatusDialog>
+			<Stack alignItems="center" >
+				<Button variant="contained" onClick={updatestatus} sx={{margin:'auto'}}>
+							CẬP NHẬT TRẠNG THÁI
+				</Button>
+			</Stack>
+			</DialogContent>
+            {openCarStatus && <CarStatusDialog openCarStatus={openCarStatus} setOpenCarStatus={setOpenCarStatus} vehicleId={vehicleId} id={id}></CarStatusDialog>}
 		</Dialog>
 	);
 }

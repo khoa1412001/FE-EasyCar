@@ -60,5 +60,20 @@ const apiCar = {
         const res = await axiosClientWithToken.get(`/my-vehicle/detail/${params.id}`)
         return res.data;
     },
+
+    getCarInfoForStatusUpdate: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/info/${params.id}`)
+        return res.data;
+    },
+
+    updateCarStatus: async (params) => {
+        const res = await axiosClientWithTokenMultiPart.post(`/my-vehicle/update-status/`,params)
+        return res.data;
+    },
+
+    getCarStatusDetail: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/detail-status/${params.id}`)
+        return res.data;
+    },
 }
 export default apiCar;
