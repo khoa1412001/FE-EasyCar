@@ -39,8 +39,6 @@ export const axiosClientWithToken = axios.create({
       },
 });
 
-
-
 var myInterceptor = null;
 export const axiosInstance = (accessToken, dispatch) => {
     axiosClientWithToken.interceptors.request.eject(myInterceptor)
