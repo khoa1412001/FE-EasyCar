@@ -55,7 +55,7 @@ function CarDetails() {
 					setCarinfo(res.data);
 				})
 				.catch((err) => {
-					toast.error('Loi');
+					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
 				});
 		};
 		getInfo();
@@ -125,7 +125,7 @@ function CarDetails() {
       insurancetype: insurancetype,
       servicefee: carinfo.servicefee,
       rentprice: carinfo.rentprice,
-      totalPrice: carinfo.totalprice,
+      totalPrice: carinfo.totalprice + insurance,
     };
     apiUser.addRentalHistory(params).then(res => {
 		toast.success("Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!")

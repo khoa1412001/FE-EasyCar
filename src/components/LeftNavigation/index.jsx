@@ -29,15 +29,13 @@ function LeftNavigation(props) {
 			<Box className="leftnavigation-container">
 				<Stack padding={1}>
 					<Stack direction="row" alignItems={'center'} spacing={1} alignSelf="center">
-						{user.avatar ? (
+						{user.avatar && (
 							<Avatar
 								className="leftnavigation-container__avatar"
 								alt="Remy Sharp"
 								src={user.avatar}
 								sx={{ width: '80px', height: '80px' }}
 							/>
-						) : (
-							<Avatar {...stringAvatar(user.username)} sx={{ width: '80px', height: '80px' }} />
 						)}
 						<Stack>
 							<Typography className="leftnavigation-container__name"  sx={{ fontWeight: 'bold', fontSize: '18px' }}> {user.username}</Typography>

@@ -81,7 +81,7 @@ function VehicleSignupBody() {
 		params.append('year', year);
 		params.append('fuelconsumption', fuelconsumption);
 		params.append('description', description);
-		params.append('rentprice', rentprice);
+		params.append('rentprice', rentprice*1000);
 		if (checked) {
 			params.append('kmlimit', kmlimit);
 			params.append('priceover', priceover);

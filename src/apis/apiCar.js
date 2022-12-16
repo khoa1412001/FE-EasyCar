@@ -42,7 +42,7 @@ const apiCar = {
     },
 
     getCarStatusList: async (params) => {
-        const res = await axiosClientWithToken.post(`/my-vehicle/status/${params.id}`)
+        const res = await axiosClientWithToken.get(`/my-vehicle/status/${params.id}`)
         return res.data;
     },
 
@@ -53,6 +53,26 @@ const apiCar = {
 
     getRentalHistoryOfVehicle: async (params) => {
         const res = await axiosClientWithToken.get(`/my-vehicle/history/${params.id}`)
+        return res.data;
+    },
+
+    getHistoryDetails: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/detail/${params.id}`)
+        return res.data;
+    },
+
+    getCarInfoForStatusUpdate: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/info/${params.id}`)
+        return res.data;
+    },
+
+    updateCarStatus: async (params) => {
+        const res = await axiosClientWithTokenMultiPart.post(`/my-vehicle/update-status/`,params)
+        return res.data;
+    },
+
+    getCarStatusDetail: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/detail-status/${params.id}`)
         return res.data;
     },
 }

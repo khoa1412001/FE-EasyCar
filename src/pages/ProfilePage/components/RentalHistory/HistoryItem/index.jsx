@@ -12,13 +12,19 @@ import HistoryDetail from '../HistoryDetail';
 import apiPayment from 'apis/apiPayment';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from "uuid";
+import RentalStatusDialog from '../RentalStatusDialog';
+import apiRentalHistory from 'apis/apiRentalHistory';
+
 function HistoryItem(props) {
 	const { item } = props;
 	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
+	const [openRentalStatus, setOpenRentalStatus] = React.useState(false);
 	const [startdate, setStartdate] = React.useState(new Date(item.rentalDateStart));
 	const [enddate, setEnddate] = React.useState(new Date(item.rentalDateEnd));
 	const [rating, setRating] = React.useState(item.rating);
-
+	const updatestatus = () => {
+		window.open(`/rentalstatus?id=${item._id}`,'_blank')
+	}
 	const transmission = (transmissiontype) => {
 		switch (transmissiontype) {
 			case 'AUTO':
@@ -51,8 +57,16 @@ function HistoryItem(props) {
 	React.useEffect(() => {
 		const handleRating = () => {
 			if(!israteable() && (rating !== 0)){
-				console.log(rating)
-				window.location.reload(false);
+				const params = {
+					id: item._id,
+					rating: rating,
+				}
+				apiRentalHistory.updateRating(params).then(res => {
+					toast.success('Gửi đánh giá chuyến đi thành công !!!')
+					setTimeout(() => {window.location.reload(false)},2000)
+				}).catch(err =>{
+					toast.error(err.response.data.message)
+				})
 			}
 		}
 		handleRating()
@@ -113,6 +127,7 @@ function HistoryItem(props) {
 						variant="outlined"
 						size="medium"
 						className="rentalhistory-container-item__updatestatus"
+						onClick={() => setOpenRentalStatus(true)}
 						sx={{
 							borderColor: variables.orangecolor,
 							color: variables.orangecolor,
@@ -128,6 +143,7 @@ function HistoryItem(props) {
 						variant="outlined"
 						size="medium"
 						className="rentalhistory-container-item__updatestatus"
+						onClick={updatestatus}
 						sx={{
 							borderColor: variables.orangecolor,
 							color: variables.orangecolor,
@@ -241,7 +257,8 @@ function HistoryItem(props) {
 			<Stack flex={1} justifyContent={'center'} spacing={1}>
 				{status(item.status)}
 			</Stack>
-			<HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog}/>
+			{openHistoryDialog && <HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog} rentalid={item._id}/>}
+			{openRentalStatus && <RentalStatusDialog openRentalStatus={openRentalStatus} setOpenRentalStatus={setOpenRentalStatus} id={item._id}/>}
 		</Stack>
 	);
 }

@@ -230,8 +230,8 @@ function CarItem(props) {
 					XOÁ
 				</Button>
 			</Stack>
-			<CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList}/>
-			<HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList} vehicleId={vehicleId}/>
+			{openStatusList && <CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList} vehicleId={vehicleId}/> }
+			{openHistoryList && <HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList} vehicleId={vehicleId}/>}
 			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />
 		</Stack>
 	);

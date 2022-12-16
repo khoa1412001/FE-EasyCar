@@ -29,6 +29,7 @@ function HistoryList(props) {
     const [openHistoryOwnerDialog, setOpenHistoryOwnerDialog] = React.useState(false)
 	const [historylist, setHistorylist] = React.useState([]);
 	const [page, setPage] = React.useState(0);
+	const [rentalid, setRentalid] = React.useState('');
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 10 - historylist.length) : 0;
 
 	const handleChangePage = (event, newPage) => {
@@ -83,7 +84,10 @@ function HistoryList(props) {
                             <TableCell align="right"><span className='bold'>{(new Date(row.rentalDateEnd)).getDate()}/{(new Date(row.rentalDateEnd)).getMonth() + 1}/{(new Date(row.rentalDateEnd)).getFullYear()}</span></TableCell>
                             <TableCell align="right"><span className='bold'>{row.userId.username}</span></TableCell>
                             <TableCell align="right"><span className="green bold fontLarge">{row.totalPrice} ₫</span></TableCell>
-							<TableCell align="right"><Chip label="XEM CHI TIẾT" className='success bold' onClick={() => setOpenHistoryOwnerDialog(true)}/></TableCell>
+							<TableCell align="right"><Chip label="XEM CHI TIẾT" className='success bold' onClick={() => {
+								setOpenHistoryOwnerDialog(true)
+								setRentalid(row._id)
+								}}/></TableCell>
 						</TableRow>
 						))}
 					</TableBody>
@@ -91,7 +95,7 @@ function HistoryList(props) {
 			</TableContainer>
 			<TablePagination component="div" count={historylist.length} rowsPerPage={10} page={page} rowsPerPageOptions={10}  onPageChange={handleChangePage}/>
             </DialogContent>
-            <HistoryOwnerDialog openHistoryOwnerDialog={openHistoryOwnerDialog} setOpenHistoryOwnerDialog={setOpenHistoryOwnerDialog}/>
+            {openHistoryOwnerDialog && <HistoryOwnerDialog openHistoryOwnerDialog={openHistoryOwnerDialog} setOpenHistoryOwnerDialog={setOpenHistoryOwnerDialog} rentalid={rentalid}/>}
 		</Dialog>
   )
 }

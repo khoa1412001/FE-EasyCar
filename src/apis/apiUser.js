@@ -2,7 +2,7 @@ import {  axiosClient,axiosClientWithToken, axiosClientWithTokenMultiPart} from 
 
 const apiUser = {
     updateUser: async (params) => {
-        const res = await axiosClientWithToken.post(`/user/update`,params)
+        const res = await axiosClientWithToken.post(`/user/update-info`,params)
         return res.data;
     },
     verifyUser: async (params) => {

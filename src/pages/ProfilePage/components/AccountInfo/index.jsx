@@ -79,15 +79,7 @@ function AccountInfo() {
 			.updateUser(params)
 			.then((res) => {
 				toast.success('Cập nhật thông tin thành công');
-				apiAuth
-					.getuserinfo()
-					.then((res) => {
-						if (res) {
-							dispatch(setUserInfo(res));
-						}
-					})
-					.catch()
-					.finally();
+				setTimeout(() => {window.location.reload(false)},3000);
 			})
 			.catch((err) => {
 				toast.error(err.response.data.message);

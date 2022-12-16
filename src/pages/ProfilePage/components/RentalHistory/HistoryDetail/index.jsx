@@ -20,19 +20,72 @@ import variables from 'assets/_variable.scss';
 import * as React from 'react';
 import './style.scss';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CheckIcon from '@mui/icons-material/Check';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 import StarIcon from '@mui/icons-material/Star';
 import moment from 'moment';
-
+import numWithSpace from 'utils/numWithSpace';
+import apiRentalHistory from 'apis/apiRentalHistory';
 function HistoryDetail(props) {
-	const { openHistoryDialog, setOpenHistoryDialog } = props;
+	const { openHistoryDialog, setOpenHistoryDialog, rentalid } = props;
 	const [startdate, setStartdate] = React.useState(moment());
-	const [enddate, setEndate] = React.useState(moment());
+	const [enddate, setEnddate] = React.useState(moment());
+	const [historydetail, setHistorydetail] = React.useState({});
+	React.useEffect(() => {
+		const getHistoryDetail = () => {
+			const params = {
+				id: rentalid,
+			}
+			apiRentalHistory.getRentalHistory(params).then(res => setHistorydetail(res.data))
+		}
+		getHistoryDetail()
+	},[])
+
+	React.useEffect(() => {
+		const updateDate = () => {
+			if(historydetail.rentalDateStart)
+			{
+				setStartdate(moment(historydetail.rentalDateStart))
+				setEnddate(moment(historydetail.rentalDateEnd))
+			}
+		}
+		updateDate()
+	}, [historydetail])
+
+	const transmission = (transmissiontype) => {
+		switch (transmissiontype) {
+			case 'AUTO':
+				return 'Tự động';
+			case 'MANUAL':
+				return 'Số sàn';
+		}
+	};
+
+	const fuel = (fueltype) => {
+		switch (fueltype) {
+			case 'GASOLINE':
+				return 'Xăng';
+			case 'DIESEL':
+				return 'Dầu Diesel';
+			case 'ELECTRIC':
+				return 'Điện';
+		}
+	};
+
 	const insurance = () => {
-		switch(2) {
+		switch(historydetail.insurancetype) {
+			case 0: 
+				return (<><FormControlLabel
+					control={
+						<Checkbox
+							checked={true}
+							className="payment-container__checkbox"
+						/>
+					}
+					label={`Bảo hiểm Basic ${historydetail.insurance} đ`}
+				/>
+				<Typography className="payment-container__smalltext">Bạn trả tối đa 50% tổng giá trị thiệt hại</Typography></>)
 			case 1: 
 				return (<><FormControlLabel
 					control={
@@ -41,21 +94,13 @@ function HistoryDetail(props) {
 							className="payment-container__checkbox"
 						/>
 					}
-					label={`Bảo hiểm Basic ${500000} đ`}
-				/>
-				<Typography className="payment-container__smalltext">Bạn trả tối đa 50% tổng giá trị thiệt hại</Typography></>)
-			case 2: 
-				return (<><FormControlLabel
-					control={
-						<Checkbox
-							checked={true}
-							className="payment-container__checkbox"
-						/>
-					}
-					label={`Bảo hiểm Premium ${500000} đ`}
+					label={`Bảo hiểm Premium ${historydetail.insurance} đ`}
 				/>
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
 		}
+	}
+	const handleContract = () => {
+		window.open(`/contract?id=${rentalid}`,'_blank')
 	}
 	return (
 		<Dialog
@@ -74,8 +119,7 @@ function HistoryDetail(props) {
 				<Stack direction={'row'} spacing={1} justifyContent="center">
 					<Stack className="historydetail-container">
 						<Typography className="historydetail-container__carname" padding={3}>
-							{/* {carinfo.brand} {carinfo.model} {carinfo.year} - {carinfo.rating} */}
-							MAZDA CX-3 2019 - 5.0
+						{historydetail.vehicleId && historydetail.vehicleId.brand} {historydetail.vehicleId && historydetail.vehicleId.model} {historydetail.vehicleId && historydetail.vehicleId.year} - {historydetail.vehicleId && historydetail.vehicleId.rating}
 							<StarIcon htmlColor={variables.mainyellowcolor} fontSize="medium" />
 						</Typography>
 						<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -85,12 +129,12 @@ function HistoryDetail(props) {
 								</Typography>
 							</Grid>
 							<Grid item xs={5} spacing={2}>
-								<Typography className="historydetail-container__text">Số ghế: 4</Typography>
-								<Typography className="historydetail-container__text">Nhiên liệu: Xăng</Typography>
+								<Typography className="historydetail-container__text">Số ghế: {historydetail.vehicleId && historydetail.vehicleId.seats}</Typography>
+								<Typography className="historydetail-container__text">Nhiên liệu: {historydetail.vehicleId && fuel(historydetail.vehicleId.fueltype)}</Typography>
 							</Grid>
 							<Grid item xs={4}>
-								<Typography className="historydetail-container__text">Truyền động: Tự động</Typography>
-								<Typography className="historydetail-container__text">Tiêu thụ nhiên liệu: 21 l/100km</Typography>
+								<Typography className="historydetail-container__text">Truyền động: {historydetail.vehicleId && transmission(historydetail.vehicleId.transmission)}</Typography>
+								<Typography className="historydetail-container__text">Tiêu thụ nhiên liệu: {historydetail.vehicleId && historydetail.vehicleId.fuelconsumption} l/100km</Typography>
 							</Grid>
 						</Grid>
 						<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -100,7 +144,7 @@ function HistoryDetail(props) {
 								</Typography>
 							</Grid>
 							<Grid item xs={9} spacing={2}>
-								<Typography className="historydetail-container__text">AAAAAAAAAAAA</Typography>
+								<Typography className="historydetail-container__text">{historydetail.vehicleId && historydetail.vehicleId.description}</Typography>
 							</Grid>
 						</Grid>
 						<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -132,7 +176,7 @@ function HistoryDetail(props) {
 							</Grid>
 							<Grid item xs={9} spacing={2}>
 								<Typography className="historydetail-container__text">
-									Quy định khác:
+									{/* Quy định khác:
 									<br />- Sử dụng xe đúng mục đích.
 									<br />- Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật.
 									<br />- Không sử dụng xe thuê để cầm cố, thế chấp.
@@ -141,7 +185,8 @@ function HistoryDetail(props) {
 									<br />- Không chở hoa quả, thực phẩm nặng mùi trong xe.
 									<br />- Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách hàng vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu
 									phí vệ sinh xe.
-									<br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi tuyệt vời !{/* {carinfo.rentterm} */}
+									<br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi tuyệt vời ! */}
+									{historydetail.vehicleId && historydetail.vehicleId.rentterm}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -156,17 +201,15 @@ function HistoryDetail(props) {
 									<Stack direction="row" alignItems={'center'} spacing={1}>
 										<Avatar
 											alt="Remy Sharp"
-											src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
+											src={historydetail.vehicleId && historydetail.vehicleId.ownerId.avatar}
 											sx={{ width: 95, height: 95 }}
 										/>
 										<Stack>
 											<Typography className="historydetail-container__name">
-												{/* {carinfo.ownerId && carinfo.ownerId.username} */}
-												Khoa Dang
+											{historydetail.vehicleId && historydetail.vehicleId.ownerId.username}
 											</Typography>
 											<Typography className="historydetail-container__name">
-												{/* {carinfo.ownerId && carinfo.ownerId.username} */}
-												0928776640
+											{historydetail.vehicleId && historydetail.vehicleId.ownerId.phoneNumber}
 											</Typography>
 										</Stack>
 									</Stack>
@@ -177,8 +220,7 @@ function HistoryDetail(props) {
 					<Stack className="paymenthistory-container" padding={3}>
 						<Typography sx={{ fontWeight: 'bold', color: variables.textgreyercolor }} alignSelf="center">
 							<span className="paymenthistory-container__price">
-								{/* {carinfo.rentprice} ₫  */}
-								750 000₫
+								{historydetail.rentprice} đ
 							</span>{' '}
 							/ngày
 						</Typography>
@@ -222,8 +264,7 @@ function HistoryDetail(props) {
 						</Typography>
 						<Typography className="paymenthistory-container__location">
 							<LocationOnIcon className="paymenthistory-container__icon" />
-							{/* {carinfo.ownerId && carinfo.ownerId.location} */}
-							Quang Trung, Go Vap
+							{historydetail.vehicleId && historydetail.vehicleId.ownerId.location}
 						</Typography>
 						<Box padding="10px" />
 						<Typography
@@ -235,14 +276,12 @@ function HistoryDetail(props) {
 						<Box className="paymenthistory-container__textbox" padding={1}>
 							<Typography className="paymenthistory-container__smalltext">
 								Giới hạn quãng đường:
-								{/* {carinfo.kmlimit}km/ngày */}
-								300km/ngày
+								{historydetail.vehicleId && historydetail.kmlimit}km/ngày
 							</Typography>
 							<Typography className="paymenthistory-container__subtext">
 								Phí:{' '}
 								<span className="bold">
-									{/* {carinfo.priceover && numWithSpace(carinfo.priceover)}đ/km */}
-									3000đ/km
+									{historydetail.vehicleId &&  numWithSpace(historydetail.vehicleId.priceover)}đ/km
 								</span>{' '}
 								vượt giới hạn
 							</Typography>
@@ -287,8 +326,7 @@ function HistoryDetail(props) {
 						>
 							<Typography className="paymenthistory-container__smalltext">Đơn giá thuê:</Typography>
 							<Typography className="paymenthistory-container__smalltext">
-								{/* {carinfo.rentprice} 000 / ngày */}
-								750 000đ / ngày
+							{historydetail.rentprice && numWithSpace(historydetail.rentprice)} đ / ngày
 							</Typography>
 						</Stack>
 						<Stack
@@ -299,8 +337,7 @@ function HistoryDetail(props) {
 						>
 							<Typography className="paymenthistory-container__smalltext">Phí dịch vụ:</Typography>
 							<Typography className="paymenthistory-container__smalltext">
-								{/* {carinfo.servicefee} 000 / ngày */}
-								90 000đ / ngày
+							{historydetail.servicefee && numWithSpace(historydetail.servicefee)} đ / ngày
 							</Typography>
 						</Stack>
 						<Stack
@@ -311,8 +348,12 @@ function HistoryDetail(props) {
 						>
 							<Typography className="paymenthistory-container__smalltext">Tổng phí thuê xe:</Typography>
 							<Typography className="paymenthistory-container__smalltext">
-								{/* {carinfo.servicefee + carinfo.rentprice} 000 x {carinfo.days} ngày */}1 000 000đ / ngày
+							{historydetail.servicefee + historydetail.rentprice} x {historydetail.days} ngày
 							</Typography>
+						</Stack>
+						<Stack className="payment-container__pricebox" direction="row" justifyContent="space-between" alignItems="center">
+							<Typography className="payment-container__smalltext">Phí bảo hiểm:</Typography>
+							<Typography className="payment-container__smalltext">{historydetail.insurance && numWithSpace(historydetail.insurance)} đ</Typography>
 						</Stack>
 						<Divider sx={{ marginBottom: '5px' }} />
 						<Stack
@@ -323,10 +364,10 @@ function HistoryDetail(props) {
 						>
 							<Typography className="paymenthistory-container__smalltext bold">Tổng cộng:</Typography>
 							<Typography className="paymenthistory-container__smalltext bold">
-								{/* {carinfo.totalprice && numWithSpace(carinfo.totalprice)} 000 đ */}1 000 000đ
+								{historydetail.totalPrice && numWithSpace(historydetail.totalPrice)} đ
 							</Typography>
 						</Stack>
-						<Button variant='contained'>
+						<Button variant='contained' onClick={handleContract}>
 							IN HỘP ĐỒNG
 						</Button>
 					</Stack>

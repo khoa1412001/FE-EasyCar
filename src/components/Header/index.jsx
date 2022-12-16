@@ -15,7 +15,6 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.scss';
-import stringAvatar from 'utils/stringavatar';
 import {useDispatch} from 'react-redux'
 import {setUserInfo} from 'slices/userSlice'
 import apiAuth from 'apis/apiAuth';
@@ -83,11 +82,9 @@ function Header() {
 								onClick={() => navigate('/profile')}
 								color="inherit"
 							>
-								{user.avatar ? (
+								{user.avatar && (
 									<Avatar alt="Remy Sharp" src={user.avatar} />
-								) : (
-									<Avatar {...stringAvatar(user.username)} />
-								)}
+								) }
 							</IconButton>
 							<Typography alignSelf="center" paddingRight={5} fontSize={20} sx={{cursor:'pointer'}} id="username">
 								{user.username}
