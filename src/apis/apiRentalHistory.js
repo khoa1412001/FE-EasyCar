@@ -29,6 +29,11 @@ const apiRentalHistory = {
     getContractData: async (params) => {
         const res = await axiosClientWithToken.get(`/history/contract/${params.id}`)
         return res.data;
-    }
+    },
+
+    updateRating: async (params) => {
+        const res = await axiosClientWithToken.post(`/history/rating-vehicle/${params.id}`,params)
+        return res.data;
+    },
 }
 export default apiRentalHistory;
