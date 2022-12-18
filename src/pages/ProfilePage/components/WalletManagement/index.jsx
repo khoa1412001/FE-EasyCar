@@ -31,6 +31,7 @@ import { toast } from 'react-toastify';
 import {useDispatch} from 'react-redux'
 import {setUserInfo} from 'slices/userSlice'
 import apiAuth from 'apis/apiAuth';
+import numWithDot from 'utils/numWithDot';
 function WalletManagement() {
 	const user = useSelector((state) => state.user.info) || {};
 	const [bank, setBank] = React.useState(user.bank || 'NONE');
@@ -297,7 +298,7 @@ function WalletManagement() {
 				</Typography>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">
 					<Typography className="walletmanagement-container__text" paddingRight={'10px'}>
-						Số tiền: <span className="green bold fontLarge">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {user.balance} đ</span>
+						Số tiền: <span className="green bold fontLarge">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {user.balance && numWithDot(user.balance)} đ</span>
 					</Typography>
 				</Stack>
 				<Stack direction={'row'} alignItems="center" paddingTop="8px" paddingLeft="15px">

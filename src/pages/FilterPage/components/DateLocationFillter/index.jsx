@@ -9,6 +9,9 @@ import './style.scss';
 import Autocomplete from '@mui/material/Autocomplete';
 function DateLocationFillter(props) {
 	const { address, setAddress, startdate, setStartdate, enddate, setEnddate, suggestion } = props;
+	const onKeyDown = (e) => {
+		e.preventDefault();
+	 };
 	return (
 		<Box className="datelocationfillter-container">
 			<Stack direction={'row'} alignItems="center" padding={1} height={'34px'}>
@@ -44,7 +47,7 @@ function DateLocationFillter(props) {
 				<LocalizationProvider dateAdapter={AdapterMoment}>
 					<DateTimePicker
 						inputFormat="DD/MM/YYYY hh:mm A"
-						renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+						renderInput={(props) => <TextField {...props} variant="standard" size="small" onKeyDown={onKeyDown}/>}
 						value={startdate}
 						onChange={(newValue) => {
 							setStartdate(newValue);
@@ -64,7 +67,7 @@ function DateLocationFillter(props) {
 				<LocalizationProvider dateAdapter={AdapterMoment}>
 					<DateTimePicker
 						inputFormat="DD/MM/YYYY hh:mm A"
-						renderInput={(props) => <TextField {...props} variant="standard" size="small" />}
+						renderInput={(props) => <TextField {...props} variant="standard" size="small" onKeyDown={onKeyDown}/>}
 						value={enddate}
 						onChange={(newValue) => {
 							setEnddate(newValue);

@@ -12,6 +12,7 @@ import numWithSpace from 'utils/numWithSpace';
 import ConfirmDialog from 'components/ConfirmDialog';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
+import Box from '@mui/material/Box';
 
 function CarItem(props) {
 	const {item} = props;
@@ -117,11 +118,13 @@ function CarItem(props) {
 	const [openStatusList, setOpenStatusList] = React.useState(false);
 	return (
 		<Stack direction={'row'} className="carmanagement-container-item" padding={1} spacing={1} marginTop={1}>
+			<Box width='240px'>
 			<img
 				className="carmanagement-container-item__img"
-				src="https://www.motortrend.com/uploads/sites/10/2019/09/2020-chevrolet-sonic-lt-automatic-sedan-angular-front.png?fit=around%7C960:600"
+				src={item.modelimage}
 				alt=""
 			/>
+			</Box>
 			<Stack width="200px">
 				<Typography
 					className="carmanagement-container-item__name"
@@ -185,7 +188,7 @@ function CarItem(props) {
 					paddingLeft={'20px'}
 					sx={{
 						fontWeight: '600',
-						fontSize: '24px',
+						fontSize: '20px',
 						letterSpacing: '0.6px',
 						color: variables.textgreencolor,
 					}}

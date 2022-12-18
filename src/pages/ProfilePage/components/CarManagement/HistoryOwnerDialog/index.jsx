@@ -85,7 +85,7 @@ function HistoryOwnerDialog(props) {
 							className="payment-container__checkbox"
 						/>
 					}
-					label={`Bảo hiểm Basic ${historydetail.insurance} đ`}
+					label={`Bảo hiểm Basic ${numWithSpace(historydetail.insurance)} đ`}
 				/>
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 50% tổng giá trị thiệt hại</Typography></>)
 			case 1: 
@@ -96,7 +96,7 @@ function HistoryOwnerDialog(props) {
 							className="payment-container__checkbox"
 						/>
 					}
-					label={`Bảo hiểm Premium ${historydetail.insurance} đ`}
+					label={`Bảo hiểm Premium ${numWithSpace(historydetail.insurance)} đ`}
 				/>
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
 		}
@@ -317,7 +317,7 @@ function HistoryOwnerDialog(props) {
 						<Stack className="paymenthistory-container__pricebox" direction="row" justifyContent="space-between" alignItems="center">
 							<Typography className="paymenthistory-container__smalltext">Tổng phí thuê xe:</Typography>
 							<Typography className="paymenthistory-container__smalltext">
-								{historydetail.servicefee + historydetail.rentprice} x {historydetail.days} ngày
+								{numWithSpace(historydetail.servicefee + historydetail.rentprice)} x {historydetail.days} ngày
 							</Typography>
 						</Stack>
 						<Stack className="payment-container__pricebox" direction="row" justifyContent="space-between" alignItems="center">

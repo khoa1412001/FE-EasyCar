@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 import * as React from 'react';
+import Box from '@mui/material/Box';
+
 function Item(props) {
 	const { item } = props;
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -41,11 +43,13 @@ function Item(props) {
 
 	return (
 		<Stack direction={'row'} className="caritem-container" padding={1} marginTop={1}>
+			<Box width='240px'>
 			<img
 				className="caritem-container__img"
-				src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
+				src={item.modelimage}
 				alt=""
 			/>
+			</Box>
 			<Stack paddingLeft={'5px'} width="176px">
 				<Typography
 					className="caritem-container__name"
@@ -77,7 +81,7 @@ function Item(props) {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> {item.rating} - 8k kms
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} /> {item.rating} 
 				</Typography>
 			</Stack>
 			<Typography

@@ -21,6 +21,7 @@ import { logoutSuccess } from 'slices/authSlice';
 import { clearUserInfo } from 'slices/userSlice';
 import stringAvatar from 'utils/stringavatar';
 import './style.scss';
+import numWithDot from 'utils/numWithDot';
 
 function Sidebar() {
 	const user = useSelector((state) => state.user.info) || {};
@@ -62,7 +63,7 @@ function Sidebar() {
 					)}
 				</Typography>
 				<Typography className="sidebar-container__verifystatus" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
-					Tài khoản:<span className='green bold large'> {user.balance} đ</span>
+					Tài khoản:<span className='green bold large'> {user.balance && numWithDot(user.balance)} đ</span>
 				</Typography>
 				<Divider sx={{ paddingTop: '8px' }} />
 				<Button

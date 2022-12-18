@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from "uuid";
 import RentalStatusDialog from '../RentalStatusDialog';
 import apiRentalHistory from 'apis/apiRentalHistory';
-
+import Box from '@mui/material/Box';
 function HistoryItem(props) {
 	const { item } = props;
 	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
@@ -177,11 +177,13 @@ function HistoryItem(props) {
 	}
 	return (
 		<Stack direction={'row'} className="rentalhistory-container-item" padding={1} spacing={1} marginTop={1}>
-			<img
-				className="rentalhistory-container-item__img"
-				src="https://zoomcar-assets.zoomcar.com/photographs/original/2e3221d37b756442191ad5a81cdc0e4a49696811.png?1663874774"
-				alt=""
-			/>
+			<Box width='240px'>
+				<img
+					className="rentalhistory-container-item__img"
+					src={item.vehicleId.modelimage}
+					alt=""
+				/>
+			</Box>
 			<Stack width="200px">
 				<Typography
 					className="rentalhistory-container-item__name"
