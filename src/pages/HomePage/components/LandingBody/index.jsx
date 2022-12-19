@@ -25,12 +25,27 @@ function LandingBody() {
 	const [enddatetime, setEndDatetime] = React.useState(moment());
 	const [location, setLocation] = React.useState('');
 	const [error, setError] = React.useState({ startdate: false, enddate: false });
+	const [latitude, setLatitude] = React.useState('');
+	const [longitude,setLongtitude] = React.useState('');
 	const navigate = useNavigate();
 	const handleFind = () => {
 		if(!error.startdate && !error.enddate){
-			navigate(`/fillter?startdate=${startdatetime.unix()}&enddate=${enddatetime.unix()}&address=${location}`);
+			navigate(`/fillter?startdate=${startdatetime.unix()}&enddate=${enddatetime.unix()}&address=${location}&lat=${latitude}&lon=${longitude}`);
 		}
 	};
+
+	React.useEffect(() => {
+		const getLatLon = () => {
+			const foundlocation = suggestion.find(item => item.address == location)
+			if(foundlocation)
+			{
+				setLatitude(foundlocation.lat)
+				setLongtitude(foundlocation.lon)
+			}
+		}
+		getLatLon()
+	},[suggestion])
+
 	React.useEffect(() => {
 		const checkDateTime = () => {
 			if ((startdatetime.unix() <= moment().unix()) && (enddatetime.unix() <= moment().unix())) {

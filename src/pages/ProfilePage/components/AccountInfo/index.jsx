@@ -28,6 +28,8 @@ function AccountInfo() {
 	const [gender, setGender] = React.useState(user.gender);
 	const [location, setLocation] = React.useState(user.location);
 	const dispatch = useDispatch();
+	const [latitude, setLatitude] = React.useState('');
+	const [longitude,setLongtitude] = React.useState('');
 	React.useEffect(() => {
 		reset(user);
 	}, [user]);
@@ -47,9 +49,23 @@ function AccountInfo() {
 	});
 
 	React.useEffect(() => {
-		const GetLocations = (location) => {handleApi(location)};
+		const GetLocations = (location) => {
+			handleApi(location)
+		};
 		GetLocations(location);
 	}, [location]);
+
+	React.useEffect(() => {
+		const getLatLon = () => {
+			const foundlocation = suggestion.find(item => item.address == location)
+			if(foundlocation)
+			{
+				setLatitude(foundlocation.lat)
+				setLongtitude(foundlocation.lon)
+			}
+		}
+		getLatLon()
+	},[suggestion])
 
 	const handleApi = React.useCallback(
 		_debounce((location) => {
@@ -74,7 +90,10 @@ function AccountInfo() {
 			username,
 			phoneNumber,
 			gender,
+			latitude,
+			longitude,
 		};
+		// console.log(params)
 		apiUser
 			.updateUser(params)
 			.then((res) => {

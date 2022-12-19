@@ -9,10 +9,9 @@ function RentForm(props) {
 				Đơn giá thuê mặc định
 			</Typography>
 			<Typography color="#424242" fontSize="0.95rem">
-				Đơn giá áp dụng cho tất cả các ngày. Bạn có thuể tuỳ chỉnh giá khác cho các ngày đặc biệt (cuối tuần, lễ, tết...)
-				trong mục quản lý xe sau khi đăng kí.
+				Đơn giá áp dụng cho tất cả các ngày.
 			</Typography>
-			<Typography py={2} color="#424242" fontSize="0.95rem">
+			<Typography py={1} color="#424242" fontSize="0.95rem">
 				Giá đề xuất: 750.000 đ
 			</Typography>
 			<Grid container>
@@ -28,11 +27,11 @@ function RentForm(props) {
 					<Typography p={2}>000 đ</Typography>
 				</Grid>
 			</Grid>
-			<Typography py={2} fontWeight="bold" fontSize="1.25rem">
+			<Typography py={1} fontWeight="bold" fontSize="1.25rem">
 				Địa chỉ xe
 			</Typography>
-			<Typography variant="outlined">
-				Địa chỉ mặc định để giao nhận xe sẽ là địa chỉ được ghi trong trang cá nhân
+			<Typography>
+				Địa chỉ mặc định để giao nhận xe sẽ là địa chỉ được ghi trong trang cá nhân, quý khách vui lòng cập nhật thông tin địa chỉ trước khi gửi yêu cầu đăng ký xe lên hệ thống !!!
 			</Typography>
 			<Stack direction="row" justifyContent="space-between">
 				<Typography pt={1} fontWeight="bold" fontSize="1.25rem">

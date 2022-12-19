@@ -109,6 +109,7 @@ function FilterPage() {
 		};
 		getBrandList();
 	}, []);
+
 	React.useEffect(() => {
 		const GetLocations = (address) => {
 			handleFind(address);
@@ -130,10 +131,7 @@ function FilterPage() {
 		}, 1000),
 		[]
 	);
-
-	const handleGetCar = () => {
-		console.log('next');
-	};
+	
 	React.useEffect(() => {
 		const changeFillter = () => {
 			let cartypefillter = ['ALL'];
