@@ -9,7 +9,7 @@ import './style.scss';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import * as React from 'react';
 function CarTable(props) {
-	const {nextPage, page, setPage, carinforlist} = props
+	const {nextPage, carinforlist} = props
 	return (
 		<Stack id="carlist-scroll" className="carlist-container" paddingLeft={1} flexWrap="nowrap">
 			<InfiniteScroll

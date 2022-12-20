@@ -9,8 +9,9 @@ import ImageForm from './ImageForm';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 function VehicleSignupBody() {
+	const user = useSelector((state) => state.user.info);
 	const [step, setStep] = useState(1);
 	const [licenseplate, setLicenseplate] = React.useState('');
 	const [brand, setBrand] = React.useState('NONE');
@@ -88,7 +89,10 @@ function VehicleSignupBody() {
 		}
 		params.append('rentterm', rentterm);
 		params.append('checked', checked);
-		params.append('modelimage',modelimage)
+		params.append('location', user.location);
+		params.append('latitude', user.latitude);
+		params.append('longitude', user.longitude);
+		params.append('modelimage',modelimage);
 		params.append('vehicleimage', imgfront);
 		params.append('vehicleimage', imgrear);
 		params.append('vehicleimage', imgleft);

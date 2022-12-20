@@ -13,13 +13,16 @@ import apiCar from 'apis/apiCar';
 
 function FilterPage() {
 	const [carinforlist, setCarinfolist] = React.useState([]);
-	const [page, setPage] = React.useState(1);
+	const [carrenderlist, setCarrenderlist] = React.useState([]);
+	const [page, setPage] = React.useState(0);
 	const [total,setTotal] = React.useState(1);
 	const [suggestion, setSuggestion] = React.useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [startdate, setStartdate] = React.useState(moment.unix(searchParams.get('startdate')));
 	const [enddate, setEnddate] = React.useState(moment.unix(searchParams.get('enddate')));
 	const [address, setAddress] = React.useState(searchParams.get('address'));
+	const [latitude, setLatitude] = React.useState(Number(searchParams.get('lat')));
+	const [longitude, setLongitude] = React.useState(Number(searchParams.get('lon')));
 	const [price, setPrice] = React.useState('ALL');
 	const [fueltype, setFueltype] = React.useState('ALL');
 	const [carbrand, setCarbrand] = React.useState('ALL');
@@ -96,7 +99,21 @@ function FilterPage() {
 		startdate: startdate.unix(),
 		enddate: enddate.unix(),
 		rating: rating,
+		latitude,
+		longitude,
 	});
+
+	React.useEffect(() => {
+		const getLatLon = () => {
+			const foundlocation = suggestion.find(item => item.address == address)
+			if(foundlocation)
+			{
+				setLatitude(foundlocation.lat)
+				setLongitude(foundlocation.lon)
+			}
+		}
+		getLatLon()
+	},[suggestion])
 
 	React.useEffect(() => {
 		const getBrandList = () => {
@@ -158,36 +175,53 @@ function FilterPage() {
 				startdate: startdate.unix(),
 				enddate: enddate.unix(),
 				rating:rating,
+				latitude,
+				longitude,
 			});
 		};
 		changeFillter();
-	}, [price, carbrand, cartype, fueltype, transmission, rating, startdate, enddate, address,rating]);
+	}, [price, carbrand, cartype, fueltype, transmission, rating, startdate, enddate, address,rating,longitude,latitude]);
 
 	React.useEffect(() => {
 		handleApi(fillter);
 	}, [fillter]);
+
 	const handleApi = React.useCallback(
 		_debounce((fillter) => {
 			apiCar.getCarFillter(fillter).then((res) => {
 				setTotal(res.totalPage)
-				setPage(1)
+				setPage(0)
 				setCarinfolist(res.data)
 			})
 		}, 1000),
 		[]
 	);
 	
+	React.useEffect(() => {
+		const calTotalPage = () => {
+			const totalPage = Math.ceil(carinforlist.length / 10)
+			setTotal(totalPage)
+			const data = carinforlist.slice(0 * 10, 0 * 10 + 10)
+			setCarrenderlist(data)
+		}
+		calTotalPage()
+	},[carinforlist])
+
 	const nextPage = () => {
 		if(page <= total) {
-			const params = {
-				...fillter,
-				page: page + 1
-			}
-			apiCar.getCarFillter(params).then((res)=> {
-				setCarinfolist([...carinforlist,...res.data])
-				setPage(page+1)
-				console.log(carinforlist)
-			})
+			const data = carinforlist.slice((page+1) * 10, (page+1) * 10 + 10)
+			setCarrenderlist([...carrenderlist,...data])
+			setPage(page+1)
+			// const params = {
+			// 	...fillter,
+			// 	page: page + 1
+			// }
+
+			// apiCar.getCarFillter(params).then((res)=> {
+			// 	setCarinfolist([...carinforlist,...res.data])
+			// 	setPage(page+1)
+			// 	console.log(carinforlist)
+			// })
 		}
 	}
 
@@ -224,7 +258,7 @@ function FilterPage() {
 							brandlist={brandlist}
 						/>
 						<Box paddingLeft={'5px'} id="caritem-box">
-							<CarTable nextPage={nextPage}  carinforlist={carinforlist} setCarinfolist={setCarinfolist} />
+							<CarTable nextPage={nextPage}  carinforlist={carrenderlist} />
 						</Box>
 					</Stack>
 				</Box>
