@@ -172,7 +172,11 @@ function CarDetails() {
 						</Typography>
 					</Grid>
 					<Grid item xs={9} spacing={2}>
-						<Typography className="carinfo-container__text">{carinfo.description}</Typography>
+						<Typography className="carinfo-container__text">
+							<pre style={{ fontFamily: 'inherit' }}>
+								{carinfo.description}
+							</pre>
+							</Typography>
 					</Grid>
 				</Grid>
 				<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -216,7 +220,9 @@ function CarDetails() {
               vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe.
               <br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi
               tuyệt vời ! */}
-							{carinfo.rentterm}
+			  				<pre style={{ fontFamily: 'inherit' }}>
+							  {carinfo.rentterm}
+							</pre>
 						</Typography>
 					</Grid>
 				</Grid>

@@ -144,7 +144,11 @@ function HistoryDetail(props) {
 								</Typography>
 							</Grid>
 							<Grid item xs={9} spacing={2}>
-								<Typography className="historydetail-container__text">{historydetail.vehicleId && historydetail.vehicleId.description}</Typography>
+								<Typography className="historydetail-container__text">
+									<pre style={{ fontFamily: 'inherit' }}>
+										{historydetail.vehicleId && historydetail.vehicleId.description}
+									</pre>
+								</Typography>
 							</Grid>
 						</Grid>
 						<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -186,7 +190,9 @@ function HistoryDetail(props) {
 									<br />- Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách hàng vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu
 									phí vệ sinh xe.
 									<br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi tuyệt vời ! */}
-									{historydetail.vehicleId && historydetail.vehicleId.rentterm}
+									<pre style={{ fontFamily: 'inherit' }}>
+										{historydetail.vehicleId && historydetail.vehicleId.rentterm}
+									</pre>
 								</Typography>
 							</Grid>
 						</Grid>

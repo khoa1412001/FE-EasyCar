@@ -137,7 +137,7 @@ function SigninPage(props) {
 						</Button>
 						<Stack spacing={1} direction="row">
 							<Typography color="gray">Bạn chưa là thành viên?</Typography>
-							<Typography><a href='http://localhost:3000/signup'>Hãy đăng kí ngay!</a></Typography>
+							<Typography><a href='http://fe-easycar.vercel.app/signup'>Hãy đăng kí ngay!</a></Typography>
 						</Stack>
 						<Divider />
 						<Typography align="center">Hoặc đăng nhập bằng tài khoản</Typography>
