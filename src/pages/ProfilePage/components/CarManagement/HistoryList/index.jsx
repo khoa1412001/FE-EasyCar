@@ -23,7 +23,7 @@ import HistoryOwnerDialog from '../HistoryOwnerDialog';
 import './style.scss';
 import { toast } from 'react-toastify';
 import apiCar from 'apis/apiCar';
-
+import numWithDot from 'utils/numWithDot';
 function HistoryList(props) {
     const {openHistoryList, setOpenHistoryList, vehicleId} = props
     const [openHistoryOwnerDialog, setOpenHistoryOwnerDialog] = React.useState(false)
@@ -83,7 +83,7 @@ function HistoryList(props) {
 							<TableCell align="right"><span className='bold'>{(new Date(row.rentalDateStart)).getDate()}/{(new Date(row.rentalDateStart)).getMonth() + 1}/{(new Date(row.rentalDateStart)).getFullYear()}</span></TableCell>
                             <TableCell align="right"><span className='bold'>{(new Date(row.rentalDateEnd)).getDate()}/{(new Date(row.rentalDateEnd)).getMonth() + 1}/{(new Date(row.rentalDateEnd)).getFullYear()}</span></TableCell>
                             <TableCell align="right"><span className='bold'>{row.userId.username}</span></TableCell>
-                            <TableCell align="right"><span className="green bold fontLarge">{row.totalPrice} ₫</span></TableCell>
+                            <TableCell align="right"><span className="green bold fontLarge">{numWithDot(row.totalPrice)} ₫</span></TableCell>
 							<TableCell align="right"><Chip label="XEM CHI TIẾT" className='success bold' onClick={() => {
 								setOpenHistoryOwnerDialog(true)
 								setRentalid(row._id)
