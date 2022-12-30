@@ -156,7 +156,7 @@ function CarItem(props) {
 						color: variables.maincolor,
 					}}
 				>
-					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="carmanagement-container-item__icon"/> 5.00 
+					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="carmanagement-container-item__icon"/> {item.rating}
 				</Typography>
 				<Button
 					variant="outlined"
