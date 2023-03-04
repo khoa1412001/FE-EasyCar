@@ -226,7 +226,7 @@ function HistoryDetail(props) {
 					<Stack className="paymenthistory-container" padding={3}>
 						<Typography sx={{ fontWeight: 'bold', color: variables.textgreyercolor }} alignSelf="center">
 							<span className="paymenthistory-container__price">
-								{historydetail.rentprice} đ
+								{historydetail.rentprice && numWithSpace(historydetail.rentprice)} đ
 							</span>{' '}
 							/ngày
 						</Typography>
@@ -373,8 +373,12 @@ function HistoryDetail(props) {
 								{historydetail.totalPrice && numWithSpace(historydetail.totalPrice)} đ
 							</Typography>
 						</Stack>
-						<Button variant='contained' onClick={handleContract}>
+						<Button variant='contained' onClick={handleContract} sx={{marginBottom:'5px'}}>
 							IN HỘP ĐỒNG
+						</Button>
+						<Divider sx={{ marginBottom: '5px' }} />
+						<Button variant='contained' className='paymenthistory-container__reportbutton' sx={{backgroundColor: variables.redcolor}}>
+							BÁO XẤU
 						</Button>
 					</Stack>
 				</Stack>

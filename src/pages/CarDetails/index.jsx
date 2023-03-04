@@ -1,23 +1,16 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Stack } from '@mui/system';
-import { Box } from '@mui/material';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
 import ImageGallery from 'react-image-gallery';
-import { Grid, FormControlLabel, Checkbox } from '@mui/material/';
+import { Grid, FormControlLabel, Checkbox, Pagination, Box, Stack, Typography, Button, Divider, Avatar, TextField } from '@mui/material/';
 import StarIcon from '@mui/icons-material/Star';
-import Divider from '@mui/material/Divider';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
-import Avatar from '@mui/material/Avatar';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
-import TextField from '@mui/material/TextField';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -26,6 +19,7 @@ import { toast } from 'react-toastify';
 import numWithSpace from 'utils/numWithSpace';
 import Contract from 'components/Contract';
 import apiUser from 'apis/apiUser';
+import RatingItem from './RatingItem';
 
 function CarDetails() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -40,7 +34,7 @@ function CarDetails() {
 	const [premium, setPremium] = React.useState('');
 	const [checkedbasic, setCheckedbasic] = React.useState(true);
 	const [checkedpremium, setCheckedpremium] = React.useState(false);
-  	const [insurancetype, setInsurancetype] = React.useState(0);
+	const [insurancetype, setInsurancetype] = React.useState(0);
 	const navigate = useNavigate();
 	React.useEffect(() => {
 		const getInfo = () => {
@@ -73,7 +67,7 @@ function CarDetails() {
 			}
 			if (carinfo.basicinsurance) {
 				setInsurance(carinfo.basicinsurance);
-        		setInsurancetype(0);
+				setInsurancetype(0);
 				setBasic(`Bảo hiểm Basic ${numWithSpace(carinfo.basicinsurance)} đ`);
 				setPremium(`Bảo hiểm Premium ${numWithSpace(carinfo.premiuminsurance)} đ`);
 			}
@@ -81,16 +75,16 @@ function CarDetails() {
 		GetImage();
 	}, [carinfo]);
 
-  React.useEffect(() => {
+	React.useEffect(() => {
 		const ChangeInsurance = () => {
 			if (carinfo.basicinsurance) {
-				if(checkedbasic){
-          setInsurance(carinfo.basicinsurance);
-          setInsurancetype(0);
-        } else {
-          setInsurance(carinfo.premiuminsurance);
-          setInsurancetype(1);
-        }
+				if (checkedbasic) {
+					setInsurance(carinfo.basicinsurance);
+					setInsurancetype(0);
+				} else {
+					setInsurance(carinfo.premiuminsurance);
+					setInsurancetype(1);
+				}
 			}
 		};
 		ChangeInsurance();
@@ -116,22 +110,27 @@ function CarDetails() {
 		}
 	};
 
-  const handleApi = () => {
-    const params = {
-      vehicleId : id,
-      rentalDateStart: startdate.unix(),
-      rentalDateEnd: enddate.unix(),
-      insurance: insurance,
-      insurancetype: insurancetype,
-      servicefee: carinfo.servicefee,
-      rentprice: carinfo.rentprice,
-      totalPrice: carinfo.totalprice + insurance,
-    };
-    apiUser.addRentalHistory(params).then(res => {
-		toast.success("Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!")
-		setTimeout(() => {navigate('/profile/history')},5000)
-	}).catch(err => toast.error(err.response.data.message))
-  }
+	const handleApi = () => {
+		const params = {
+			vehicleId: id,
+			rentalDateStart: startdate.unix(),
+			rentalDateEnd: enddate.unix(),
+			insurance: insurance,
+			insurancetype: insurancetype,
+			servicefee: carinfo.servicefee,
+			rentprice: carinfo.rentprice,
+			totalPrice: carinfo.totalprice + insurance,
+		};
+		apiUser
+			.addRentalHistory(params)
+			.then((res) => {
+				toast.success('Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!');
+				setTimeout(() => {
+					navigate('/profile/history');
+				}, 5000);
+			})
+			.catch((err) => toast.error(err.response.data.message));
+	};
 
 	return (
 		<Stack direction={'row'} spacing={1} padding={2} justifyContent="center" bgcolor={variables.maingreycolor}>
@@ -173,10 +172,8 @@ function CarDetails() {
 					</Grid>
 					<Grid item xs={9} spacing={2}>
 						<Typography className="carinfo-container__text">
-							<pre style={{ fontFamily: 'inherit' }}>
-								{carinfo.description}
-							</pre>
-							</Typography>
+							<pre style={{ fontFamily: 'inherit' }}>{carinfo.description}</pre>
+						</Typography>
 					</Grid>
 				</Grid>
 				<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
@@ -220,9 +217,7 @@ function CarDetails() {
               vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe.
               <br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi
               tuyệt vời ! */}
-			  				<pre style={{ fontFamily: 'inherit' }}>
-							  {carinfo.rentterm}
-							</pre>
+							<pre style={{ fontFamily: 'inherit' }}>{carinfo.rentterm}</pre>
 						</Typography>
 					</Grid>
 				</Grid>
@@ -243,6 +238,16 @@ function CarDetails() {
 						</Stack>
 					</Grid>
 				</Grid>
+				<Divider sx={{marginLeft:'24px', marginRight:'24px',}}/>
+				<Typography className="carinfo-container__carname" paddingLeft={3} paddingTop={1}>
+					ĐÁNH GIÁ
+				</Typography>
+				<RatingItem/>
+				<RatingItem/>
+				<RatingItem/>
+				<RatingItem/>
+				<RatingItem/>
+				<Pagination count={10} shape="rounded" sx={{ alignSelf: 'center', justifySelf: 'flex-end', marginTop:'10px', marginBottom:'10px', }}/>
 			</Stack>
 			<Stack className="payment-container" padding={3}>
 				<Typography sx={{ fontWeight: 'bold', color: variables.textgreyercolor }} alignSelf="center">
@@ -364,7 +369,7 @@ function CarDetails() {
 						{numWithSpace(carinfo.servicefee + carinfo.rentprice)} đ x {carinfo.days} ngày
 					</Typography>
 				</Stack>
-        <Stack className="payment-container__pricebox" direction="row" justifyContent="space-between" alignItems="center">
+				<Stack className="payment-container__pricebox" direction="row" justifyContent="space-between" alignItems="center">
 					<Typography className="payment-container__smalltext">Phí bảo hiểm:</Typography>
 					<Typography className="payment-container__smalltext">{insurance && numWithSpace(insurance)} đ</Typography>
 				</Stack>
@@ -384,7 +389,7 @@ function CarDetails() {
 					ĐẶT XE
 				</Button>
 			</Stack>
-      <Contract openSignin={openSignin} setOpenSignin={setOpenSignin} handleApi={handleApi}/>
+			<Contract openSignin={openSignin} setOpenSignin={setOpenSignin} handleApi={handleApi} />
 		</Stack>
 	);
 }

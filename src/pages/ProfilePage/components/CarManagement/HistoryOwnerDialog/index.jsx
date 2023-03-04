@@ -229,7 +229,7 @@ function HistoryOwnerDialog(props) {
 					<Stack className="paymenthistory-container" padding={3}>
 						<Typography sx={{ fontWeight: 'bold', color: variables.textgreyercolor }} alignSelf="center">
 							<span className="paymenthistory-container__price">
-                                {historydetail.rentprice} đ
+                                {historydetail.rentprice && numWithSpace(historydetail.rentprice)} đ
                                 </span> /ngày
 						</Typography>
 						<Typography className="paymenthistory-container__title" sx={{ fontWeight: 'bold', color: variables.textblackcolor }}>

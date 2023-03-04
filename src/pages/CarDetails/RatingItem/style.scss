@@ -1,0 +1,8 @@
+@import '../../../assets/variable';
+
+.ratingitem-container {
+    &__name {
+        font-weight: 600 !important;
+        color: $text-greyer-color !important;
+    }
+}

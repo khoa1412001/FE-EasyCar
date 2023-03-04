@@ -1,9 +1,11 @@
 import * as React from 'react';
+import {
+	Button,
+	Box,
+	Stack,
+	Typography,
+} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import Button from '@mui/material/Button';
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/system';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
@@ -14,11 +16,13 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from "uuid";
 import RentalStatusDialog from '../RentalStatusDialog';
 import apiRentalHistory from 'apis/apiRentalHistory';
-import Box from '@mui/material/Box';
+import RatingDialog from 'components/RatingDialog';
+
 function HistoryItem(props) {
 	const { item } = props;
 	const [openHistoryDialog, setOpenHistoryDialog] = React.useState(false);
 	const [openRentalStatus, setOpenRentalStatus] = React.useState(false);
+	const [openRatingDialog, setOpenRatingDialog] = React.useState(false);
 	const [startdate, setStartdate] = React.useState(new Date(item.rentalDateStart));
 	const [enddate, setEnddate] = React.useState(new Date(item.rentalDateEnd));
 	const [rating, setRating] = React.useState(item.rating);
@@ -54,23 +58,20 @@ function HistoryItem(props) {
 		}
 	}
 
-	React.useEffect(() => {
-		const handleRating = () => {
-			if(!israteable() && (rating !== 0)){
-				const params = {
-					id: item._id,
-					rating: rating,
-				}
-				apiRentalHistory.updateRating(params).then(res => {
-					toast.success('Gửi đánh giá chuyến đi thành công !!!')
-					setTimeout(() => {window.location.reload(false)},2000)
-				}).catch(err =>{
-					toast.error(err.response.data.message)
-				})
+	const SendRating = () => {
+		if(!israteable() && (rating !== 0)){
+			const params = {
+				id: item._id,
+				rating: rating,
 			}
+			apiRentalHistory.updateRating(params).then(res => {
+				toast.success('Gửi đánh giá chuyến đi thành công !!!')
+				setTimeout(() => {window.location.reload(false)},2000)
+			}).catch(err =>{
+				toast.error(err.response.data.message)
+			})
 		}
-		handleRating()
-	},[rating])
+	}
 
 	const makePayment = () => {
 		const params = {
@@ -218,7 +219,20 @@ function HistoryItem(props) {
 					<StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className="rentalhistory-container-item__icon" />{' '}
 					{item.vehicleId.rating}
 				</Typography>
-				<Rating name="no-value" value={rating} disabled={israteable()} onChange={(event) => setRating(event.target.value)} sx={{ paddingTop: '20px' }} />
+				<Button
+				variant="outlined"
+				size="medium"
+				className="rentalhistory-container-item__rating"
+				disabled={israteable()}
+				onClick={() => setOpenRatingDialog(true)}
+				sx={{
+					fontWeight: 'bold',
+					width: '180px',
+					marginTop:'12px',
+				}}
+				>
+					ĐÁNH GIÁ
+				</Button>
 			</Stack>
 			<Stack width="200px">
 				<Typography
@@ -261,6 +275,7 @@ function HistoryItem(props) {
 			</Stack>
 			{openHistoryDialog && <HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog} rentalid={item._id}/>}
 			{openRentalStatus && <RentalStatusDialog openRentalStatus={openRentalStatus} setOpenRentalStatus={setOpenRentalStatus} id={item._id}/>}
+			{openRatingDialog && <RatingDialog openRatingDialog={openRatingDialog} setOpenRatingDialog={setOpenRatingDialog} rating={rating} setRating={setRating} SendRating={SendRating}/>}
 		</Stack>
 	);
 }

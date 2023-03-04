@@ -1,0 +1,14 @@
+@import '../../assets/variable';
+
+.reportcar-container {
+	&__title {
+		letter-spacing: 0.8px !important;
+		font-weight: bold !important;
+		color: $main-color;
+		text-transform: uppercase;
+	}
+	
+	&__carinfo {
+		color: $main-color;
+	}
+}

@@ -99,4 +99,8 @@
         background-color: white !important;
         border-color: $text-green-color !important;
     }
+
+    &__reportbutton:hover {
+        background-color: #BE4444 !important;
+    }
 }

@@ -17,6 +17,7 @@ import WalletManagement from "pages/ProfilePage/components/WalletManagement";
 import ActivatePage from "pages/ActivatePage";
 import ContractPaper from "components/ContractPaper";
 import RentalStatusUpdate from "pages/RentalStatusUpdate";
+import ReportPage from "pages/ReportPage";
 function ConfigRoute() {
   return (
     <Routes>
@@ -39,6 +40,7 @@ function ConfigRoute() {
       <Route path="details" element={<CarDetails />} />
       <Route path="/carstatus" element={<CarStatusUpdate/>}/>
       <Route path="/rentalstatus" element={<RentalStatusUpdate/>}/>
+      <Route path="/report" element={<ReportPage/>}/>
     </Routes>
   );
 }
