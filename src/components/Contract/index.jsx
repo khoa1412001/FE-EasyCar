@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, redirect } from 'react-router-dom';
 import './style.scss';
 function Contract(props) {
 	const { openSignin, setOpenSignin, handleApi } = props;
@@ -103,7 +103,8 @@ function Contract(props) {
 						onClick={() => {
 							handleApi()
 							setOpenSignin(false)
-							navigate('/profile/history')
+							navigate("/profile/history")
+							window.location.reload()
 						}}
 						sx={{
 							width:'300px',

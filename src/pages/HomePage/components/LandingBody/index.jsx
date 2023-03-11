@@ -21,15 +21,18 @@ import apiUtils from 'apis/apiUtils';
 
 function LandingBody() {
 	const [suggestion, setSuggestion] = React.useState([]);
-	const [startdatetime, setStartDatetime] = React.useState(moment());
-	const [enddatetime, setEndDatetime] = React.useState(moment());
+	const [startdatetime, setStartDatetime] = React.useState(moment().add(1, 'days'));
+	const [enddatetime, setEndDatetime] = React.useState(moment().add(2, 'days'));
 	const [location, setLocation] = React.useState('');
-	const [error, setError] = React.useState({ startdate: false, enddate: false });
+	const [error, setError] = React.useState({ startdate: false, enddate: false, location: false });
 	const [latitude, setLatitude] = React.useState('');
 	const [longitude,setLongtitude] = React.useState('');
 	const navigate = useNavigate();
 	const handleFind = () => {
-		if(!error.startdate && !error.enddate){
+		if(latitude === ''){
+			setError({startdate: error.startdate, enddate: error.enddate, location: true });
+		}
+		if(!error.startdate && !error.enddate && (latitude !== '')){
 			navigate(`/fillter?startdate=${startdatetime.unix()}&enddate=${enddatetime.unix()}&address=${location}&lat=${latitude}&lon=${longitude}`);
 		}
 	};
@@ -112,6 +115,7 @@ function LandingBody() {
 								{...params}
 								placeholder="Nhập vị trí thành phố, quận, đường..."
 								variant="outlined"
+								error={error.location}
 								size="normal"
 								value={location}
 								onChange={(event) => {

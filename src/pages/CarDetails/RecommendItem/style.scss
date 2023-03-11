@@ -1,0 +1,19 @@
+@import '../../../assets/variable';
+
+.recommend-item-container {
+
+   &__img {
+        height: auto; 
+        width: auto; 
+        max-height: 190px; 
+        max-width: 290px;
+        align-self: center;
+   }
+
+   &__icon {
+    position: relative;
+    top: 4px;
+    }
+
+ 
+}

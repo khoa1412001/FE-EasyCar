@@ -2,7 +2,7 @@ import * as React from 'react';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import './style.scss';
-import { Typography, Box, Avatar, Rating, Divider, Pagination } from '@mui/material';
+import { Typography, Box, Avatar, Rating, Divider} from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 function RatingItem() {

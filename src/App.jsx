@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
 import CheckAuthentication from 'components/CheckAuthentication';
-
+import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
+import variables from 'assets/_variable.scss';
 function App() {
 	const accessToken = useSelector((state) => state.auth.accessToken);
 	const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Header />
+			<ChatBubbleRoundedIcon className='chat-icon' sx={{position:'fixed', zIndex: 10, color: variables.bluecolor, bottom: 20, right: 20, fontSize:'55px' }} />
 			<CheckAuthentication>
 				<ConfigRoute />
 				<ToastContainer

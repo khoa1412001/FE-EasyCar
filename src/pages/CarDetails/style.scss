@@ -5,6 +5,26 @@
     font-weight: bold !important;
 }
 
+.recommend-container {
+    border-radius: 5px;
+    border-style: solid;
+    border-color: $main-lighter-color;
+    border-width: 1px;
+    background-color: #FFF;
+    height: 310px;
+    width: 1267px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+.swiper-slide {
+    background: #fff;
+    /* Center slide text vertically */
+}
+
 .carinfo-container {
     min-height: 1200px;
     height: fit-content;
