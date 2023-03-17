@@ -26,6 +26,7 @@ function HistoryItem(props) {
 	const [startdate, setStartdate] = React.useState(new Date(item.rentalDateStart));
 	const [enddate, setEnddate] = React.useState(new Date(item.rentalDateEnd));
 	const [rating, setRating] = React.useState(item.rating);
+	const [comment, setComment] = React.useState('');
 	const updatestatus = () => {
 		window.open(`/rentalstatus?id=${item._id}`,'_blank')
 	}
@@ -63,6 +64,7 @@ function HistoryItem(props) {
 			const params = {
 				id: item._id,
 				rating: rating,
+				comment: comment,
 			}
 			apiRentalHistory.updateRating(params).then(res => {
 				toast.success('Gửi đánh giá chuyến đi thành công !!!')
@@ -275,7 +277,7 @@ function HistoryItem(props) {
 			</Stack>
 			{openHistoryDialog && <HistoryDetail openHistoryDialog={openHistoryDialog} setOpenHistoryDialog={setOpenHistoryDialog} rentalid={item._id}/>}
 			{openRentalStatus && <RentalStatusDialog openRentalStatus={openRentalStatus} setOpenRentalStatus={setOpenRentalStatus} id={item._id}/>}
-			{openRatingDialog && <RatingDialog openRatingDialog={openRatingDialog} setOpenRatingDialog={setOpenRatingDialog} rating={rating} setRating={setRating} SendRating={SendRating}/>}
+			{openRatingDialog && <RatingDialog openRatingDialog={openRatingDialog} setOpenRatingDialog={setOpenRatingDialog} rating={rating} setRating={setRating} SendRating={SendRating} comment={comment} setComment={setComment}/>}
 		</Stack>
 	);
 }

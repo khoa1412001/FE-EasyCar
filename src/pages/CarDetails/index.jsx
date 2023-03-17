@@ -53,7 +53,12 @@ function CarDetails() {
 	const [checkedbasic, setCheckedbasic] = React.useState(true);
 	const [checkedpremium, setCheckedpremium] = React.useState(false);
 	const [insurancetype, setInsurancetype] = React.useState(0);
+	const [carRating, setCarRating] = React.useState([]);
+	const [page,setPage] = React.useState(0);
+	const [totalpage, setTotalpage] = React.useState(1);
+	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 4 - carRating.length) : 0;
 	const navigate = useNavigate();
+
 	React.useEffect(() => {
 		const getInfo = () => {
 			const params = {
@@ -65,6 +70,16 @@ function CarDetails() {
 				.getCarDetails(params)
 				.then((res) => {
 					setCarinfo(res.data);
+				})
+				.catch((err) => {
+					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
+				});
+
+			apiCar
+				.getCarRating(params)
+				.then((res) => {
+					setCarRating(res.data);
+					setTotalpage(Math.ceil(res.data.length/4))
 				})
 				.catch((err) => {
 					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
@@ -145,6 +160,10 @@ function CarDetails() {
 				toast.success('Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!');
 			})
 			.catch((err) => toast.error(err.response.data.message));
+	};
+
+	const handleChange = (event, page) => {
+		setPage(page - 1);
 	};
 
 	return (
@@ -258,14 +277,12 @@ function CarDetails() {
 					<Typography className="carinfo-container__carname" paddingLeft={3} paddingTop={1}>
 						ĐÁNH GIÁ
 					</Typography>
-					<RatingItem />
-					<RatingItem />
-					<RatingItem />
-					<RatingItem />
+					{(carRating.slice(page * 4, page * 4 + 4)).map((item) =>(<RatingItem item={item}/>))}
 					<Pagination
-						count={10}
+						count={totalpage}
 						shape="rounded"
-						sx={{ alignSelf: 'center', justifySelf: 'flex-end', marginTop: '10px', marginBottom: '10px' }}
+						sx={{alignSelf: 'center', justifySelf: 'flex-end', marginTop: '10px', marginBottom: '10px' }}
+						onChange={handleChange}
 					/>
 				</Stack>
 				<Stack className="payment-container" padding={3}>

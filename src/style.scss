@@ -1,0 +1,10 @@
+@import 'assets/variable';
+
+.react-chatbot-kit-chat-container {
+    position: fixed ;
+    z-index: 11;
+    bottom: 33px;
+    right: 80px;
+    width: 320px;
+    display: none;
+}

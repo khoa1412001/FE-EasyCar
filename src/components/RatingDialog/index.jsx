@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 function RatingDialog(props) {
-	const { openRatingDialog, setOpenRatingDialog, rating, setRating, SendRating } = props;
+	const { openRatingDialog, setOpenRatingDialog, rating, setRating, SendRating, comment, setComment } = props;
 	return (
 		<Dialog
 			open={openRatingDialog}
@@ -29,9 +29,10 @@ function RatingDialog(props) {
 			</DialogTitle>
 			<DialogContent align="center" dividers="true">
 			<TextField
-					placeholder="Nhập biển số xe"
+					placeholder="Nhập đánh giá của bạn"
 					variant="outlined"
-					value='MITSUBISHI XPANDER 2022'
+					value={comment}
+					onChange={(event) => setComment(event.target.value)}
 					size='small'
 					sx={{width: '500px'}}
 					multiline
@@ -44,6 +45,7 @@ function RatingDialog(props) {
 						onClick={() => {
 							SendRating();
 							setOpenRatingDialog(false);
+							window.location.reload();
 						}}
 						sx={{
 							width: '300px',

@@ -22,11 +22,11 @@ import apiUtils from 'apis/apiUtils';
 function LandingBody() {
 	const [suggestion, setSuggestion] = React.useState([]);
 	const [startdatetime, setStartDatetime] = React.useState(moment().add(1, 'days'));
-	const [enddatetime, setEndDatetime] = React.useState(moment().add(2, 'days'));
-	const [location, setLocation] = React.useState('');
+	const [enddatetime, setEndDatetime] = React.useState(moment().add(2, 'days').startOf('day'));
+	const [location, setLocation] = React.useState('153 Lê Hoàng Phái, Phường 17, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam');
 	const [error, setError] = React.useState({ startdate: false, enddate: false, location: false });
-	const [latitude, setLatitude] = React.useState('');
-	const [longitude,setLongtitude] = React.useState('');
+	const [latitude, setLatitude] = React.useState('10.8421829');
+	const [longitude,setLongtitude] = React.useState('106.6746799');
 	const navigate = useNavigate();
 	const handleFind = () => {
 		if(latitude === ''){
@@ -108,6 +108,7 @@ function LandingBody() {
 					<Autocomplete
 						freeSolo
 						disableClearable
+						value={location}
 						options={suggestion.map((option) => option.address)}
 						onSelect={(event) => setLocation(event.target.value)}
 						renderInput={(params) => (

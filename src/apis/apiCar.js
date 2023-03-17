@@ -75,5 +75,10 @@ const apiCar = {
         const res = await axiosClientWithToken.get(`/my-vehicle/detail-status/${params.id}`)
         return res.data;
     },
+
+    getCarRating: async (params) => {
+        const res = await axiosClient.get(`/vehicle/rating/${params.id}`)
+        return res.data;
+    },
 }
 export default apiCar;
