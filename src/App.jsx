@@ -7,11 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
 import CheckAuthentication from 'components/CheckAuthentication';
-import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import variables from 'assets/_variable.scss'; 
 import ChatbotComponent from 'components/Chatbot';
 import './style.scss';
 import * as React from 'react';
+import chaticon from "assets/img/chat.png";
+
 function App() {
 	const [chatbotState, setChatbotState] = React.useState(false)
 	const accessToken = useSelector((state) => state.auth.accessToken);
@@ -41,7 +42,7 @@ function App() {
 		<BrowserRouter>
 			<Header />
 			<ChatbotComponent />
-			<ChatBubbleRoundedIcon className='chat-icon' onClick={turnOnOffChatbot} sx={{position:'fixed', zIndex: 10, color: variables.bluecolor, bottom: 20, right: 20, fontSize:'55px' }} />
+			<img src={chaticon} className='chat-icon' onClick={turnOnOffChatbot}></img>
 			<CheckAuthentication>
 				<ConfigRoute />
 				<ToastContainer

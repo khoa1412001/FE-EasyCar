@@ -21,7 +21,7 @@ import apiUtils from 'apis/apiUtils';
 
 function LandingBody() {
 	const [suggestion, setSuggestion] = React.useState([]);
-	const [startdatetime, setStartDatetime] = React.useState(moment().add(1, 'days'));
+	const [startdatetime, setStartDatetime] = React.useState(moment().add(1, 'days').startOf('day'));
 	const [enddatetime, setEndDatetime] = React.useState(moment().add(2, 'days').startOf('day'));
 	const [location, setLocation] = React.useState('153 Lê Hoàng Phái, Phường 17, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam');
 	const [error, setError] = React.useState({ startdate: false, enddate: false, location: false });

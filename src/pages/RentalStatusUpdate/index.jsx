@@ -38,7 +38,8 @@ function RentalStatusUpdate() {
 		params.append('statusvideo',statusvideo);
 		apiRentalHistory.updateRentalStatus(params).then(res => {
 			toast.success("Cập nhật trạng thái cho xe thành công!!")
-			setTimeout(() => {navigate('/profile/carmanage')},3000)
+			setTimeout(() => {navigate('/profile/history')},3000)
+			window.location.reload()
 		}
 		).catch(err => toast.error(err.response.data.message))
 	}

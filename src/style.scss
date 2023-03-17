@@ -8,3 +8,16 @@
     width: 320px;
     display: none;
 }
+
+.react-chatbot-kit-chat-header {
+    background-color: $main-color;
+    color: white;
+}
+
+.chat-icon {
+    position: fixed;
+    z-index: 11;
+    height: 55px;
+    bottom: 30px;
+    right: 20px;
+}

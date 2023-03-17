@@ -446,6 +446,18 @@ function CarDetails() {
 					<SwiperSlide>
 						<RecommendItem/>
 					</SwiperSlide>
+					<SwiperSlide>
+						<RecommendItem/>
+					</SwiperSlide>
+					<SwiperSlide>
+						<RecommendItem/>
+					</SwiperSlide>
+					<SwiperSlide>
+						<RecommendItem/>
+					</SwiperSlide>
+					<SwiperSlide>
+						<RecommendItem/>
+					</SwiperSlide>
 				</Swiper>
 			</Box>
 		</Stack>

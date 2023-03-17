@@ -36,6 +36,7 @@ function VehicleSignupBody() {
 	const [modelimage, setModelimage] = React.useState('');
 	const [turnoffback, setTurnofback] = React.useState(false);
 	const [turnoffforward, setTurnofforward] = React.useState(false);
+	
 	const navigate = useNavigate();
 	React.useEffect(() => {
 		const getBrandList = () => {
