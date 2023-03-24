@@ -1,4 +1,4 @@
-import { Typography, Stack, Button, Box, Divider } from '@mui/material';
+import { Typography, Stack, Button, Box, Divider, Autocomplete, TextField } from '@mui/material';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
 import * as React from 'react';
@@ -7,12 +7,18 @@ import Grid from '@mui/material/Unstable_Grid2';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 function ImageForm(props) {
 	const { imgfront, setImgfront, imgrear, setImgrear, imgleft, setImgleft, imgright, setImgright, handleSent } = props;
-	return (
-		<Stack bgcolor="white" className="imageform-container">
-			<Stack bgcolor="white" p={1} spacing={2}>
-				<Typography align="center" className="imageform-container__text">
-					Ảnh mặt trước
-				</Typography>
+	const [state, setState] = React.useState(1);
+	const options = [
+		{ label: 'Ảnh mặt trước', id: 1 },
+		{ label: 'Ảnh mặt sau', id: 2 },
+		{ label: 'Ảnh mặt trái', id: 3 },
+		{ label: 'Ảnh mặt phải', id: 4 },
+	];
+	const renderComponent = (state) => {
+		switch (state) {
+			case 1:
+				return (
+				<>
 				<img className="imageform-container__img" src={imgfront ? URL.createObjectURL(imgfront) : ''} key={imgfront}></img>
 				<Button
 					variant="outlined"
@@ -37,10 +43,10 @@ function ImageForm(props) {
 						}}
 					/>
 				</Button>
-				<Divider/>
-				<Typography align="center" className="imageform-container__text">
-					Ảnh mặt sau
-				</Typography>
+				</>)
+			case 2:
+				return (
+				<>
 				<img className="imageform-container__img" src={imgrear ? URL.createObjectURL(imgrear) : ''} key={imgrear}></img>
 				<Button
 					variant="outlined"
@@ -66,10 +72,10 @@ function ImageForm(props) {
 						}}
 					/>
 				</Button>
-				<Divider/>		
-				<Typography align="center" className="imageform-container__text">
-					Ảnh bên trái
-				</Typography>
+				</>)
+			case 3:
+				return (
+				<>
 				<img className="imageform-container__img" src={imgleft ? URL.createObjectURL(imgleft) : ''} key={imgleft}></img>
 				<Button
 					variant="outlined"
@@ -95,10 +101,10 @@ function ImageForm(props) {
 						}}
 					/>
 				</Button>
-				<Divider/>		
-				<Typography align="center" className="imageform-container__text">
-					Ảnh bên phải
-				</Typography>
+				</>)
+			case 4:
+				return (
+				<>
 				<img className="imageform-container__img" src={imgright ? URL.createObjectURL(imgright) : ''} key={imgright}></img>
 				<Button
 					variant="outlined"
@@ -124,6 +130,25 @@ function ImageForm(props) {
 						}}
 					/>
 				</Button>
+				</>)
+		}
+	}
+	return (
+		<Stack bgcolor="white" className="imageform-container">
+			<Stack bgcolor="white" p={1} spacing={2}>
+				<Autocomplete
+					disablePortal
+					disableClearable
+					id="combo-box-demo"
+					options={options}
+					sx={{ width: 260, alignSelf: 'center' }}
+					defaultValue={options[0]}
+					onChange={(event, newValue) => {
+						setState(newValue.id);
+					}}
+					renderInput={(params) => <TextField {...params} size='small' />}
+				/>
+				{renderComponent(state)}
 				<Divider/>
 				<Button
 					className="imageform-container__sent"

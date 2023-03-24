@@ -10,6 +10,7 @@ import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loading from 'components/Loading';
 function VehicleSignupBody() {
 	const user = useSelector((state) => state.user.info);
 	const [step, setStep] = useState(1);
@@ -36,7 +37,7 @@ function VehicleSignupBody() {
 	const [modelimage, setModelimage] = React.useState('');
 	const [turnoffback, setTurnofback] = React.useState(false);
 	const [turnoffforward, setTurnofforward] = React.useState(false);
-	
+	const [uploading, setUploading] = React.useState(false);
 	const navigate = useNavigate();
 	React.useEffect(() => {
 		const getBrandList = () => {
@@ -73,6 +74,7 @@ function VehicleSignupBody() {
 	}
 
 	const handleSent = () => {
+		setUploading(true)
 		let params = new FormData();
 		params.append('licenseplate', licenseplate);
 		params.append('brand', brand);
@@ -191,7 +193,7 @@ function VehicleSignupBody() {
 		checkStep()
 	}, [step])
 	return (
-		<Stack justifyContent="center" direction="row" bgcolor="#e8eaef">
+		<Stack justifyContent="center" direction="row" bgcolor="#e8eaef" minHeight={600}>
 			<Stack maxWidth="800px" width="800px" py={5} spacing={2}>
 				<Stack direction="row" justifyContent="center" bgcolor="white" spacing={4} py={2}>
 					<Stack>
@@ -253,6 +255,7 @@ function VehicleSignupBody() {
 					</Button>
 				</Stack>
 			</Stack>
+			{uploading &&<Loading/>}
 		</Stack>
 	);
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { parse, stringify } from 'qs';
-// const baseURL='http://localhost:5000/api';
-const baseURL='https://be-easycar.vercel.app/api';
+const baseURL='http://localhost:5000/api';
+// const baseURL='https://be-easycar.vercel.app/api';
 export const axiosClient = axios.create({
     baseURL: baseURL,
     headers: {

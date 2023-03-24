@@ -118,7 +118,6 @@ function LandingBody() {
 								variant="outlined"
 								error={error.location}
 								size="normal"
-								value={location}
 								onChange={(event) => {
 									setLocation(event.target.value);
 								}}
