@@ -235,7 +235,7 @@ function CarItem(props) {
 			</Stack>
 			{openStatusList && <CarStatusList openStatusList={openStatusList} setOpenStatusList={setOpenStatusList} vehicleId={vehicleId}/> }
 			{openHistoryList && <HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList} vehicleId={vehicleId}/>}
-			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />
+			{openDialog && <ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />}
 		</Stack>
 	);
 }

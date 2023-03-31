@@ -11,6 +11,7 @@ import CarItem from './CarItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import apiUser from 'apis/apiUser';
 import apiCar from 'apis/apiCar';
+import CarItem2 from './CarItem2';
 function CarManagement() {
 	const [carinforlist, setCarinforlist] = React.useState([]);
 	const nextPage = () => {};
@@ -18,15 +19,16 @@ function CarManagement() {
 		apiCar.getOwnedVehicle().then((res) => setCarinforlist(res.data));
 	}, []);
 	return (
-		<Stack className="carmanagement-container" paddingLeft={1} spacing={1} marginLeft="5px">
+		<Stack className="carmanagement-container" spacing={1} marginLeft="5px">
 			<InfiniteScroll
 				dataLength={carinforlist.length}
 				next={() => nextPage()}
 				hasMore={false}
 				scrollableTarget="carmanagement-container"
+				style= {{overflow: 'hidden'}}
 			>
 				{carinforlist.map((item) => (
-					<CarItem item={item} />
+					<CarItem2 item={item} />
 				))}
 			</InfiniteScroll>
 		</Stack>

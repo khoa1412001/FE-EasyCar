@@ -99,9 +99,15 @@ function HistoryDetail(props) {
 				<Typography className="payment-container__smalltext">Bạn trả tối đa 20% tổng giá trị thiệt hại</Typography></>)
 		}
 	}
+
 	const handleContract = () => {
 		window.open(`/contract?id=${rentalid}`,'_blank')
 	}
+
+	const handleReport = () => {
+		window.open(`/report?id=${rentalid}`,'_blank')
+	}
+
 	return (
 		<Dialog
 			open={openHistoryDialog}
@@ -377,7 +383,7 @@ function HistoryDetail(props) {
 							IN HỘP ĐỒNG
 						</Button>
 						<Divider sx={{ marginBottom: '5px' }} />
-						<Button variant='contained' className='paymenthistory-container__reportbutton' sx={{backgroundColor: variables.redcolor}}>
+						<Button variant='contained' className='paymenthistory-container__reportbutton' sx={{backgroundColor: variables.redcolor}} onClick={handleReport}>
 							BÁO XẤU
 						</Button>
 					</Stack>

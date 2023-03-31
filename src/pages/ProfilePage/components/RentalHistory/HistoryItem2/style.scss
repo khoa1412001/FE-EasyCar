@@ -1,24 +1,24 @@
 @import '../../../../../assets/variable';
 
 .rentalhistory-container-item {
-    width: 1020px;
-    min-height: 144px;
+    width: 1032px;
+    min-height: 310px;
     border-radius: 5px;
     background-color: white;
 
     &__img {
         height: auto; 
         width: auto; 
-        max-height: 140px; 
-        max-width: 240px;
+        max-height: 310px; 
+        max-width: 415px;
     }
 
     &__name {
-        padding-bottom: 5px;
+        padding-bottom: 8px;
     }
 
     &__option {
-        padding-bottom: 10px;
+        padding-bottom: 8px;
     }
     
     &__rebook:hover {
@@ -31,6 +31,11 @@
         color: white;
         background-color: $blue-color !important;
         border-color: $blue-color !important;
+    }
+
+    &__location {
+        color: $text-green-color;
+        padding-bottom: 8px;
     }
 
     &__icon {   

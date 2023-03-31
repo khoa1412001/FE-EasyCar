@@ -41,7 +41,7 @@ function Item2(props) {
 
 	return (
 		<Stack direction={'column'} className="caritem-container" marginTop={1} marginLeft={1} onClick={handleDetails}>
-			<Box width="400px" height="310px">
+			<Box width="400px" height="310px" sx={{minWidth:'400px',display:'grid',}}>
 				<img
 					className="caritem-container__img"
 					src={item.vehicleimage[0]}
