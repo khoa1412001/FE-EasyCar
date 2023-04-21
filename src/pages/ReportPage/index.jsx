@@ -90,7 +90,7 @@ function ReportPage() {
 						<FormControlLabel control={<Checkbox size="small" onChange={(event) => {setOther(event.target.checked)}}/>} label="Khác" />
 					</Stack>
 					<TextField
-						placeholder="Nhập biển số xe"
+						placeholder="Nhập nội dung báo xấu"
 						variant="outlined"
 						value={comment}
 						onChange={(event) => setComment(event.target.value)}

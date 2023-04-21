@@ -59,7 +59,7 @@ function Item2(props) {
 						}}
 					>
 						{item.brand} {item.model} {item.year}{' '}
-						- 4.0 <StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className='icon'/>
+						- {item.rating} <StarIcon fontSize="small" htmlColor={variables.mainyellowcolor} className='icon'/>
 					</Typography>
 					<Typography
 						className="caritem-container__option"

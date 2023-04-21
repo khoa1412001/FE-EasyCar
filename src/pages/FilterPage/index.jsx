@@ -157,7 +157,7 @@ function FilterPage() {
 					cartypefillter.push(item.value);
 				}
 
-				if (item.select === false) {
+				if (item.selected === false) {
 					const index = cartypefillter.indexOf(item.value);
 					if (index > -1) {
 						cartypefillter.splice(index, 1);
