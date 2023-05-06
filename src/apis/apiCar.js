@@ -80,5 +80,25 @@ const apiCar = {
         const res = await axiosClient.get(`/vehicle/rating/${params.id}`)
         return res.data;
     },
+
+    getOwnedCarDetail: async (params) => {
+        const res = await axiosClientWithToken.get(`/my-vehicle/detail-vehical/${params.id}`)
+        return res.data;
+    },
+
+    updateVehicleRentPrice: async (params) => {
+        const res = await axiosClientWithToken.post(`/my-vehicle/update-price/${params.id}`,params)
+        return res.data;
+    },
+
+    updateVehicleInfo: async (params) => {
+        const res = await axiosClientWithToken.post(`/my-vehicle/update-infor/${params.id}`,params)
+        return res.data;
+    },
+
+    updateVehicleImage: async (params) => {
+        const res = await axiosClientWithTokenMultiPart.post(`/my-vehicle/update-image/`,params)
+        return res.data;
+    },
 }
 export default apiCar;

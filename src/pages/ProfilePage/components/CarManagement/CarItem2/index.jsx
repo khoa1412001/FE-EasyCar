@@ -13,7 +13,7 @@ import ConfirmDialog from 'components/ConfirmDialog';
 import apiCar from 'apis/apiCar';
 import { toast } from 'react-toastify';
 import Box from '@mui/material/Box';
-
+import CarUpdateDialog from '../CarUpdateDialog';
 function CarItem2(props) {
 	const { item } = props;
 	const [handleApi, setHandleApi] = React.useState(() => () => {
@@ -22,6 +22,7 @@ function CarItem2(props) {
 	const [text, setText] = React.useState('');
 	const [openDialog, setOpenDialog] = React.useState(false);
 	const [vehicleId, setVehicleId] = React.useState(item._id);
+	const [openCarUpdateDialog, setOpenCarUpdateDialog] = React.useState(false);
 	const handlePostpone = () => {
 		const params = {
 			id: item._id,
@@ -197,9 +198,24 @@ function CarItem2(props) {
 							fontWeight: 'bold',
 							width: '180px ',
 							marginBottom: '8px',
+						
 						}}
 					>
 						LỊCH SỬ
+					</Button>
+					<Button
+						variant="outlined"
+						size="medium"
+						className="carmanagement-container-item__history"
+						onClick={() => setOpenCarUpdateDialog(true)}
+						sx={{
+							fontWeight: 'bold',
+							width: '180px ',
+							marginBottom: '8px',
+							marginLeft: '8px',
+						}}
+					>
+						CẬP NHẬT
 					</Button>
 				</Stack>
 				<Stack justifyContent={'center'} direction="row" spacing={1} sx={{ width: '100%' }}>
@@ -247,6 +263,9 @@ function CarItem2(props) {
 			)}
 			{openHistoryList && (
 				<HistoryList openHistoryList={openHistoryList} setOpenHistoryList={setOpenHistoryList} vehicleId={vehicleId} />
+			)}
+			{openCarUpdateDialog && (
+				<CarUpdateDialog openCarUpdateDialog={openCarUpdateDialog} setOpenCarUpdateDialog={setOpenCarUpdateDialog} vehicleId={vehicleId} />
 			)}
 			<ConfirmDialog openDialog={openDialog} setOpenDialog={setOpenDialog} text={text} handleApi={handleApi} />
 		</Stack>
