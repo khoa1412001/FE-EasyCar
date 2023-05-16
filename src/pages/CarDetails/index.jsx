@@ -54,7 +54,7 @@ function CarDetails() {
 	const [checkedpremium, setCheckedpremium] = React.useState(false);
 	const [insurancetype, setInsurancetype] = React.useState(0);
 	const [carRating, setCarRating] = React.useState([]);
-	const [page,setPage] = React.useState(0);
+	const [page, setPage] = React.useState(0);
 	const [totalpage, setTotalpage] = React.useState(1);
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 4 - carRating.length) : 0;
 	const navigate = useNavigate();
@@ -79,7 +79,7 @@ function CarDetails() {
 				.getCarRating(params)
 				.then((res) => {
 					setCarRating(res.data);
-					setTotalpage(Math.ceil(res.data.length/4))
+					setTotalpage(Math.ceil(res.data.length / 4));
 				})
 				.catch((err) => {
 					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
@@ -240,48 +240,43 @@ function CarDetails() {
 						</Grid>
 						<Grid item xs={9} spacing={2}>
 							<Typography className="carinfo-container__text">
-								{/* Quy định khác:
-              <br />- Sử dụng xe đúng mục đích.
-              <br />- Không sử dụng xe thuê vào mục đích phi pháp, trái pháp
-              luật.
-              <br />- Không sử dụng xe thuê để cầm cố, thế chấp.
-              <br />- Không hút thuốc, nhả kẹo cao su, xả rác trong xe.
-              <br />- Không chở hàng quốc cấm dễ cháy nổ.
-              <br />- Không chở hoa quả, thực phẩm nặng mùi trong xe.
-              <br />- Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách hàng
-              vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe.
-              <br />- Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi
-              tuyệt vời ! */}
 								<pre style={{ fontFamily: 'inherit' }}>{carinfo.rentterm}</pre>
 							</Typography>
 						</Grid>
 					</Grid>
+
 					<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
-						<Grid item xs={3}>
+						<Grid item xs={2}>
 							<Typography className="carinfo-container__spectext" sx={{ fontWeight: 'bold' }}>
-								CHỦ XE
+								VỊ TRÍ
 							</Typography>
 						</Grid>
-						<Grid item xs={9} spacing={2}>
-							<Stack>
-								<Stack direction="row" alignItems={'center'} spacing={1}>
-									<Avatar alt="Remy Sharp" src={carinfo.ownerId && carinfo.ownerId.avatar} sx={{ width: 95, height: 95 }} />
-									<Stack>
-										<Typography className="carinfo-container__name">{carinfo.ownerId && carinfo.ownerId.username}</Typography>
-									</Stack>
-								</Stack>
-							</Stack>
+						<Grid item xs={10} spacing={2}>
+							{carinfo.latitude && (
+								<iframe
+								width="100%"
+								height="600"
+								frameborder="0"
+								marginheight="0"
+								marginwidth="0"
+								src={"https://maps.google.com/maps?q="+String(carinfo.latitude)+","+String(carinfo.longitude)+"&t=&z=15&ie=UTF8&iwloc=&output=embed"}
+								></iframe>
+							)}
+
 						</Grid>
 					</Grid>
+
 					<Divider sx={{ marginLeft: '24px', marginRight: '24px' }} />
 					<Typography className="carinfo-container__carname" paddingLeft={3} paddingTop={1}>
 						ĐÁNH GIÁ
 					</Typography>
-					{(carRating.slice(page * 4, page * 4 + 4)).map((item) =>(<RatingItem item={item}/>))}
+					{carRating.slice(page * 4, page * 4 + 4).map((item) => (
+						<RatingItem item={item} />
+					))}
 					<Pagination
 						count={totalpage}
 						shape="rounded"
-						sx={{alignSelf: 'center', justifySelf: 'flex-end', marginTop: '10px', marginBottom: '10px' }}
+						sx={{ alignSelf: 'center', justifySelf: 'flex-end', marginTop: '10px', marginBottom: '10px' }}
 						onChange={handleChange}
 					/>
 				</Stack>
@@ -427,36 +422,37 @@ function CarDetails() {
 				</Stack>
 				<Contract openSignin={openSignin} setOpenSignin={setOpenSignin} handleApi={handleApi} />
 			</Stack>
-			<Box className="recommend-container" alignSelf="center" marginBottom={2} bgcolor={variables.maingreycolor} padding='1px'>
-				<Swiper
-					slidesPerView={4}
-					spaceBetween={10}
-					modules={[swiper.Pagination]}
-					className="mySwiper"
-				>
+			<Box
+				className="recommend-container"
+				alignSelf="center"
+				marginBottom={2}
+				bgcolor={variables.maingreycolor}
+				padding="1px"
+			>
+				<Swiper slidesPerView={4} spaceBetween={10} modules={[swiper.Pagination]} className="mySwiper">
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 					<SwiperSlide>
-						<RecommendItem/>
+						<RecommendItem />
 					</SwiperSlide>
 				</Swiper>
 			</Box>
