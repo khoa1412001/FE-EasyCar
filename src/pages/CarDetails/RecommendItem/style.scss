@@ -1,19 +1,16 @@
 @import '../../../assets/variable';
 
 .recommend-item-container {
+	cursor: pointer;
+	&__img {
+		height: 190px;
+		width: 307px;
+		object-fit: cover;
+		align-self: center;
+	}
 
-   &__img {
-        height: auto; 
-        width: auto; 
-        max-height: 190px; 
-        max-width: 290px;
-        align-self: center;
-   }
-
-   &__icon {
-    position: relative;
-    top: 4px;
-    }
-
- 
+	&__icon {
+		position: relative;
+		top: 4px;
+	}
 }

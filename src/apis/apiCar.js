@@ -81,6 +81,11 @@ const apiCar = {
         return res.data;
     },
 
+    getCarRecommend: async (params) => {
+        const res = await axiosClient.get(`/vehicle/recommend/${params.id}?startdate=${params.startdate}&enddate=${params.enddate}`)
+        return res.data;
+    },
+
     getOwnedCarDetail: async (params) => {
         const res = await axiosClientWithToken.get(`/my-vehicle/detail-vehical/${params.id}`)
         return res.data;
@@ -100,5 +105,6 @@ const apiCar = {
         const res = await axiosClientWithTokenMultiPart.post(`/my-vehicle/update-image/`,params)
         return res.data;
     },
+
 }
 export default apiCar;

@@ -56,6 +56,7 @@ function CarDetails() {
 	const [carRating, setCarRating] = React.useState([]);
 	const [page, setPage] = React.useState(0);
 	const [totalpage, setTotalpage] = React.useState(1);
+	const [recommend, setRecommend] = React.useState([]);
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * 4 - carRating.length) : 0;
 	const navigate = useNavigate();
 
@@ -80,6 +81,16 @@ function CarDetails() {
 				.then((res) => {
 					setCarRating(res.data);
 					setTotalpage(Math.ceil(res.data.length / 4));
+				})
+				.catch((err) => {
+					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
+				});
+
+			
+			apiCar
+				.getCarRecommend(params)
+				.then((res) => {
+					setRecommend(res.data);
 				})
 				.catch((err) => {
 					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
@@ -430,30 +441,10 @@ function CarDetails() {
 				padding="1px"
 			>
 				<Swiper slidesPerView={4} spaceBetween={10} modules={[swiper.Pagination]} className="mySwiper">
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
-					<SwiperSlide>
-						<RecommendItem />
-					</SwiperSlide>
+					{recommend.map((item) =>(
+						<SwiperSlide>
+							<RecommendItem item={item}/>
+						</SwiperSlide>))}
 				</Swiper>
 			</Box>
 		</Stack>
