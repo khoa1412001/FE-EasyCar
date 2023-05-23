@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { parse, stringify } from 'qs';
-const baseURL='http://localhost:5000/api';
+
+const baseURL= process.env.REACT_APP_BE_URL;
 // const baseURL='https://be-easycar.vercel.app/api';
-const botURL = 'http://localhost:5005/webhooks/rest/webhook'
+const botURL = process.env.REACT_APP_BOT_URL;
+
 export const axiosBotClient = axios.create({
     baseURL: botURL,
     headers: {
