@@ -86,7 +86,6 @@ function CarDetails() {
 					toast.error('Lỗi hệ thống, vui lòng thử lại sau!!');
 				});
 
-			
 			apiCar
 				.getCarRecommend(params)
 				.then((res) => {
@@ -257,6 +256,23 @@ function CarDetails() {
 					</Grid>
 
 					<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
+						<Grid item xs={3}>
+							<Typography className="carinfo-container__spectext" sx={{ fontWeight: 'bold' }}>
+								CHỦ XE
+							</Typography>
+						</Grid>
+						<Grid item xs={9} spacing={2}>
+							<Stack>
+								<Stack direction="row" alignItems={'center'} spacing={1}>
+									<Avatar alt="Remy Sharp" src={carinfo.ownerId && carinfo.ownerId.avatar} sx={{ width: 95, height: 95 }} />
+									<Stack>
+										<Typography className="carinfo-container__name">{carinfo.ownerId && carinfo.ownerId.username}</Typography>
+									</Stack>
+								</Stack>
+							</Stack>
+						</Grid>
+					</Grid>
+					<Grid container justifyContent="center" paddingLeft={3} paddingRight={3} marginBottom={3}>
 						<Grid item xs={2}>
 							<Typography className="carinfo-container__spectext" sx={{ fontWeight: 'bold' }}>
 								VỊ TRÍ
@@ -265,15 +281,20 @@ function CarDetails() {
 						<Grid item xs={10} spacing={2}>
 							{carinfo.latitude && (
 								<iframe
-								width="100%"
-								height="600"
-								frameborder="0"
-								marginheight="0"
-								marginwidth="0"
-								src={"https://maps.google.com/maps?q="+String(carinfo.latitude)+","+String(carinfo.longitude)+"&t=&z=15&ie=UTF8&iwloc=&output=embed"}
+									width="100%"
+									height="600"
+									frameborder="0"
+									marginheight="0"
+									marginwidth="0"
+									src={
+										'https://maps.google.com/maps?q=' +
+										String(carinfo.latitude) +
+										',' +
+										String(carinfo.longitude) +
+										'&t=&z=15&ie=UTF8&iwloc=&output=embed'
+									}
 								></iframe>
 							)}
-
 						</Grid>
 					</Grid>
 
@@ -441,10 +462,11 @@ function CarDetails() {
 				padding="1px"
 			>
 				<Swiper slidesPerView={4} spaceBetween={10} modules={[swiper.Pagination]} className="mySwiper">
-					{recommend.map((item) =>(
+					{recommend.map((item) => (
 						<SwiperSlide>
-							<RecommendItem item={item}/>
-						</SwiperSlide>))}
+							<RecommendItem item={item} />
+						</SwiperSlide>
+					))}
 				</Swiper>
 			</Box>
 		</Stack>
