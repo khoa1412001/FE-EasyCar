@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { Box, Typography } from '@mui/material';
-import './style.scss';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import apiAuth from 'apis/apiAuth';
 import variables from 'assets/_variable.scss';
 import 'assets/style.scss';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { Stack } from '@mui/system';
+import * as React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import apiAuth from 'apis/apiAuth';
 import { toast } from 'react-toastify';
+import './style.scss';
 
 function ActivatePage() {
   const [searchParams, setSearchParams] = useSearchParams();

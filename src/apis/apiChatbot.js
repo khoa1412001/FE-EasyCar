@@ -1,5 +1,4 @@
-import axios from "axios";
-import {  axiosBotClient,axiosClientWithToken} from "./axiosClient";
+import { axiosBotClient } from "./axiosClient";
 
 const apiChatbot = {
     sendmessage: async (params) => {

@@ -1,12 +1,11 @@
-import './style.scss';
-import variables from 'assets/_variable.scss';
+import { Box, Typography } from '@mui/material';
+import apiRentalHistory from 'apis/apiRentalHistory';
 import 'assets/style.scss';
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import apiRentalHistory from 'apis/apiRentalHistory';
 import { toast } from 'react-toastify';
 import numWithDot from 'utils/numWithDot';
+import './style.scss';
 const PaperContract = React.forwardRef((props,ref) =>{
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [id, setId] = React.useState(searchParams.get('id'));

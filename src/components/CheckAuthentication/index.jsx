@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const privatePath = ['/profile', '/car-signup','/profile/'];
 

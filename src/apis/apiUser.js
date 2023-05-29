@@ -1,4 +1,4 @@
-import {  axiosClient,axiosClientWithToken, axiosClientWithTokenMultiPart} from "./axiosClient";
+import { axiosClientWithToken, axiosClientWithTokenMultiPart } from "./axiosClient";
 
 const apiUser = {
     updateUser: async (params) => {

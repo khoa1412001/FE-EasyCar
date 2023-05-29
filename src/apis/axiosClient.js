@@ -4,9 +4,21 @@ import { parse, stringify } from 'qs';
 const baseURL= process.env.REACT_APP_BE_URL;
 // const baseURL='https://be-easycar.vercel.app/api';
 const botURL = process.env.REACT_APP_BOT_URL;
-
+const elasticURL = process.env.REACT_APP_ELASTIC_URL;
 export const axiosBotClient = axios.create({
     baseURL: botURL,
+    headers: {
+        "Content-Type": "application/json"
+    },
+    withCredentials: true,
+    paramsSerializer: {
+        encode: parse,
+        serialize: stringify,
+      },
+});
+
+export const axiosElasticClient = axios.create({
+    baseURL: elasticURL,
     headers: {
         "Content-Type": "application/json"
     },

@@ -1,4 +1,3 @@
-import axios from "axios";
 import {  axiosClient,axiosClientWithToken} from "./axiosClient";
 
 const apiAuth = {

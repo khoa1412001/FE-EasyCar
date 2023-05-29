@@ -1,10 +1,9 @@
-import './style.scss';
-import variables from 'assets/_variable.scss';
+import { Button, Stack } from '@mui/material';
 import 'assets/style.scss';
 import * as React from 'react';
-import { Avatar, Box, Button, Divider, Drawer, Stack, Typography } from '@mui/material';
-import PaperContract from './PaperContract';
 import { useReactToPrint } from 'react-to-print';
+import PaperContract from './PaperContract';
+import './style.scss';
 
 function ContractPaper() {
 	const componentRef = React.useRef();

@@ -1,17 +1,16 @@
-import { BrowserRouter } from 'react-router-dom';
 import ConfigRoute from 'ConfigRoute';
-import Header from 'components/Header';
+import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
+import chaticon from "assets/img/chat.png";
+import ChatbotComponent from 'components/Chatbot';
+import CheckAuthentication from 'components/CheckAuthentication';
 import Footer from 'components/Footer';
+import Header from 'components/Header';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { axiosInstance, axiosInstanceMultiPart } from 'apis/axiosClient';
-import CheckAuthentication from 'components/CheckAuthentication';
-import variables from 'assets/_variable.scss'; 
-import ChatbotComponent from 'components/Chatbot';
 import './style.scss';
-import * as React from 'react';
-import chaticon from "assets/img/chat.png";
 
 function App() {
 	const [chatbotState, setChatbotState] = React.useState(false)

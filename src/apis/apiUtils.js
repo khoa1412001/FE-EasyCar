@@ -1,5 +1,4 @@
-import axios from "axios";
-import {  axiosClient,axiosClientWithToken} from "./axiosClient";
+import { axiosClient } from "./axiosClient";
 
 const apiUtils = {
     findLocation: async (params) => {

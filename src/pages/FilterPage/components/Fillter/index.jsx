@@ -1,11 +1,6 @@
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import { Grid } from '@mui/material/';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
+import SearchIcon from '@mui/icons-material/Search';
+import { Grid, Box, Button, Divider, MenuItem, Select, Typography, TextField } from '@mui/material/';
 import { Stack } from '@mui/system';
 import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
@@ -26,6 +21,9 @@ function Fillter(props) {
     	rating,
    		setRating,
 		brandlist,
+		elasticquery,
+		setElasticquery,
+		handleElasticSearch,
 	} = props;
 	const ITEM_HEIGHT = 48;
 	const ITEM_PADDING_TOP = 8;
@@ -141,18 +139,48 @@ function Fillter(props) {
 			},
 		]);
 	};
+	
 	return (
 		<Box className="fillter-container">
 			<Stack padding={1}>
+				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }}>
+					Tìm kiếm
+				</Typography>
+				<Stack direction='row' spacing={1}>
+					<TextField 
+						variant="outlined"
+						size="small"
+						value={elasticquery}
+						onChange={(event) => setElasticquery(event.target.value)}
+						sx={{
+							width: '237px',
+						}}>
+					</TextField>
+					<Button
+						variant="outlined"
+						size="medium"
+						className="fillter-container__buttonreset"
+						onClick={handleElasticSearch}
+						sx={{
+							color: variables.mainlightercolor,
+							bgcolor: variables.mainyellowcolor,
+							fontWeight: 'bold',
+							marginTop: '8px',
+						}}
+					>
+						<SearchIcon />
+					</Button>
+				</Stack>
+				<Divider sx={{ paddingTop: '8px' }}></Divider>
 				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }}>
 					Mức giá
 				</Typography>
 				<Select id="fillter-container__selectprice" value={price} onChange={handlePriceChange} size="small">
 					<MenuItem value={'ALL'}>Tất cả</MenuItem>
 					<MenuItem value={'1M'}>Dưới 1.000.000đ</MenuItem>
-					<MenuItem value={'2M'}>Trên 1.000.000đ dưới 2.000.000đ</MenuItem>
-					<MenuItem value={'3M'}>Trên 2.000.000đ dưới 3.000.000đ</MenuItem>
-					<MenuItem value={'4M'}>Trên 3.000.000đ</MenuItem>
+					<MenuItem value={'2M'}>Dưới 2.000.000đ</MenuItem>
+					<MenuItem value={'3M'}>Dưới 3.000.000đ</MenuItem>
+					<MenuItem value={'4M'}>Dưới 4.000.000đ</MenuItem>
 				</Select>
 				<Divider sx={{ paddingTop: '8px' }}></Divider>
 				<Typography className="fillter-container__text" sx={{ fontWeight: 'bold' }} paddingTop="8px">

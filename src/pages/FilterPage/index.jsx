@@ -10,6 +10,8 @@ import moment from 'moment';
 import apiUtils from 'apis/apiUtils';
 import CarTable from './components/CarItem';
 import apiCar from 'apis/apiCar';
+import apiElastic from 'apis/apiElastic';
+import { toast } from 'react-toastify';
 
 function FilterPage() {
 	const [carinforlist, setCarinfolist] = React.useState([]);
@@ -18,6 +20,7 @@ function FilterPage() {
 	const [total,setTotal] = React.useState(1);
 	const [suggestion, setSuggestion] = React.useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [elasticquery, setElasticquery] = React.useState("");
 	const [startdate, setStartdate] = React.useState(moment.unix(searchParams.get('startdate')));
 	const [enddate, setEnddate] = React.useState(moment.unix(searchParams.get('enddate')));
 	const [address, setAddress] = React.useState(searchParams.get('address'));
@@ -225,6 +228,20 @@ function FilterPage() {
 		}
 	}
 
+	const handleElasticSearch = () => {
+		const params = {
+			query: elasticquery,
+			startdate: startdate.unix(),
+			enddate: enddate.unix(),
+		};
+
+		apiElastic.makeElasticSearch(params).then((res) => {
+			setCarrenderlist(res)
+		})
+		.catch((err) => {
+			toast.error("Lỗi hệ thống !!!")
+		})
+	}
 
 	return (
 		<Box>
@@ -256,6 +273,9 @@ function FilterPage() {
 							rating={rating}
 							setRating={setRating}
 							brandlist={brandlist}
+							elasticquery={elasticquery}
+							setElasticquery={setElasticquery}
+							handleElasticSearch={handleElasticSearch}
 						/>
 						<Box paddingLeft={'5px'} id="caritem-box">
 							<CarTable nextPage={nextPage}  carinforlist={carrenderlist} />

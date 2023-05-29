@@ -1,14 +1,6 @@
-import React from 'react';
-import Sidebar from './components/Sidebar';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
-import AccountInfo from './components/AccountInfo';
-import RentalHistory from './components/RentalHistory';
-import ChangePassword from './components/ChangePassword';
-import AccountVerify from './components/AccountVerify';
-import CarManagement from './components/CarManagement';
 import { Stack } from "@mui/system";
 import { Outlet } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
 function ProfilePage() {
   return (
     <>

@@ -1,17 +1,10 @@
-import StarIcon from '@mui/icons-material/Star';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/system';
-import 'assets/style.scss';
-import variables from 'assets/_variable.scss';
-import CarStatusDialog from './CarStatusDialog';
-import './style.scss';
-import * as React from 'react';
-import CarItem from './CarItem';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import apiUser from 'apis/apiUser';
 import apiCar from 'apis/apiCar';
+import 'assets/style.scss';
+import * as React from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import CarItem2 from './CarItem2';
+import './style.scss';
 function CarManagement() {
 	const [carinforlist, setCarinforlist] = React.useState([]);
 	const nextPage = () => {};

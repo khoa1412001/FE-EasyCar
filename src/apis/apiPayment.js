@@ -1,4 +1,4 @@
-import {  axiosClient,axiosClientWithToken, axiosClientWithTokenMultiPart} from "./axiosClient";
+import { axiosClientWithToken } from "./axiosClient";
 
 const apiPayment = {
     makePaymentmomo: async (params) => {

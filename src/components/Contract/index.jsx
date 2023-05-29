@@ -3,9 +3,9 @@ import {
 	Dialog,
 	DialogContent, DialogTitle, Stack, Typography
 } from '@mui/material';
-import 'assets/style.scss';
 import variables from 'assets/_variable.scss';
-import { useNavigate, redirect } from 'react-router-dom';
+import 'assets/style.scss';
+import { useNavigate } from 'react-router-dom';
 import './style.scss';
 function Contract(props) {
 	const { openSignin, setOpenSignin, handleApi } = props;
