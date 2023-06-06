@@ -14,6 +14,11 @@
     color: white;
 }
 
+.react-chatbot-kit-chat-bot-message {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 .chat-icon {
     position: fixed;
     z-index: 11;
