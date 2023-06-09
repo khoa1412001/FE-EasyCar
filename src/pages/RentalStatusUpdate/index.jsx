@@ -46,7 +46,11 @@ function RentalStatusUpdate() {
 			setUploading(false)
 			setTimeout(() => {navigate('/profile/history')},3000)
 		}
-		).catch(err => toast.error(err.response.data.message))
+		).catch(err => {
+			toast.error(err.response.data.message)
+			setUploading(false)
+			setTimeout(() => {navigate('/profile/history')},3000)
+		})
 	}
 
 	React.useEffect(() => {
