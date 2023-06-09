@@ -102,9 +102,6 @@ function Contract(props) {
 						variant="standard"
 						onClick={() => {
 							handleApi()
-							setOpenSignin(false)
-							navigate("/profile/history")
-							window.location.reload()
 						}}
 						sx={{
 							width:'300px',

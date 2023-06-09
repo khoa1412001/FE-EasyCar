@@ -168,6 +168,11 @@ function CarDetails() {
 			.addRentalHistory(params)
 			.then((res) => {
 				toast.success('Đặt xe thành công, vui lòng thanh toán trong lịch sử !!!');
+				setTimeout(() => {
+					setOpenSignin(false)
+					navigate("/profile/history")
+					window.location.reload()
+				  }, 5000);
 			})
 			.catch((err) => toast.error(err.response.data.message));
 	};
