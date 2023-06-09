@@ -193,7 +193,7 @@ function VehicleSignupBody() {
 		checkStep()
 	}, [step])
 	return (
-		<Stack justifyContent="center" direction="row" bgcolor="#e8eaef" minHeight={600}>
+		<Stack justifyContent="center" direction="row" bgcolor="#e8eaef" minHeight={680}>
 			<Stack maxWidth="800px" width="800px" py={5} spacing={2}>
 				<Stack direction="row" justifyContent="center" bgcolor="white" spacing={4} py={2}>
 					<Stack>
