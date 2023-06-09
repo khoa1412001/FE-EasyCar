@@ -65,7 +65,8 @@ function HistoryItem2(props) {
 				.then((res) => {
 					toast.success('Gửi đánh giá chuyến đi thành công !!!');
 					setTimeout(() => {
-						window.location.reload(false);
+						setOpenRatingDialog(false);
+						window.location.reload();
 					}, 2000);
 				})
 				.catch((err) => {

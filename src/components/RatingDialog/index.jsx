@@ -44,8 +44,6 @@ function RatingDialog(props) {
 						variant="standard"
 						onClick={() => {
 							SendRating();
-							setOpenRatingDialog(false);
-							window.location.reload();
 						}}
 						sx={{
 							width: '300px',
