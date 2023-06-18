@@ -43,7 +43,10 @@ function CarStatusUpdate() {
 					navigate('/profile/carmanage');
 				}, 3000);
 			})
-			.catch((err) => toast.error(err.response.data.message));
+			.catch((err) => {
+				setUploading(false)
+				toast.error(err.response.data.message)
+			});
 	};
 
 	React.useEffect(() => {

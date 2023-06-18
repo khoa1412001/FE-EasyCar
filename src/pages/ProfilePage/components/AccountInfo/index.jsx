@@ -17,9 +17,12 @@ import _debounce from 'lodash/debounce';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import {setUserInfo} from 'slices/userSlice'
+import apiAuth from 'apis/apiAuth';
 import { toast } from 'react-toastify';
 import { schema } from './schema';
 import './style.scss';
+
 function AccountInfo() {
 	const [suggestion, setSuggestion] = React.useState([]);
 	const user = useSelector((state) => state.user.info) || {};
@@ -28,6 +31,7 @@ function AccountInfo() {
 	const dispatch = useDispatch();
 	const [latitude, setLatitude] = React.useState('');
 	const [longitude,setLongtitude] = React.useState('');
+	const accesstoken = useSelector((state) => state.auth.accessToken);
 	React.useEffect(() => {
 		reset(user);
 	}, [user]);
@@ -80,6 +84,19 @@ function AccountInfo() {
 		[]
 	);
 
+	const getInfo = () => {
+		if(accesstoken){
+			apiAuth
+				.getuserinfo()
+				.then((res) => {
+					if (res) {
+						dispatch(setUserInfo(res.data));
+					}
+				})
+				.catch()
+				.finally();
+		}
+	}
 
 	const onSubmit = (data) => {
 		const { phoneNumber, username } = data;
@@ -96,7 +113,8 @@ function AccountInfo() {
 			.updateUser(params)
 			.then((res) => {
 				toast.success('Cập nhật thông tin thành công');
-				setTimeout(() => {window.location.reload(false)},3000);
+				getInfo()
+				// setTimeout(() => {window.location.reload(false)},3000);
 			})
 			.catch((err) => {
 				toast.error(err.response.data.message);

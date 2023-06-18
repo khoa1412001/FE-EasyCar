@@ -102,10 +102,14 @@ function VehicleSignupBody() {
 		params.append('vehicleimage', imgright);
 
 		apiCar.registerCar(params).then((res) => {
+			setUploading(false)
 			toast.success('Gửi đăng ký thành công!!!');
 			navigate('/');
 			
-		}).catch(err => toast.warning(err.response.data.message));
+		}).catch(err => { 
+			setUploading(false)
+			toast.warning(err.response.data.message)
+		});
 	};
 	const bodyProcess = () => {
 		switch (step) {
