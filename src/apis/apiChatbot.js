@@ -2,7 +2,7 @@ import { axiosBotClient, axiosClient } from "./axiosClient";
 
 const apiChatbot = {
     sendmessage: async (params) => {
-        const res = await axiosBotClient.post(`/`,params)
+        const res = await axiosClient.post(`/auth/chatbot`,params)
         return res.data;
     },
 
