@@ -11,7 +11,7 @@ import {
 	TableHead,
 	TablePagination,
 	TableRow,
-	Typography
+	Typography,
 } from '@mui/material';
 import apiCar from 'apis/apiCar';
 import 'assets/style.scss';
@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import numWithDot from 'utils/numWithDot';
 import HistoryOwnerDialog from '../HistoryOwnerDialog';
 import './style.scss';
+import variables from 'assets/_variable.scss';
 function HistoryList(props) {
     const {openHistoryList, setOpenHistoryList, vehicleId} = props
     const [openHistoryOwnerDialog, setOpenHistoryOwnerDialog] = React.useState(false)
@@ -46,6 +47,15 @@ function HistoryList(props) {
 
 		getHistoryList()
 	},[])
+
+	const chipStatus = (status) => {
+		switch (status) {
+			case true:
+				return (<Chip label="CHỜ THANH TOÁN" sx={{bgcolor:variables.orangecolor, color:'white',fontWeight:'bold'}} />);
+			case false:
+				return (<Chip label="ĐÃ THANH TOÁN" className='success bold'/>)
+		}
+	}
   return (
     <Dialog
 			open={openHistoryList}
@@ -67,9 +77,10 @@ function HistoryList(props) {
 							<TableCell>ID</TableCell>
 							<TableCell align="right">Ngày đặt xe</TableCell>
                             <TableCell align="right">Ngày kết thúc</TableCell>
-                            <TableCell align="right">Người thuê</TableCell>
+                            <TableCell align="center">Người thuê</TableCell>
                             <TableCell align="right">Tổng số tiền</TableCell>
-							<TableCell align="right">Hành động</TableCell>
+							<TableCell align="center">Trạng thái</TableCell>
+							<TableCell align="center">Hành động</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -80,7 +91,8 @@ function HistoryList(props) {
                             <TableCell align="right"><span className='bold'>{(new Date(row.rentalDateEnd)).getDate()}/{(new Date(row.rentalDateEnd)).getMonth() + 1}/{(new Date(row.rentalDateEnd)).getFullYear()}</span></TableCell>
                             <TableCell align="right"><span className='bold'>{row.userId.username}</span></TableCell>
                             <TableCell align="right"><span className="green bold fontLarge">{numWithDot(row.totalPrice)} ₫</span></TableCell>
-							<TableCell align="right"><Chip label="XEM CHI TIẾT" className='success bold' onClick={() => {
+							<TableCell align="center">{chipStatus(row.status)}</TableCell>
+							<TableCell align="center"><Chip label="XEM CHI TIẾT" className='success bold' onClick={() => {
 								setOpenHistoryOwnerDialog(true)
 								setRentalid(row._id)
 								}}/></TableCell>
